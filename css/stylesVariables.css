@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+:root {
+  --color-primary: #C10007;
+  --color-secondary: #FFFFFF;
+  --color-ternary: #82181A;
+  --color-background: #FFF4F0;
+  --color-text: #101828;
+}
+
+
 .caccaculo {
     background-color:black ;
 }
