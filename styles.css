@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+html {
+    background-color:#fff5f0 ;
+    padding: 0;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+h1,h4,p,h2,h3 {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+/*HEADER*/
+
+.centralHeader {
+    margin: 30px 6%;
+}
+
+.BackLogin {
+    color: #c10007;
+    font-size: 20px;
+}
+
+.alignHeader {
+    margin-top: 60px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.LogoWrite {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.WriteToPutDown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+    color: #82181a;
+    text-align: left;
+    font-size: 10px;
+}
+
+img {
+    max-width: 80px;
+    width: 100%;
+    height: auto;
+}
+
+.searchBox {
+    margin-top: 40px;
+    display: flex;               
+    width: 320px;                
+    max-width: 90%;              
+    border-radius: 25px;         
+    overflow: hidden;           
+    border: 1px solid #ccc;  
+    background-color: #f5f5f5;  
+}
+
+.searchBox input {
+    flex: 1;
+    border: none;       
+    outline: none;   
+    padding: 10px 15px;         
+    font-size: 16px;              
+    background: transparent;      
+}
+
+.searchBox button {
+    border: none;                
+    background: transparent;   
+    padding: 0 15px;            
+    cursor: pointer;              
+    font-size: 18px;               
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s; 
+}
+
+.searchBox button:hover {
+    background-color: #a71c1f;   
+}
+
+header .titolo {
+    font-size: 27px;
+}
+
+/*MAIN*/
+
+.titolo {
+    color: #82181a;
+    margin-bottom: 17px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main section .titolo {
+    margin-top: 70px;
+    align-items: center;
+    text-align: center;
+    font-size: 25px;
+}
+
+main section p {
+    align-items: center;
+    text-align: center;
+    font-size: 17px;
+}
+
+main form {
+    background-color: #ffffff;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+}
+
+main form h2{
+    padding-top: 25px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 28px;
+}
+
+main form h3{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 4%;
+}
+
+main form input {
+    margin-left: 4%;
+    margin-right: 4%;
+    border-radius: 25px;
+    outline: none;
+    padding: 3%;
+}
+
+main form .accedi {
+    margin: 25px 4%;
+    padding: 3%;
+    border-radius: 25px;
+    background-color: #c10007;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 16px;
+}
+.accedi:hover {
+    background-color:white;
+    color: #c10007;
+}
+
+.separator {
+    display: flex;
+    align-items: center;   
+}
+
+.separator .linea {
+    flex: 1;             
+    height: 1px;           
+    background-color: #ccc;
+    margin: 0 5%;
+}
+
+.separator .text {
+    flex: none;           
+    color: #555;
+    font-weight: bold;
+}
+
+.Registrati {
+    margin: 25px 4%;
+    padding: 3%;
+    border-radius: 25px;
+    background-color: white;
+    color: #c10007;
+    cursor: pointer;
+    border: 2px solid #c10007;
+}
+
+main form a {
+    text-align: center;
+    margin-bottom: 5%;
+    color: #c10007;
+    text-decoration: none;
+}
+
+
+/*FOOTER*/
+
+footer p {
+    text-align: center;
+    margin: 40px 0;
+}
