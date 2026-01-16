@@ -1,0 +1,32 @@
+nav.navbar.navbar-padding {
+    padding: 16px;
+}
+
+
+.navbar-title {
+    color: var(--color-primary);
+    text-wrap: wrap;
+}
+
+.navbar-button{
+    width: 50px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.navbar-button-active {
+    background-color: var(--color-primary);
+}
+
+.navbar-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.navbar-button.dropdown-toggle {
+    color: #000;
+}
+
