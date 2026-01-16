@@ -100,6 +100,10 @@
     font-size: 12px;
 }
 
+.SizeForInformation {
+    font-size: 13px;
+}
+
 .buttonPrimary {
     padding: 3%;
     border-radius: 10px;
@@ -108,6 +112,74 @@
     transition: 0.3s;
     cursor: pointer;
     font-size: 16px;
+}
+
+.buttonApproves {
+    border-radius: 10px;
+    background-color: #00a63e;
+    font-size: 16px;
+    color: white;
+    transition: 0.3s;
+}
+
+.buttonModify {
+    border-radius: 10px;
+    background-color: #155dfc;
+    font-size: 16px;
+    color: white;
+    transition: 0.3s;
+}
+
+.buttonErase {
+    border-radius: 10px;
+    background-color: #e5e7eb;
+    font-size: 16px;
+    color: white;
+    transition: 0.3s;
+}
+
+.buttonErase:hover {
+    background-color:white;
+    color: #e5e7eb;
+}
+
+.line {
+    flex: 1;             
+    height: 1px;           
+    background-color: #ccc;
+}
+
+.buttonApproves:hover {
+    background-color:white;
+    color: #00a63e;
+}
+
+.buttonModify:hover {
+    background-color:white;
+    color: #155dfc;
+}
+
+.warningBox {
+    background-color: #fff7ed;
+    border-left: 4px solid #ff6900;
+    border-radius: 5px 0 0 5px;
+}
+
+.selected {
+    border-radius: 15px;
+    background-color: #c10007;
+    color: white;
+}
+
+.role {
+    border-radius: 35px;
+    background-color: #c10007;
+    color: white;
+}
+
+.notSelected {
+    background-color: white;
+    border-radius: 15px;
 }
 
 .buttonPrimary:hover {
