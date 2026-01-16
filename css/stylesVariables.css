@@ -5,10 +5,62 @@
   --color-secondary: #FFFFFF;
   --color-tertiary: #82181A;
   --color-background: #FFF4F0;
-  --color-text: #101828;
+  --color-text: #000000;
 }
 
+.font {
+    font-family: "Inter", sans-serif;
+}
 
-.caccaculo {
-    background-color:black ;
+.defaultTextColor {
+    color: #000000;
+}
+
+.body {
+    background-color:#fff5f0 ;
+    margin: 8px;
+}
+
+.textprimary {
+    color: #C10007;
+}
+
+.textsecondary {
+    color: #82181A;
+}
+
+.paddingleft8 {
+    padding-left: 8%;
+}
+
+.paddingx4 {
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.form {
+    max-width: 600px;
+    border-radius: 40px;
+    width: 100%;
+}
+
+.marginx4 {
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.imageForForm {
+    max-width: 25px;
+    width: 100%;
+    height: auto;
+}
+
+.inputForForm {
+    border-radius: 10px;
+    outline: none;
+    padding: 3%;
+}
+
+.SizeForDescription {
+    font-size: 12px;
 }
