@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Crea il tuo evento</title>
+        <link rel="stylesheet" href="../css/stylesVariables.css">
+        <link rel="stylesheet" href="../css/stylesEMME.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body class="body font">
+        <header>
+            <div>
+                <h3 class="textprimary mt-5 text-center fs-1 fw-bold">Crea un nuovo evento</h3>
+                <p class="text-center fs-6 mb-0  defaultTextColor">Compila il form per richiedere la pubblicazione di un evento sulla piattaforma</p>
+                <p class="text-center fs-6  defaultTextColor">di Uni Events</p>
+            </div>
+        </header>
+        <main class="d-flex justify-content-center">
+            <form class="bg-white paddingx4 form mt-2">
+                <div class="d-flex pt-4 pb-2">
+                    <img src="../img/title.png" alt="" class="imageForForm">
+                    <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Titolo dell'evento *</h3>
+                </div>
+                <input type="text" placeholder="Es. Workshop su AI e Machine Learning" class="inputForForm w-100">
+                <div class="d-flex pt-4 pb-2">
+                    <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Descrizione *</h3>
+                </div>
+                <input type="text" placeholder="Descrivi l'evento, cosa verrà trattato, chi può partecipare..." class="inputForForm w-100">
+                <div class="d-flex pt-4 pb-2">
+                    <img src="../img/calendary.png" alt="" class="imageForForm">
+                    <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Data *</h3>
+                </div>
+                <input type="date" class="inputForForm w-100">
+                <div class="d-flex pt-4 pb-2">
+                    <img src="../img/time.png" alt="" class="imageForForm">
+                    <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Orario *</h3>
+                </div>
+                <input type="time" class="inputForForm w-100">
+                <div class="d-flex pt-4 pb-2">
+                    <img src="../img/position.png" alt="" class="imageForForm">
+                    <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Nome del luogo *</h3>
+                </div>
+                <input type="text" placeholder="Es. Aula Magna" class="inputForForm w-100">
+                <div class="d-flex pt-4 pb-2">
+                    <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Indirizzo *</h3>
+                </div>
+                <input type="text" placeholder="Es. Via dell'Università, 10, Bologna" class="inputForForm w-100">
+                <div class="d-flex pt-4 pb-2">
+                    <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Città *</h3>
+                </div>
+                <input type="text" placeholder="Es. Bologna" class="inputForForm w-100">
+                <div class="d-flex gap-3 mt-4 w-100 mb-4">
+                    <button class="btn-publish flex-fill">
+                        <span>Richiedi<br>Pubblicazione</span>
+                    </button>
+                    <button class="btn-cancel flex-fill">
+                        Annulla
+                    </button>
+                </div>
+            </form>
+        </main>
+        
+    </body>
+</html>
