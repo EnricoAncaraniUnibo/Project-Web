@@ -79,6 +79,11 @@
     margin-right: 4%;
 }
 
+.marginx6 {
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
 .imageForForm {
     max-width: 25px;
     width: 100%;
