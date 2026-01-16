@@ -40,13 +40,15 @@
 
 .btn-primary-custom {
     background-color: #C10007;
+    color: white;
     border: none;
     border-radius: 20px;
     padding: 6px 16px;
 }
 
 .btn-primary-custom:hover {
-    background-color: #82181A;
+    background-color: white;
+    color: #C10007;
 }
 
 .footer {
