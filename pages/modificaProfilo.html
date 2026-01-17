@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il mio profilo</title>
+    <link rel="stylesheet" href="../css/stylesVariables.css">
+    <link rel="stylesheet" href="../css/stylesEMME.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="body font">
+    <div class="container py-4 maxWidthScaling">
+        <div class="profile-header mb-4">
+            <h1 class="textprimary fw-bold">Il mio profilo</h1>
+            <p class="SizeForDescription mb-1">Matricola: 00004612</p>
+            <p class="SizeForDescription">Email: mario.rossi@studio.unibo.it</p>
+        </div>
+
+        <div class="d-flex gap-2 mb-4">
+            <a href="cercaUtenti.html" class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</a>
+            <a href="modificaProfilo.html" class="btn-active flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</a>
+        </div>
+
+        <div class="event-card">
+            <div class="p-4">
+                <h2 class="defaultTextColor text-center mb-4 fw-semibold">I miei dati</h2>
+                
+                <div class="mb-3">
+                    <label for="username" class="form-label defaultTextColor fw-semibold SizeForDescription">Username</label>
+                    <input type="text" class="inputForForm w-100" id="username" value="Mario Rossi">
+                </div>
+
+                <div class="mb-3">
+                    <label for="old-password" class="form-label defaultTextColor fw-semibold SizeForDescription">Password</label>
+                    <input type="password" placeholder="Vecchia password" class="inputForForm w-100" id="old-password">
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" placeholder="Nuova password" class="inputForForm w-100" id="new-password">
+                </div>
+
+                <button class="buttonPrimary border-0 d-flex align-items-center gap-2">
+                    ✏️ Modifica
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

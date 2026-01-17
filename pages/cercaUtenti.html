@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerca utenti</title>
+    <link rel="stylesheet" href="../css/stylesVariables.css">
+    <link rel="stylesheet" href="../css/stylesEMME.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="body font">
+    <div class="container py-4 maxWidthScaling">
+        <div class="profile-header mb-4">
+            <h1 class="textprimary fw-bold">Il mio profilo</h1>
+            <p class="SizeForDescription mb-0">Username: Mario Rossi</p>
+            <p class="SizeForDescription mb-0">Matricola: 00004612</p>
+            <p class="SizeForDescription">Email: mario.rossi@studio.unibo.it</p>
+        </div>
+
+        <div class="d-flex gap-2 mb-4">
+            <a href="cercaUtenti.html" class="btn-active flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</a>
+            <a href="modificaProfilo.html" class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</a>
+        </div>
+
+        <div class="search-container mb-4">
+            <input type="text" class="form-control inputForForm backgroundGrey border-0" placeholder="Cerca per nome o matricola...">
+            <i class="bi bi-search search-icon"></i>
+        </div>
+        
+        <div class="users-list">
+            <div class="user-card d-flex align-items-center justify-content-between mb-3 p-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar">L</div>
+                    <div>
+                        <p class="user-name mb-0 fw-bold">Laura Bianchi</p>
+                        <p class="user-matricola mb-0">Mat. 0000123456</p>
+                    </div>
+                </div>
+                <button class="btn-follow-light">
+                    <i class="bi bi-person-plus-fill"></i> Seguito
+                </button>
+            </div>
+
+            <div class="user-card d-flex align-items-center justify-content-between mb-3 p-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar">G</div>
+                    <div>
+                        <p class="user-name mb-0 fw-bold">Giovanni Verdi</p>
+                        <p class="user-matricola mb-0">Mat. 0000234567</p>
+                    </div>
+                </div>
+                <button class="btn-follow-light">
+                    <i class="bi bi-person-plus-fill"></i> Seguito
+                </button>
+            </div>
+
+            <div class="user-card d-flex align-items-center justify-content-between mb-3 p-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar">A</div>
+                    <div>
+                        <p class="user-name mb-0 fw-bold">Anna Ferrari</p>
+                        <p class="user-matricola mb-0">Mat. 0000345678</p>
+                    </div>
+                </div>
+                <button class="btn-unfollow">
+                    <i class="bi bi-person-check-fill"></i> Segui
+                </button>
+            </div>
+
+            <div class="user-card d-flex align-items-center justify-content-between mb-3 p-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar">M</div>
+                    <div>
+                        <p class="user-name mb-0 fw-bold">Marco Neri</p>
+                        <p class="user-matricola mb-0">Mat. 0000456789</p>
+                    </div>
+                </div>
+                <button class="btn-unfollow">
+                    <i class="bi bi-person-check-fill"></i> Segui
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

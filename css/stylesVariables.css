@@ -8,6 +8,28 @@
   --color-text: #000000;
 }
 
+.event-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: #c0c0c0 0px 5px;
+}
+
+.event-header {
+    background-color: #C10007;
+    color: white;
+    border-radius: 12px 12px 0 0;
+    padding: 5px 5px;
+}
+
+.MaxHeightScaling {
+    max-height: 100px;
+}
+
+.backgroundGrey {
+    background-color: #f5f5f5
+}
+
 .font {
     font-family: "Inter", sans-serif;
 }
@@ -17,7 +39,7 @@
 }
 
 .body {
-    background-color:#fff5f0 ;
+    background-color: #fff5f0;
     margin: 8px;
 }
 
@@ -44,9 +66,22 @@
     width: 100%;
 }
 
+.maxWidthScaling {
+    max-width: 600px;
+}
+
+.searchbar {
+    border: 1px solid #ccc
+}
+
 .marginx4 {
     margin-left: 4%;
     margin-right: 4%;
+}
+
+.marginx6 {
+    margin-left: 6%;
+    margin-right: 6%;
 }
 
 .imageForForm {
@@ -63,4 +98,91 @@
 
 .SizeForDescription {
     font-size: 12px;
+}
+
+.SizeForInformation {
+    font-size: 13px;
+}
+
+.buttonPrimary {
+    padding: 3%;
+    border-radius: 10px;
+    background-color: #c10007;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.buttonApproves {
+    border-radius: 10px;
+    background-color: #00a63e;
+    font-size: 16px;
+    color: white;
+    transition: 0.3s;
+}
+
+.buttonModify {
+    border-radius: 10px;
+    background-color: #155dfc;
+    font-size: 16px;
+    color: white;
+    transition: 0.3s;
+}
+
+.buttonErase {
+    border-radius: 10px;
+    background-color: #e5e7eb;
+    font-size: 16px;
+    color: black;
+    transition: 0.3s;
+}
+
+.buttonErase:hover {
+    background-color:white;
+    color: #e5e7eb;
+}
+
+.line {
+    flex: 1;             
+    height: 1px;           
+    background-color: #ccc;
+}
+
+.buttonApproves:hover {
+    background-color:white;
+    color: #00a63e;
+}
+
+.buttonModify:hover {
+    background-color:white;
+    color: #155dfc;
+}
+
+.warningBox {
+    background-color: #fff7ed;
+    border-left: 4px solid #ff6900;
+    border-radius: 5px 0 0 5px;
+}
+
+.selected {
+    border-radius: 15px;
+    background-color: #c10007;
+    color: white;
+}
+
+.role {
+    border-radius: 35px;
+    background-color: #c10007;
+    color: white;
+}
+
+.notSelected {
+    background-color: white;
+    border-radius: 15px;
+}
+
+.buttonPrimary:hover {
+    background-color:white;
+    color: #c10007;
 }
