@@ -1,6 +1,7 @@
-nav.navbar.navbar-layout {
-    padding: 16px;
-    justify-content: space-between;
+.navbar-layout {
+    background-color: var(--color-background-light);
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -23,6 +24,7 @@ nav.navbar.navbar-layout {
 
 .navbar-button-active {
     background-color: var(--color-primary);
+    border: 1px solid #000;
 }
 
 .navbar-icon {

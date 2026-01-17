@@ -10,34 +10,36 @@
 </head>
 <body>
     <nav class="navbar navbar-expand navbar-layout">
-        <a class="navbar-brand navbar-title" href="#">Uni Events</a>
-        <ul class="navbar-nav flex-row justify-content-around w-75">
-            <li class="nav-item">
-                <a href="#" class="navbar-button navbar-button-active border border-dark">
-                    <img src="../img/home_icon.svg" alt="Home" class="navbar-icon"/>
-                    <span class="d-none d-sm-inline ms-2">Home</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="navbar-button">
-                    <img src="../img/map_icon.svg" alt="Map" class="navbar-icon"/>
-                    <span class="d-none d-sm-inline ms-2">Map</span>
-                </a>
-            </li>
-            <li class="nav-item d-flex flex-lg-grow-1">
-                <a href="#" class="navbar-button">
-                    <img src="../img/search_icon.svg" alt="Search" class="navbar-icon"/>
-                    <span class="d-none d-sm-inline ms-2">Search</span>
-                </a>
-                <input type="text" class="d-none d-lg-inline ms-2 searchbar flex-grow-1" placeholder="Search..."/>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="navbar-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../img/user_icon.svg" alt="User" class="navbar-icon"/>
-                    <span class="d-none d-sm-inline ms-2">Profile</span>
-                </a>
-            </li>
-        </ul>
+        <div class="container-lg d-flex">
+            <a class="navbar-brand navbar-title" href="#">Uni Events</a>
+            <ul class="navbar-nav flex-row justify-content-around w-75">
+                <li class="nav-item">
+                    <a href="#" class="navbar-button navbar-button-active">
+                        <img src="../img/home_icon.svg" alt="Home" class="navbar-icon"/>
+                        <span class="d-none d-sm-inline ms-2">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="navbar-button">
+                        <img src="../img/map_icon.svg" alt="Map" class="navbar-icon"/>
+                        <span class="d-none d-sm-inline ms-2">Mappa</span>
+                    </a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a href="#" class="navbar-button">
+                        <img src="../img/search_icon.svg" alt="Search" class="navbar-icon"/>
+                        <span class="d-none d-sm-inline ms-2">Cerca</span>
+                    </a>
+                    <input type="text" class="d-none d-lg-inline ms-2 searchbar" placeholder="Cerca eventi..."/>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="navbar-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../img/user_icon.svg" alt="User" class="navbar-icon"/>
+                        <span class="d-none d-sm-inline ms-2">Profilo</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
