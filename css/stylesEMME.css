@@ -157,7 +157,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 16px;
     transition: 0.3s;
     cursor: default;
 }
@@ -174,22 +174,6 @@
 }
 
 /* Cerca utenti*/
-.btn-active {
-    background-color: white;
-    color: var(--color-primary);
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 14px;
-    transition: 0.3s;
-    cursor: default;
-}
-
-.btn-active:hover {
-    background-color: white;
-    color: var(--color-primary);
-}
-
 .search-container {
     position: relative;
 }
