@@ -316,6 +316,68 @@
     background-color: #d5d5d5;
 }
 
+/* Tabs */
+.activities-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.tab-button:hover {
+    background-color: var(--color-tertiary);
+}
+
+.tab-button-inactive {
+    background-color: white;
+    color: var(--color-text);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.tab-button-inactive:hover {
+    background-color: #f5f5f5;
+}
+
+/* Pulsante segnala problema */
+.btn-report {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.3s;
+}
+
+.btn-report:hover {
+    background-color: #e64a19;
+}
+
+.btn-report i {
+    color: white;
+    margin-right: 0;
+}
+
 @media (min-width: 768px) {
     .footer {
         padding: 50px 30px 30px;
