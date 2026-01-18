@@ -22,5 +22,13 @@ class DataBaseHelper{
         $result = $stmt->get_result();
         return $result->num_rows > 0;
     }
+
+    public function verifyUserCredentials($matricola, $password){
+        $stmt = $this->db->prepare("SELECT * FROM utente WHERE matricola = ? AND password = ?");
+        $stmt->bind_param('ii', $matricola, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
 }
 ?>
