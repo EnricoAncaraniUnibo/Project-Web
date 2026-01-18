@@ -14,5 +14,13 @@ class DataBaseHelper{
         $result=$stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function checkUserExists($matricola){
+        $stmt = $this->db->prepare("SELECT * FROM utente WHERE matricola = ?");
+        $stmt->bind_param('i', $matricola);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
 }
 ?>
