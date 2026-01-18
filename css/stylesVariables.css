@@ -8,6 +8,23 @@
   --color-text: #000000;
 }
 
+.eventLabel {
+    background-color: #ffe2e2;
+    color: #82181A;
+    border-radius: 10px;
+}
+
+.redBorder {
+    border: 2px, solid, #C10007;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.whiteBorder {
+    background-color: white;
+    border-radius: 10px;
+}
+
 .event-card {
     background-color: white;
     border-radius: 10px;
@@ -32,6 +49,13 @@
 
 .font {
     font-family: "Inter", sans-serif;
+}
+
+.map {
+    height: 500px;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 25px;
 }
 
 .defaultTextColor {
@@ -67,7 +91,7 @@
 }
 
 .maxWidthScaling {
-    max-width: 600px;
+    max-width: 600px !important;
 }
 
 .searchbar {
@@ -86,6 +110,12 @@
 
 .imageForForm {
     max-width: 25px;
+    width: 100%;
+    height: auto;
+}
+
+.imageForInformation {
+    max-width: 15px;
     width: 100%;
     height: auto;
 }
