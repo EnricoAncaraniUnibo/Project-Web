@@ -30,5 +30,11 @@ class DataBaseHelper{
         $result = $stmt->get_result();
         return $result->num_rows > 0;
     }
+
+    public function registerUser($username, $matricola,$email,$password){
+        $stmt = $this->db->prepare("INSERT INTO utente (nome, matricola, email, password) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param('iiii', $username, $matricola, $email, $password);
+        $stmt->execute();
+    }
 }
 ?>
