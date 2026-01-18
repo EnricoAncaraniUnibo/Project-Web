@@ -1,7 +1,5 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
-
-
 header('Content-Type: application/json');
 
 if (isset($_POST['matricola']) && isset($_POST['password'])) {
@@ -11,6 +9,7 @@ if (isset($_POST['matricola']) && isset($_POST['password'])) {
     if ($user_exists) {
         $user_login_success = $dbh->verifyUserCredentials($_POST['matricola'], $_POST['password']);
         if ($user_login_success) {
+            loginUser($_POST['matricola']);
             http_response_code(200);
             echo json_encode(['response' => 'Login avvenuto con successo']);
         } else {
