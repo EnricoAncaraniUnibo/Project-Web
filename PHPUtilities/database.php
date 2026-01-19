@@ -133,7 +133,7 @@ class DataBaseHelper{
 
     // Recupera tutti gli eventi per una specifica data che sono stati approvati
     public function getEventiPerData($data){
-        $query = "SELECT * FROM EVENTO WHERE Data = ? AND Stato = 'approvato' ORDER BY Orario ASC";
+        $query = "SELECT * FROM EVENTO JOIN UTENTE on matricola_creatore=matricola WHERE Data = ? AND Stato = 'approvato' ORDER BY Orario ASC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $data);
         $stmt->execute();
