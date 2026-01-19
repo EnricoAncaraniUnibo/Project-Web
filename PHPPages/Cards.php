@@ -21,7 +21,13 @@
                     <p class="SizeForInformation mb-1">🕓 <?php echo formattaOrario($evento["Orario"]) ?>, <?php echo formattaDataItaliana($evento["Data"]) ?></p>
                     <p class="SizeForInformation mb-1">📍 <?php echo $evento["Luogo"] ?>, <?php echo $evento["Indirizzo"] ?></p>
                     <p class="SizeForInformation mb-1">🎓 <?php echo $evento["Descrizione"] ?></p>
-                    <p class="SizeForInformation mb-2">👥 <?php echo $evento["Partecipanti_Attuali"] ?> partecipanti</p>
+                    <p class="SizeForDescription mb-2">
+                        👥 <?php echo $evento["Partecipanti_Attuali"]; ?>
+                        <?php if ($evento["Max_Partecipanti"]): ?>
+                            / <?php echo $evento["Max_Partecipanti"]; ?>
+                        <?php endif; ?>
+                        partecipanti
+                    </p>
                 </div>
             </div>
         </div>
