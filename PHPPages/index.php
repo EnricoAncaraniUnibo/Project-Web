@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
                     <span class="linea"></span>
                 </div>
                 <button class="Registrati" type="submit" name="register">Registrati ora</button>
-                <a href="#">Password dimenticata?</a>
             </form>
         </main>
         <footer>
