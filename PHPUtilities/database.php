@@ -53,8 +53,8 @@ class DataBaseHelper{
     }
 
     public function registerUser($username, $matricola,$email,$password){
-        $stmt = $this->db->prepare("INSERT INTO utente (nome, matricola, email, password) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param('iiii', $username, $matricola, $email, $password);
+        $stmt = $this->db->prepare("INSERT INTO utente (nome, matricola, email, password, ruolo) VALUES (?, ?, ?, ?, 'normale')");
+        $stmt->bind_param('siss', $username, $matricola, $email, $password);
         $stmt->execute();
     }
 }

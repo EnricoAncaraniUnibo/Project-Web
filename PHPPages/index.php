@@ -1,41 +1,5 @@
 <?php
-require_once("../PHPUtilities/bootstrap.php");
-
-if (isset($_SESSION['user_id'])) {
-    header('Location: homepageUser.php');
-    exit();
-}
-
-$error_message = $_SESSION['error_message'] ?? '';
-
-unset($_SESSION['error_message']);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-    $matricola = trim($_POST['matricola'] ?? '');
-    $password = trim($_POST['password'] ?? '');
-    
-    if (empty($matricola) || empty($password)) {
-        $_SESSION['error_message'] = "Inserisci sia matricola che password";
-        header('Location: ' . $_SERVER['PHP_SELF']);
-        exit();
-    } else {
-        if ($dbh->checkUserExists($matricola)) {
-            if ($dbh->verifyUserCredentials($matricola, $password)) {
-                $_SESSION['user_id'] = $matricola;
-                header('Location: homepageUser.php');
-                exit();
-            } else {
-                $_SESSION['error_message'] = "Password errata";
-                header('Location: ' . $_SERVER['PHP_SELF']);
-                exit();
-            }
-        } else {
-            $_SESSION['error_message'] = "Utente non trovato";
-            header('Location: ' . $_SERVER['PHP_SELF']);
-            exit();
-        }
-    }
-}
+require_once("../PHPUtilities/login.php");
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     <span class="testo">oppure</span>
                     <span class="linea"></span>
                 </div>
-                <a class="Registrati" href="registrati.html">Registrati ora</a>
+                <button class="Registrati" type="submit" name="register">Registrati ora</button>
                 <a href="#">Password dimenticata?</a>
             </form>
         </main>
