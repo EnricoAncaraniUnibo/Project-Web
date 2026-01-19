@@ -88,7 +88,7 @@ if ($dataSelezionata === null) {
 
 <body class="body font mb-0">
 <?php require 'navbar.php'; ?>
-<div class="container maxWidthScaling">
+<div class="container maxWidthScaling mt-4">
 
     <?php if ($templateParams["NoEventi"]): ?>
         <div class="alert alert-info text-center mt-4">
