@@ -57,5 +57,23 @@ class DataBaseHelper{
         $stmt->bind_param('siss', $username, $matricola, $email, $password);
         $stmt->execute();
     }
+
+    public function search($key) {
+        $searchTerm = "%" . $key . "%";
+        $stmt = $this->db->prepare("SELECT e.Data,e.Città,e.Titolo,u.nome,u.matricola,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione,e.Partecipanti_Attuali FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ? ORDER BY e.Città,e.Data,e.Orario");
+        $stmt->bind_param('ssssss', $searchTerm, $searchTerm, $searchTerm,$searchTerm, $searchTerm, $searchTerm);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function NumberOfsearch($key) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ?");
+        $searchTerm = "%" . $key . "%";
+        $stmt->bind_param('ssssss', $searchTerm, $searchTerm, $searchTerm,$searchTerm, $searchTerm, $searchTerm);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>
