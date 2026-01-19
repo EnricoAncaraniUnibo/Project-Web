@@ -1,9 +1,11 @@
 <?php
 
-// if (!isset($_SESSION['matricola'])) {
-//     header('Location: login.php');
-//     exit();
-// }
+require_once("../PHPUtilities/bootstrap.php");
+
+if (!isset($_SESSION['matricola'])) {
+    header('Location: index.php');
+    exit();
+}
 
 $host = 'localhost';
 $dbname = 'gestionale_eventi';
