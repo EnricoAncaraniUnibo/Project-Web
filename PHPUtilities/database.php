@@ -76,6 +76,25 @@ class DataBaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getEventiPartecipa($matricola){
+        $stmt=$this->db->prepare("SELECT e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione 
+        FROM evento e 
+        JOIN partecipa p ON e.Id=p.Id_evento WHERE p.utente_matricola=?");
+        $stmt->bind_param('i', $matricola);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getEventiPubblicati($matricola){
+        $stmt=$this->db->prepare("SELECT e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione 
+        FROM evento e 
+        WHERE e.matricola_creatore=?");
+        $stmt->bind_param('i', $matricola);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
     //Recupera la prima data disponibile con eventi approvati
     public function getPrimaDataConEventi(){
         $query = "SELECT MIN(Data) as prima_data 
