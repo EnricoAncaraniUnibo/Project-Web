@@ -12,6 +12,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 function isActive($page_name, $current_page) {
     return $page_name === $current_page ? 'navbar-button-active' : '';
 }
+
+$matricolaUtente = $_SESSION['matricola'];
+$ruolo = $dbh->getRuoloByMatricola($matricolaUtente);
+$isAdmin = ($ruolo === 'admin');
 ?>
 
 <nav class="navbar navbar-expand navbar-layout">
@@ -66,10 +70,12 @@ function isActive($page_name, $current_page) {
                             <img src="../img/create_icon.svg" alt="Crea evento" class="small-icon"/>
                             <a class="ms-2 dropdown-link <?php echo $current_page === 'creaEvento.php' ? 'active' : ''; ?>" href="creaEvento.php">Crea evento</a>
                         </li>
+                        <?php if ($isAdmin): ?>
                         <li class="d-flex dropdown-item align-items-center">
                             <img src="../img/dashboard_icon.svg" alt="Bacheca" class="small-icon"/>
                             <a class="ms-2 dropdown-link <?php echo $current_page === 'bachecaAdmin.php' ? 'active' : ''; ?>" href="bachecaAdmin.php">Bacheca</a>
                         </li>
+                        <?php endif; ?>
                         <li><hr class="dropdown-divider"></li>
                         <li class="d-flex dropdown-item align-items-center">
                             <img src="../img/logout_icon.svg" alt="Logout" class="small-icon"/>

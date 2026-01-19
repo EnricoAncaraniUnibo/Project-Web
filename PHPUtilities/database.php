@@ -269,5 +269,21 @@ class DataBaseHelper{
             return false;
         }
     }
+
+    public function getRuoloByMatricola($matricola) {
+        $stmt = $this->db->prepare("SELECT ruolo FROM utente WHERE matricola = ?");
+        $stmt->bind_param('s', $matricola); // Usa 's' per stringa
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        
+        if (count($rows) > 0) {
+            return $rows[0]['ruolo'];
+        }
+        
+        return null; 
+    }
 }
 ?>
