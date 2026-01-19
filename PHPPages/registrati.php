@@ -64,13 +64,6 @@ require_once("../PHPUtilities/registration.php");
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Conferma password *</h3>
                 </div>
                 <input type="text" placeholder="Reinserisci la password" name="conferma_password" class="inputForForm w-100" required>
-                <div class="SizeForDescription backgroundGrey mt-3 d-flex flex-wrap align-items-center px-3 py-3 ">
-                    <span>Registrandoti accetti i</span>
-                    <a class="textprimary mx-1">Termini di Servizio</a>
-                    <span>e la</span>
-                    <a class="textprimary mx-1">Privacy Policy</a>
-                    <span>di Uni Events</span>
-                </div>
                 <button type="submit" name="registrati" class="buttonPrimary mt-4 w-100 mb-4">Registrati</button>
             </form>
         </main>
