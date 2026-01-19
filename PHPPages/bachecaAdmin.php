@@ -3,7 +3,7 @@ require_once("PHPUtilities/bootstrap.php");
 $templateParams["EventiInSospeso"]=$dbh->getEventiInSospeso();
 $templateParams["NumeroEventiInSospeso"]=$dbh->getNumberEventiInSospeso();
 $templateParams["EventiSegnalati"]=$dbh->getEventiSegnalati();
-$templateParams["NumeroEventiSegnalati"]=$dbh->getNumberEventiSegnalati();
+//$templateParams["NumeroEventiSegnalati"]=$dbh->getNumberEventiSegnalati();
 ?>
 
 <!DOCTYPE html>
