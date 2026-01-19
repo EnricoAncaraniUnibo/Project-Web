@@ -6,8 +6,12 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
-$error_message = "";
-$success_message = "";
+// Inizializza i messaggi dalla sessione, se presenti
+$error_message = $_SESSION['error_message'] ?? '';
+$success_message = $_SESSION['success_message'] ?? '';
+
+// Pulisci i messaggi dalla sessione dopo averli presi
+unset($_SESSION['error_message'], $_SESSION['success_message']);
 
 // Gestione del login
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
@@ -15,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $password = trim($_POST['password'] ?? '');
     
     if (empty($matricola) || empty($password)) {
-        $error_message = "Inserisci sia matricola che password";
+        $_SESSION['error_message'] = "Inserisci sia matricola che password";
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
     } else {
         // Verifica se l'utente esiste
         if ($dbh->checkUserExists($matricola)) {
@@ -29,10 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 header('Location: homepageUser.php');
                 exit();
             } else {
-                $error_message = "Password errata";
+                $_SESSION['error_message'] = "Password errata";
+                header('Location: ' . $_SERVER['PHP_SELF']);
+                exit();
             }
         } else {
-            $error_message = "Utente non trovato";
+            $_SESSION['error_message'] = "Utente non trovato";
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit();
         }
     }
 }
@@ -45,6 +55,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>HomePage</title>
         <link rel="stylesheet" href="..\css\styles.css">
+        <style>
+            /* Aggiungi questo stile per il messaggio di errore */
+            .error-message {
+                background-color: #f8d7da;
+                color: #721c24;
+                padding: 12px;
+                border-radius: 5px;
+                border: 1px solid #f5c6cb;
+                margin: 15px 0;
+                text-align: center;
+                font-weight: bold;
+            }
+            
+            .success-message {
+                background-color: #d4edda;
+                color: #155724;
+                padding: 12px;
+                border-radius: 5px;
+                border: 1px solid #c3e6cb;
+                margin: 15px 0;
+                text-align: center;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
         <header class="alignHeader">
@@ -72,6 +106,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     <p>a tutti gli eventi universitari!</p>
                 </div>
             </section>
+            <!-- Mostra messaggio di errore se presente -->
+            <?php if (!empty($error_message)): ?>
+                <div class="error-message">
+                    <?php echo htmlspecialchars($error_message); ?>
+                </div>
+            <?php endif; ?>
+            
+            <!-- Mostra messaggio di successo se presente -->
+            <?php if (!empty($success_message)): ?>
+                <div class="success-message">
+                    <?php echo htmlspecialchars($success_message); ?>
+                </div>
+            <?php endif; ?>
             <form method="POST" action="">
                 <h2>Accedi al tuo account</h2>
                 <h3>Numero Matricola</h3>

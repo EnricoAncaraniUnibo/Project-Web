@@ -1,5 +1,7 @@
 <?php 
 require_once("../PHPUtilities/bootstrap.php");
+$_SESSION = array();
+session_destroy();
 ?>
 
 <!DOCTYPE html>
