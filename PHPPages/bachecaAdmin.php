@@ -81,7 +81,7 @@ $templateParams["EventiSegnalati"]=$dbh->getEventiSegnalati();
                 <?php endforeach; ?>
             </div>
         </main>
-        <footer>FOOTER DA IMMETTERE</footer>
+        <?php require 'footer.php'; ?>
         <script src="bachecaAdmin.js"></script>
     </body>
 </html>
