@@ -1,27 +1,39 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
+
 if (isset($_SESSION['user_id'])) {
     header('Location: homepageUser.php');
     exit();
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+
+$error_message = "";
+$success_message = "";
+
+// Gestione del login
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+    $matricola = trim($_POST['matricola'] ?? '');
+    $password = trim($_POST['password'] ?? '');
     
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch();
-    
-    if ($user && password_verify($password, $user['password'])) {
-        // Login riuscito
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['logged_in'] = true;
-        
-        header('Location: dashboard.php');
-        exit();
+    if (empty($matricola) || empty($password)) {
+        $error_message = "Inserisci sia matricola che password";
     } else {
-        $error = "Credenziali errate!";
+        // Verifica se l'utente esiste
+        if ($dbh->checkUserExists($matricola)) {
+            // Verifica le credenziali
+            if ($dbh->verifyUserCredentials($matricola, $password)) {
+                // Login riuscito - imposta la sessione
+                $_SESSION['user_id'] = $matricola;
+                $_SESSION['user_matricola'] = $matricola;
+                
+                // Reindirizza alla homepage
+                header('Location: homepageUser.php');
+                exit();
+            } else {
+                $error_message = "Password errata";
+            }
+        } else {
+            $error_message = "Utente non trovato";
+        }
     }
 }
 ?>
@@ -60,13 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p>a tutti gli eventi universitari!</p>
                 </div>
             </section>
-            <form>
+            <form method="POST" action="">
                 <h2>Accedi al tuo account</h2>
                 <h3>Numero Matricola</h3>
-                <input type="text" placeholder="Inserisci il tuo numero di matricola">
+                <input type="text" name="matricola" placeholder="Inserisci il tuo numero di matricola">
                 <h3>Password</h3>
-                <input type="text" placeholder="Inserisci la tua password">
-                <button type="submit" class="accedi">Accedi</button>
+                <input type="password" name="password" placeholder="Inserisci la tua password">
+                <button type="submit" name="login" class="accedi">Accedi</button>
                 <div class="separator">
                     <span class="linea"></span>
                     <span class="testo">oppure</span>
