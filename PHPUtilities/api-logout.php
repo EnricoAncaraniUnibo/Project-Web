@@ -1,5 +1,5 @@
 <?php
-require_once("../PHPUtilities/bootstrap.php");
+require_once("bootstrap.php");
 if (isUserLoggedIn()) {
     $_SESSION = [];
     session_destroy();
