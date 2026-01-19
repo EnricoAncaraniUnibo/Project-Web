@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <title>Crea il tuo evento</title>
         <link rel="stylesheet" href="../css/stylesVariables.css">
         <link rel="stylesheet" href="../css/stylesEMME.css">
+        <link rel="stylesheet" href="../css/navbar.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <style>
             .alert-custom {
@@ -89,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </style>
     </head>
     <body class="body font">
+        <?php require 'navbar.php'; ?>
         <?php if (!empty($messaggio)): ?>
             <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-custom alert-dismissible fade show" role="alert">
                 <?php echo htmlspecialchars($messaggio); ?>
