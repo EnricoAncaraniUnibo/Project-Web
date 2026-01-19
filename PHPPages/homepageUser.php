@@ -5,7 +5,6 @@ redirectToLoginIfUserNotLoggedIn();
 
 $matricolaUtente = $_SESSION['matricola'];
 
-// GESTIONE AZIONI POST (Partecipa/Annulla)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventoId = isset($_POST['evento_id']) ? intval($_POST['evento_id']) : 0;
     $azione = isset($_POST['azione']) ? $_POST['azione'] : '';
@@ -47,25 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// GESTIONE VISUALIZZAZIONE EVENTI
-// Gestione della data da visualizzare
 if (isset($_GET['data']) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $_GET['data'])) {
     $dataSelezionata = $_GET['data'];
 } else {
     $dataSelezionata = $dbh->getPrimaDataConEventi();
 }
 
-// Se non ci sono eventi, mostra messaggio
 if ($dataSelezionata === null) {
     $templateParams["NoEventi"] = true;
 } else {
     $templateParams["NoEventi"] = false;
-    
-    // Calcolo date precedente e successiva con eventi
     $dataPrecedente = $dbh->getDataPrecedenteConEventi($dataSelezionata);
     $dataSuccessiva = $dbh->getDataSuccessivaConEventi($dataSelezionata);
-    
-    // Recupero eventi per la data selezionata
     $templateParams["Eventi"] = $dbh->getEventiPerData($dataSelezionata);
     $templateParams["DataSelezionata"] = $dataSelezionata;
     $templateParams["DataFormattata"] = formattaDataItaliana($dataSelezionata);
@@ -95,7 +87,6 @@ if ($dataSelezionata === null) {
         </div>
     <?php else: ?>
         
-        <!-- Messaggi di feedback -->
         <?php if (isset($_SESSION['successo'])): ?>
             <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                 <?php echo htmlspecialchars($_SESSION['successo']); ?>
@@ -113,17 +104,12 @@ if ($dataSelezionata === null) {
         <?php endif; ?>
 
         <div class="header d-flex justify-content-between align-items-center mb-3">
-            <!-- Pulsante precedente -->
             <a href="<?php echo $templateParams["DataPrecedente"] ? '?data=' . $templateParams["DataPrecedente"] : '#'; ?>" 
                 class="btn-primary-custom btn-arrow <?php echo !$templateParams["DataPrecedente"] ? 'disabled' : ''; ?>"
                 <?php echo !$templateParams["DataPrecedente"] ? 'aria-disabled="true"' : ''; ?>>
                 <span class="arrow-left"></span>
             </a>
-
-            <!-- Data centrale -->
             <strong><?php echo $templateParams["DataFormattata"]; ?></strong>
-
-            <!-- Pulsante successivo -->
             <a href="<?php echo $templateParams["DataSuccessiva"] ? '?data=' . $templateParams["DataSuccessiva"] : '#'; ?>" 
                 class="btn-primary-custom btn-arrow <?php echo !$templateParams["DataSuccessiva"] ? 'disabled' : ''; ?>"
                 <?php echo !$templateParams["DataSuccessiva"] ? 'aria-disabled="true"' : ''; ?>>
@@ -131,7 +117,6 @@ if ($dataSelezionata === null) {
             </a>
         </div>
 
-        <!-- Lista eventi -->
         <?php foreach($templateParams["Eventi"] as $evento): ?>
             <div class="event-card mb-3">
                 <div class="event-header d-flex justify-content-between">
@@ -154,7 +139,6 @@ if ($dataSelezionata === null) {
                     </p>
                     
                     <?php 
-                    // Recupero amici che partecipano all'evento
                     $amiciPartecipanti = $dbh->getAmiciPartecipanti($evento["Id"], $matricolaUtente);
                     if (count($amiciPartecipanti) > 0): 
                     ?>
@@ -172,14 +156,12 @@ if ($dataSelezionata === null) {
                     <?php endif; ?>
                     
                     <?php 
-                    // Verifica se l'utente partecipa già
                     $utentePartecipa = $dbh->verificaPartecipazioneUtente($evento["Id"], $matricolaUtente);
                     $eventoCompleto = $evento["Max_Partecipanti"] && $evento["Partecipanti_Attuali"] >= $evento["Max_Partecipanti"];
                     ?>
                     
                     <div class="d-flex gap-2">
                         <?php if ($utentePartecipa): ?>
-                            <!-- Utente già iscritto - può annullare -->
                             <form method="POST" class="d-inline">
                                 <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
                                 <input type="hidden" name="azione" value="annulla">
@@ -187,10 +169,8 @@ if ($dataSelezionata === null) {
                                 <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
                             </form>
                         <?php elseif ($eventoCompleto): ?>
-                            <!-- Evento completo -->
                             <button class="btn-secondary-custom" disabled style="opacity: 0.5;">Evento completo</button>
                         <?php else: ?>
-                            <!-- Utente non iscritto - può partecipare -->
                             <form method="POST" class="d-inline">
                                 <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
                                 <input type="hidden" name="azione" value="partecipa">
