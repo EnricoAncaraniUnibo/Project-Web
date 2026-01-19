@@ -6,14 +6,10 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Inizializza i messaggi dalla sessione, se presenti
 $error_message = $_SESSION['error_message'] ?? '';
-$success_message = $_SESSION['success_message'] ?? '';
 
-// Pulisci i messaggi dalla sessione dopo averli presi
-unset($_SESSION['error_message'], $_SESSION['success_message']);
+unset($_SESSION['error_message']);
 
-// Gestione del login
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $matricola = trim($_POST['matricola'] ?? '');
     $password = trim($_POST['password'] ?? '');
@@ -23,15 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit();
     } else {
-        // Verifica se l'utente esiste
         if ($dbh->checkUserExists($matricola)) {
-            // Verifica le credenziali
             if ($dbh->verifyUserCredentials($matricola, $password)) {
-                // Login riuscito - imposta la sessione
                 $_SESSION['user_id'] = $matricola;
-                $_SESSION['user_matricola'] = $matricola;
-                
-                // Reindirizza alla homepage
                 header('Location: homepageUser.php');
                 exit();
             } else {
@@ -55,30 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>HomePage</title>
         <link rel="stylesheet" href="..\css\styles.css">
-        <style>
-            /* Aggiungi questo stile per il messaggio di errore */
-            .error-message {
-                background-color: #f8d7da;
-                color: #721c24;
-                padding: 12px;
-                border-radius: 5px;
-                border: 1px solid #f5c6cb;
-                margin: 15px 0;
-                text-align: center;
-                font-weight: bold;
-            }
-            
-            .success-message {
-                background-color: #d4edda;
-                color: #155724;
-                padding: 12px;
-                border-radius: 5px;
-                border: 1px solid #c3e6cb;
-                margin: 15px 0;
-                text-align: center;
-                font-weight: bold;
-            }
-        </style>
     </head>
     <body>
         <header class="alignHeader">
@@ -106,17 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     <p>a tutti gli eventi universitari!</p>
                 </div>
             </section>
-            <!-- Mostra messaggio di errore se presente -->
             <?php if (!empty($error_message)): ?>
-                <div class="error-message">
-                    <?php echo htmlspecialchars($error_message); ?>
-                </div>
-            <?php endif; ?>
-            
-            <!-- Mostra messaggio di successo se presente -->
-            <?php if (!empty($success_message)): ?>
-                <div class="success-message">
-                    <?php echo htmlspecialchars($success_message); ?>
+                <div class="error">
+                    <?php echo $error_message; ?>
                 </div>
             <?php endif; ?>
             <form method="POST" action="">
