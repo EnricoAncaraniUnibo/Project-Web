@@ -1,3 +1,11 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
+    $termine = $_GET['key'];
+    header('Location: RicercaEvento.php?key=' . $termine);
+    exit();
+}
+?>
+
 <nav class="navbar navbar-expand navbar-layout">
         <div class="container-lg d-flex">
             <a class="navbar-brand navbar-title" href="homepageUser.php">Uni Events</a>
@@ -15,11 +23,13 @@
                     </a>
                 </li>
                 <li class="nav-item d-flex">
-                    <a href="#" class="navbar-button">
-                        <img src="../img/search_icon.svg" alt="Search" class="small-icon"/>
-                        <span class="d-none d-sm-inline ms-2">Cerca</span>
-                    </a>
-                    <input type="text" class="d-none d-lg-inline ms-2 searchbar" placeholder="Cerca eventi..."/>
+                    <form action="" method="GET" class="d-flex ">
+                        <button name="search" class="bg navbar-button border-0">
+                            <img src="../img/search_icon.svg" alt="Search" class="small-icon"/>
+                            <span class="d-none d-sm-inline ms-2">Cerca</span>
+                        </button>
+                        <input type="text" name="key" class="d-none d-lg-inline ms-2 searchbar" placeholder="Cerca eventi..."/>
+                    </form>
                 </li>
                 <li class="nav-item dropdown">
                     <button href="#" class="navbar-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

@@ -1,4 +1,4 @@
-const main = document.querySelector("main");
+const main = document.querySelector("nav");
 main.querySelector("#logout-button").addEventListener("click", function(e){
     e.preventDefault();
     console.log("Logout initiated");

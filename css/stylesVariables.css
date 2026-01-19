@@ -8,6 +8,10 @@
   --color-text: #000000;
 }
 
+.bg {
+    background-color: #fff5f0;
+}
+
 .backToLogin:visited{
     color:#C10007 !important;
 }

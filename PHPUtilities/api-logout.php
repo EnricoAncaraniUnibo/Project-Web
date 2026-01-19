@@ -4,7 +4,7 @@ if (isUserLoggedIn()) {
     $_SESSION = [];
     session_destroy();
     http_response_code(200);
-    header("Location: ../pages/index.php");
+    header("Location: ../PHPPages/index.php");
 } else {
     header('Content-Type: application/json');
     http_response_code(401);
