@@ -47,21 +47,12 @@ function formattaDataItaliana($data) {
                 <p class="mb-0 role py-1 px-3 fs-6 ms-2">Admin</p>
             </div>
             <div class="mt-5 d-flex flex-column flex-md-row justify-content-center gap-3 align-items-center">
-<<<<<<< HEAD
                 <button type="button" id="bottone-Segnalazione" onclick="mostraEventiDaRisolvere()" class="notSelected maxWidthScaling px-5 py-3 border-0">Segnalazione problemi (<?php echo $templateParams["NumeroEventiSegnalati"][0]["COUNT(*)"] ?>)</button>
                 <button type="button" id="bottone-Accettazione" onclick="mostraEventiDaAccettare()" class="selected maxWidthScaling px-5 py-3 border-0">Accettazione eventi (<?php echo $templateParams["NumeroEventiInSospeso"][0]["COUNT(*)"] ?>)</button>
             </div>
             <div class="d-flex flex-column align-items-center gap-4 mt-5" id="Div-Accettazioni">
                 <?php foreach($templateParams["EventiInSospeso"] as $eventoInSospeso): ?>
                 <div class="event-card maxWidthScaling w-100" >
-=======
-                <button type="button" class="notSelected maxWidthScaling px-5 py-3 border-0">Segnalazione problemi (2)</button>
-                <button type="button" class="selected maxWidthScaling px-5 py-3 border-0">Accettazione eventi (3)</button>
-            </div>
-            <div class="d-flex flex-column align-items-center gap-4 mt-5">
-                <?php foreach($templateParams["EventiInSospeso"] as $eventoInSospeso): ?>
-                <div class="event-card maxWidthScaling w-100">
->>>>>>> b35951cdccf8459e58666a47ffdeda3668e49b39
                     <div class="event-header d-flex justify-content-between">
                         <div class="event-header d-flex align-items-center">
                             <img src="img/positionHeader.png" alt="luogo" class="imageForForm me-2">
@@ -79,7 +70,6 @@ function formattaDataItaliana($data) {
                     </div>
                 </div>
                 <?php endforeach; ?>
-<<<<<<< HEAD
             </div>
             <div class="d-flex flex-column align-items-center gap-4 mt-5 d-none" id="Div-Segnalazioni">
                 <?php foreach($templateParams["EventiSegnalati"] as $eventoSegnalato): ?>
@@ -88,61 +78,32 @@ function formattaDataItaliana($data) {
                         <div class="event-header d-flex align-items-center">
                             <img src="img/positionHeader.png" alt="luogo" class="imageForForm me-2">
                             <span class="fw-bold"><?php echo $eventoSegnalato["Città"] ?></span>
-=======
-                <div class="event-card maxWidthScaling w-100 d-none">
-                    <div class="event-header d-flex justify-content-between">
-                        <div class="event-header d-flex align-items-center">
-                            <img src="img/positionHeader.png" alt="luogo" class="imageForForm me-2">
-                            <span class="fw-bold">Firenze</span>
->>>>>>> b35951cdccf8459e58666a47ffdeda3668e49b39
                         </div>
                     </div>
                     <div class="px-3 py-3">
                         <div class="d-flex align-items-center gap-2">
                             <img src="img/AlertImage.png" alt="immagine di allerta" class="imageForForm">
-<<<<<<< HEAD
                             <p class="SizeForDescription mb-0">Segnalato da <?php echo $eventoSegnalato["nome"] ?> (Mat. <?php echo $eventoSegnalato["matricola"] ?>)</p>
                         </div>
                         <div class="warningBox px-2 py-2 my-3 ms-4">
                             <p class="mb-0"><?php echo $eventoSegnalato["Descrizione"] ?></p>
-=======
-                            <p class="SizeForDescription mb-0">Segnalato da Laura Bianchi (Mat. 0000123456)</p>
-                        </div>
-                        <div class="warningBox px-2 py-2 my-3 ms-4">
-                            <p class="mb-0">L'evento è stato spostato al Cortile Esterno a causa di lavori di ristrutturazione. Inoltre la descrizione dovrebbe specificare che l'ingresso è gratuito.</p>
->>>>>>> b35951cdccf8459e58666a47ffdeda3668e49b39
                         </div>
                         <div class="d-flex">
                             <span class="line"></span>
                         </div>
-<<<<<<< HEAD
                         <h4 class="fw-bold mt-3"><?php echo $eventoSegnalato["Titolo"] ?></h4>
                         <p class="SizeForInformation mb-1">🕓 <?php echo formattaOrario($eventoSegnalato["Orario"]) ?>, <?php echo formattaDataItaliana($eventoSegnalato["Data"]) ?> </p>
                         <p class="SizeForInformation mb-1">📍 <?php echo $eventoSegnalato["Luogo"] ?>, <?php echo $eventoSegnalato["Indirizzo"] ?></p>
                         <p class="SizeForInformation mb-1">🎓 <?php echo $eventoInSospeso["Descrizione"] ?></p>
-=======
-                        <h4 class="fw-bold mt-3">Presentazione Progetti Tesi</h4>
-                        <p class="SizeForDescription">Creato da: Marco Verdi (Mat. 0000234567)</p>
-                        <p class="SizeForInformation mb-1">🕓 14:00 </p>
-                        <p class="SizeForInformation mb-1">📍 Aula Magna, Via dell’università 20</p>
-                        <p class="SizeForInformation mb-1">🎓 Esposizione dei migliori progetti di tesi dell’anno</p>
-                        <p class="SizeForInformation mb-2">👥 120 partecipanti</p>
->>>>>>> b35951cdccf8459e58666a47ffdeda3668e49b39
                         <button type="button" class="buttonModify border-0 px-3 py-2 mb-2">📝 Modifica evento</button>
                         <button type="button" class="mt-2 buttonApproves border-0 px-3 py-2">✔ Risolto</button>
                         <button type="button" class="buttonErase border-0 px-3 py-2">🗑️ Elimina Evento</button>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <?php endforeach; ?>
             </div>
         </main>
         <footer>FOOTER DA IMMETTERE</footer>
         <script src="bachecaAdmin.js"></script>
-=======
-            </div>
-        </main>
-        <footer>FOOTER DA IMMETTERE</footer>
->>>>>>> b35951cdccf8459e58666a47ffdeda3668e49b39
     </body>
 </html>
