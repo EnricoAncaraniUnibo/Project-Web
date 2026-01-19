@@ -39,16 +39,72 @@
 }
 
 .btn-primary-custom {
+    display: inline-block;       /* rende il link come un pulsante */
+    padding: 6px 16px;
+    border-radius: 20px;
     background-color: #C10007;
     color: white;
     border: none;
-    border-radius: 20px;
-    padding: 6px 16px;
+    text-align: center;
+    text-decoration: none;      /* rimuove sottolineatura da <a> */
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
 }
 
-.btn-primary-custom:hover {
+.btn-primary-custom:hover:not(.disabled) {
+    background-color: #82181A;
+}
+
+.btn-primary-custom.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Triangoli CSS */
+.btn-arrow {
+    padding: 10px 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-left,
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.arrow-left {
+    border-width: 6px 8px 6px 0;
+    border-color: transparent white transparent transparent;
+}
+
+.arrow-right {
+    border-width: 6px 0 6px 8px;
+    border-color: transparent transparent transparent white;
+}
+
+
+
+
+.btn-secondary-custom {
+    display: inline-block;       /* rende il link come un pulsante */
+    padding: 6px 16px;
+    border-radius: 20px;
+    background-color: #8a8787;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;      /* rimuove sottolineatura da <a> */
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.btn-secondary-custom:hover {
     background-color: white;
-    color: #C10007;
+    color: #82181A;
 }
 
 .footer {

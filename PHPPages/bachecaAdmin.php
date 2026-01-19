@@ -5,28 +5,6 @@ $templateParams["NumeroEventiInSospeso"]=$dbh->getNumberEventiInSospeso();
 $templateParams["EventiSegnalati"]=$dbh->getEventiSegnalati();
 $templateParams["NumeroEventiSegnalati"]=$dbh->getNumberEventiSegnalati();
 ?>
-<?php
-// Funzioni di utilità per formattare date e orari
-function formattaOrario($orario) {
-    return date("G:i", strtotime($orario));
-}
-
-function formattaDataItaliana($data) {
-    $mesi_italiano = array(
-        1 => 'gennaio', 2 => 'febbraio', 3 => 'marzo', 4 => 'aprile',
-        5 => 'maggio', 6 => 'giugno', 7 => 'luglio', 8 => 'agosto',
-        9 => 'settembre', 10 => 'ottobre', 11 => 'novembre', 12 => 'dicembre'
-    );
-    
-    $timestamp = strtotime($data);
-    $giorno = date('j', $timestamp);
-    $mese_numero = date('n', $timestamp);
-    $anno = date('Y', $timestamp);
-    
-    return $giorno . ' ' . $mesi_italiano[$mese_numero] . ' ' . $anno;
-}
-?>
-
 
 <!DOCTYPE html>
 <html lang="it">
