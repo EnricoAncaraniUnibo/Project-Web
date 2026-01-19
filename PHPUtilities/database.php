@@ -60,7 +60,7 @@ class DataBaseHelper{
 
     public function search($key) {
         $searchTerm = "%" . $key . "%";
-        $stmt = $this->db->prepare("SELECT e.Data,e.Città,e.Titolo,u.nome,u.matricola,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione,e.Partecipanti_Attuali FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ? ORDER BY e.Città,e.Data,e.Orario");
+        $stmt = $this->db->prepare("SELECT e.Data,e.Città,e.Titolo,u.nome,u.matricola,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione,e.Partecipanti_Attuali,e.Max_Partecipanti FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ? ORDER BY e.Città,e.Data,e.Orario");
         $stmt->bind_param('ssssss', $searchTerm, $searchTerm, $searchTerm,$searchTerm, $searchTerm, $searchTerm);
         $stmt->execute();
         $result=$stmt->get_result();
@@ -133,7 +133,7 @@ class DataBaseHelper{
 
     // Recupera tutti gli eventi per una specifica data che sono stati approvati
     public function getEventiPerData($data){
-        $query = "SELECT * FROM EVENTO WHERE Data = ? AND Stato = 'approvato' ORDER BY Orario ASC";
+        $query = "SELECT * FROM EVENTO JOIN UTENTE on matricola_creatore=matricola WHERE Data = ? AND Stato = 'approvato' ORDER BY Orario ASC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $data);
         $stmt->execute();

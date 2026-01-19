@@ -63,6 +63,14 @@ if ($dataSelezionata === null) {
     $templateParams["DataFormattata"] = formattaDataItaliana($dataSelezionata);
     $templateParams["DataPrecedente"] = $dataPrecedente;
     $templateParams["DataSuccessiva"] = $dataSuccessiva;
+    $eventiPerCitta = [];
+    foreach($templateParams["Eventi"] as $evento) {
+        $citta = $evento["Città"];
+        if (!isset($eventiPerCitta[$citta])) {
+            $eventiPerCitta[$citta] = [];
+        }
+        $eventiPerCitta[$citta][] = $evento;
+    }
 }
 ?>
 
@@ -74,12 +82,13 @@ if ($dataSelezionata === null) {
     <title>Eventi<?php echo !$templateParams["NoEventi"] ? " del " . $templateParams["DataFormattata"] : ""; ?></title>
     <link rel="stylesheet" href="../css/stylesVariables.css">
     <link rel="stylesheet" href="../css/stylesEMME.css">
+    <link rel="stylesheet" href="../css/navbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="body font mb-0">
-
-<div class="container maxWidthScaling">
+<?php require 'navbar.php'; ?>
+<div class="container maxWidthScaling mt-4">
 
     <?php if ($templateParams["NoEventi"]): ?>
         <div class="alert alert-info text-center mt-4">
@@ -117,71 +126,7 @@ if ($dataSelezionata === null) {
             </a>
         </div>
 
-        <?php foreach($templateParams["Eventi"] as $evento): ?>
-            <div class="event-card mb-3">
-                <div class="event-header d-flex justify-content-between">
-                    <div class="event-header d-flex align-items-center">
-                        <img src="../img/positionHeader.png" alt="luogo" class="event-icon">
-                        <span class="event-city"><?php echo htmlspecialchars($evento["Città"]); ?></span>
-                    </div>
-                </div>
-                <div class="px-3 py-3">
-                    <h2 class="textprimary fw-bold fs-6"><?php echo htmlspecialchars($evento["Titolo"]); ?></h2>
-                    <p class="SizeForDescription mb-1">📍 <?php echo htmlspecialchars($evento["Luogo"] . ", " . $evento["Indirizzo"]); ?></p>
-                    <p class="SizeForDescription mb-1">🕓 <?php echo formattaOrario($evento["Orario"]); ?></p>
-                    <p class="SizeForDescription mb-1">🎓 <?php echo htmlspecialchars($evento["Descrizione"]); ?></p>
-                    <p class="SizeForDescription mb-2">
-                        👥 <?php echo $evento["Partecipanti_Attuali"]; ?>
-                        <?php if ($evento["Max_Partecipanti"]): ?>
-                            / <?php echo $evento["Max_Partecipanti"]; ?>
-                        <?php endif; ?>
-                        partecipanti
-                    </p>
-                    
-                    <?php 
-                    $amiciPartecipanti = $dbh->getAmiciPartecipanti($evento["Id"], $matricolaUtente);
-                    if (count($amiciPartecipanti) > 0): 
-                    ?>
-                        <p class="SizeForDescription">
-                            Amici che partecipano:
-                            <strong>
-                                <?php 
-                                $nomiAmici = array_map(function($amico) {
-                                    return htmlspecialchars($amico['nome']);
-                                }, $amiciPartecipanti);
-                                echo implode(', ', $nomiAmici);
-                                ?>
-                            </strong>
-                        </p>
-                    <?php endif; ?>
-                    
-                    <?php 
-                    $utentePartecipa = $dbh->verificaPartecipazioneUtente($evento["Id"], $matricolaUtente);
-                    $eventoCompleto = $evento["Max_Partecipanti"] && $evento["Partecipanti_Attuali"] >= $evento["Max_Partecipanti"];
-                    ?>
-                    
-                    <div class="d-flex gap-2">
-                        <?php if ($utentePartecipa): ?>
-                            <form method="POST" class="d-inline">
-                                <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
-                                <input type="hidden" name="azione" value="annulla">
-                                <input type="hidden" name="data_ritorno" value="<?php echo $templateParams["DataSelezionata"]; ?>">
-                                <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
-                            </form>
-                        <?php elseif ($eventoCompleto): ?>
-                            <button class="btn-secondary-custom" disabled style="opacity: 0.5;">Evento completo</button>
-                        <?php else: ?>
-                            <form method="POST" class="d-inline">
-                                <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
-                                <input type="hidden" name="azione" value="partecipa">
-                                <input type="hidden" name="data_ritorno" value="<?php echo $templateParams["DataSelezionata"]; ?>">
-                                <button type="submit" class="btn-primary-custom">Partecipa</button>
-                            </form>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
+        <?php include "Cards.php" ?>
     
     <?php endif; ?>
 
