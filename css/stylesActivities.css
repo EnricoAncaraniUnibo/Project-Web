@@ -3,3 +3,8 @@
     color: white;
     border-radius: 10px;
 }
+
+.report-button:hover {
+    background-color: #ffa47d;
+    color: white;
+}

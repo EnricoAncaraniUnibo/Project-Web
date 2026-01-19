@@ -1,5 +1,4 @@
 const main = document.querySelector("main");
-console.log(main);
 main.querySelector("#joinedEvents").addEventListener("click", function(e){
     e.preventDefault();
     console.log("Navigating to Joined Events");
