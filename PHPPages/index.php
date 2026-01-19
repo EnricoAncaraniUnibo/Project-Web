@@ -1,5 +1,10 @@
 <?php
 require_once("../PHPUtilities/login.php");
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
+    $termine = $_GET['key'];
+    header('Location: ricercaSenzaLogin.php?key=' . $termine);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,12 +24,12 @@ require_once("../PHPUtilities/login.php");
                     <h1>Bologna</h1>
                 </div>
             </div>
-            <div class="searchBox">
-                <input type="text" placeholder="Cerca eventi...">
-                <button type="submit">
+            <form action="" method="GET" class="searchBox">
+                <input type="text" name="key" placeholder="Cerca eventi..." required>
+                <button type="submit" name="search">
                     🔍
                 </button>
-            </div>
+            </form>
         </header>
         <main>
             <section>

@@ -14,7 +14,7 @@ require_once("../PHPUtilities/registration.php");
     <body class="body font">
         <header>
             <div class="mt-5">
-                <a href="index.php" class="text-decoration-none textprimary paddingleft8 fs-4">← Torna al login</a>
+                <a href="index.php" class=" backToLogin text-decoration-none textprimary paddingleft8 fs-4">← Torna al login</a>
             </div>
             <div>
                 <h3 class="textsecondary mt-5 text-center fs-1 fw-bold">Registrati</h3>
