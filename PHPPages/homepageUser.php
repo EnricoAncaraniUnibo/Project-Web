@@ -74,11 +74,12 @@ if ($dataSelezionata === null) {
     <title>Eventi<?php echo !$templateParams["NoEventi"] ? " del " . $templateParams["DataFormattata"] : ""; ?></title>
     <link rel="stylesheet" href="../css/stylesVariables.css">
     <link rel="stylesheet" href="../css/stylesEMME.css">
+    <link rel="stylesheet" href="../css/navbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="body font mb-0">
-
+<?php require 'navbar.php'; ?>
 <div class="container maxWidthScaling">
 
     <?php if ($templateParams["NoEventi"]): ?>

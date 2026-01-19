@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" class="btn-publish flex-fill">
                         <span>Richiedi<br>Pubblicazione</span>
                     </button>
-                    <button type="button" class="btn-cancel flex-fill" onclick="window.location.href='eventi.php'">
+                    <button type="button" class="btn-cancel flex-fill" onclick="window.location.href='homepageUser.php'">
                         Annulla
                     </button>
                 </div>

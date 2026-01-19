@@ -44,7 +44,7 @@
                             </li>
                             <li class="d-flex dropdown-item align align-items-center">
                                 <img src="../img/create_icon.svg" alt="Crea evento" class="small-icon"/>
-                                <a class="ms-2 dropdown-link" href="#">Crea evento</a>
+                                <a class="ms-2 dropdown-link" href="creaEvento.php">Crea evento</a>
                             </li>
                             <li class="d-flex dropdown-item align align-items-center">
                                 <img src="../img/dashboard_icon.svg" alt="Bacheca" class="small-icon"/>
