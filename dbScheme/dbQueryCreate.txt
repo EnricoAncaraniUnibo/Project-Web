@@ -1,0 +1,56 @@
+-- Creazione del database
+CREATE DATABASE IF NOT EXISTS gestionale_eventi;
+USE gestionale_eventi;
+
+-- Tabella UTENTE con ENUM per il ruolo
+CREATE TABLE UTENTE (
+    matricola VARCHAR(10) PRIMARY KEY NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    ruolo ENUM('admin', 'normale') NOT NULL
+);
+
+-- Tabella EVENTO (con ID autoincrementale) con ENUM per stato
+CREATE TABLE EVENTO (
+    Id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    matricola_creatore VARCHAR(10) NOT NULL,
+    Titolo VARCHAR(200) NOT NULL,
+    Descrizione TEXT NOT NULL,
+    Data DATE NOT NULL,
+    Orario TIME NOT NULL,
+    Luogo VARCHAR(150) NOT NULL,
+    Indirizzo VARCHAR(200) NOT NULL,
+    Città VARCHAR(100) NOT NULL,
+    Max_Partecipanti INT CHECK (Max_Partecipanti>0),
+    Partecipanti_Attuali INT DEFAULT 0 NOT NULL,
+    Stato ENUM('approvato', 'rifiutato', 'in sospeso') NOT NULL,
+    DataRegistrazione DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (matricola_creatore) REFERENCES UTENTE(matricola)
+);
+
+-- Tabella SEGNALAZIONE
+CREATE TABLE SEGNALAZIONE (
+    Id INT PRIMARY KEY NOT NULL,
+    Descrizione TEXT NOT NULL,
+    FOREIGN KEY (Id) REFERENCES EVENTO(Id)
+);
+
+-- Tabella Partecipa (relazione molti-a-molti tra UTENTE ed EVENTO)
+CREATE TABLE Partecipa (
+    evento_id INT NOT NULL,
+    utente_matricola VARCHAR(10) NOT NULL,
+    PRIMARY KEY (evento_id, utente_matricola),
+    FOREIGN KEY (evento_id) REFERENCES EVENTO(Id),
+    FOREIGN KEY (utente_matricola) REFERENCES UTENTE(matricola)
+);
+
+-- Tabella Segue (relazione tra utenti - follower/followed)
+CREATE TABLE Segue (
+    seguitore_matricola VARCHAR(10) NOT NULL,
+    seguito_matricola VARCHAR(10) NOT NULL,
+    PRIMARY KEY (seguitore_matricola, seguito_matricola),
+    FOREIGN KEY (seguitore_matricola) REFERENCES UTENTE(matricola),
+    FOREIGN KEY (seguito_matricola) REFERENCES UTENTE(matricola),
+    CHECK (seguitore_matricola != seguito_matricola)
+);
