@@ -1,0 +1,172 @@
+<?php
+require_once("../PHPUtilities/bootstrap.php");
+
+if (!isset($_SESSION['matricola'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$host = 'localhost';
+$port = '3307';
+$dbname = 'gestionale_eventi';
+$username = 'root';
+$password = '';
+
+$messaggio = '';
+$tipo_messaggio = '';
+$utente = null;
+
+try {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    $matricola = $_SESSION['matricola'];
+    
+    $sql = "SELECT matricola, nome, email, ruolo FROM UTENTE WHERE matricola = :matricola";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':matricola' => $matricola]);
+    $utente = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$utente) {
+        session_destroy();
+        header('Location: login.php?error=utente_non_trovato');
+        exit();
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nuovo_nome = trim($_POST['nome'] ?? '');
+        $vecchia_password = $_POST['vecchia_password'] ?? '';
+        $nuova_password = $_POST['nuova_password'] ?? '';
+        
+        if (empty($nuovo_nome)) {
+            throw new Exception('Il nome non può essere vuoto');
+        }
+        $cambio_password = !empty($vecchia_password) && !empty($nuova_password);
+        
+        if ($cambio_password) {
+            $sql_pwd = "SELECT password FROM UTENTE WHERE matricola = :matricola";
+            $stmt_pwd = $pdo->prepare($sql_pwd);
+            $stmt_pwd->execute([':matricola' => $matricola]);
+            $password_hash_db = $stmt_pwd->fetchColumn();
+            
+            // Verifica la vecchia password
+            if (!password_verify($vecchia_password, $password_hash_db)) {
+                throw new Exception('La vecchia password non è corretta');
+            }
+            // Validazione nuova password
+            if (strlen($nuova_password) < 6) {
+                throw new Exception('La nuova password deve essere di almeno 6 caratteri');
+            }
+            // Aggiorna nome e password
+            $nuovo_hash = password_hash($nuova_password, PASSWORD_DEFAULT);
+            $sql_update = "UPDATE UTENTE SET nome = :nome, password = :password WHERE matricola = :matricola";
+            $stmt_update = $pdo->prepare($sql_update);
+            $stmt_update->execute([
+                ':nome' => $nuovo_nome,
+                ':password' => $nuovo_hash,
+                ':matricola' => $matricola
+            ]);
+            
+            $messaggio = 'Profilo e password aggiornati con successo!';
+        } else {
+            // Aggiorna solo il nome
+            $sql_update = "UPDATE UTENTE SET nome = :nome WHERE matricola = :matricola";
+            $stmt_update = $pdo->prepare($sql_update);
+            $stmt_update->execute([
+                ':nome' => $nuovo_nome,
+                ':matricola' => $matricola
+            ]);
+            
+            $messaggio = 'Nome aggiornato con successo!';
+        }
+        $tipo_messaggio = 'success';
+        // Ricarica i dati aggiornati
+        $stmt->execute([':matricola' => $matricola]);
+        $utente = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+} catch (PDOException $e) {
+    $messaggio = 'Errore database: ' . $e->getMessage();
+    $tipo_messaggio = 'error';
+} catch (Exception $e) {
+    $messaggio = $e->getMessage();
+    $tipo_messaggio = 'error';
+}
+?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il mio profilo</title>
+    <link rel="stylesheet" href="../css/stylesVariables.css">
+    <link rel="stylesheet" href="../css/stylesEMME.css">
+        <link rel="stylesheet" href="../css/navbar.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .alert-custom {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body class="body font">
+    <?php require 'navbar.php'; ?>
+    <?php if (!empty($messaggio)): ?>
+        <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-custom alert-dismissible fade show" role="alert">
+            <?php echo htmlspecialchars($messaggio); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+
+    <div class="container py-4 maxWidthScaling">
+        <div class="profile-header mb-4">
+            <h1 class="textsecondary fw-bold">Il mio profilo</h1>
+            <p class="SizeForDescription mb-1">Matricola: <?php echo htmlspecialchars($utente['matricola']); ?></p>
+            <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente['email']); ?></p>
+            <?php if ($utente['ruolo'] === 'admin'): ?>
+                <p class="SizeForDescription"><span class="badge bg-primary">Amministratore</span></p>
+            <?php endif; ?>
+        </div>
+
+        <div class="d-flex gap-2 mb-4">
+            <span class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</span>
+            <a href="cercaUtenti.php" class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</a> 
+        </div>
+
+        <div class="event-card">
+            <div class="p-4">
+                <h2 class="defaultTextColor text-center mb-4 fw-semibold">I miei dati</h2>
+                
+                <form method="POST" action="">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label defaultTextColor fw-semibold SizeForDescription">Nome</label>
+                        <input type="text" class="inputForForm w-100" id="nome" name="nome" value="<?php echo htmlspecialchars($utente['nome']); ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="vecchia_password" class="form-label defaultTextColor fw-semibold SizeForDescription">Cambia Password (opzionale)</label>
+                        <input type="password" placeholder="Vecchia password" class="inputForForm w-100" id="vecchia_password" name="vecchia_password">
+                        <small class="text-muted">Lascia vuoto se non vuoi cambiare la password</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="password" placeholder="Nuova password (min. 6 caratteri)" class="inputForForm w-100" id="nuova_password" name="nuova_password">
+                    </div>
+
+                    <button type="submit" class="buttonPrimary border-0 d-flex align-items-center gap-2">
+                        ✏️ Modifica
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <?php require 'footer.php'; ?>
+</body>
+</html>

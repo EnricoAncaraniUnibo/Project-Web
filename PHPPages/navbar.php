@@ -64,7 +64,7 @@ $isAdmin = ($ruolo === 'admin');
                         </li>
                         <li class="d-flex dropdown-item align-items-center">
                             <img src="../img/profile_icon.svg" alt="Mio profilo" class="small-icon"/>
-                            <a class="ms-2 dropdown-link <?php echo $current_page === 'profilo.php' ? 'active' : ''; ?>" href="profilo.php">Mio profilo</a>
+                            <a class="ms-2 dropdown-link <?php echo $current_page === 'modificaProfilo.php' ? 'active' : ''; ?>" href="modificaProfilo.php">Mio profilo</a>
                         </li>
                         <li class="d-flex dropdown-item align-items-center">
                             <img src="../img/create_icon.svg" alt="Crea evento" class="small-icon"/>

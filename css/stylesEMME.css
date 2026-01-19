@@ -333,6 +333,14 @@
     background-color: var(--color-tertiary);
 }
 
+/*
+.btn-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+*/
+
 /* Crea evento*/
 .btn-publish {
     background-color: var(--color-primary);
@@ -433,6 +441,26 @@
 .btn-report i {
     color: white;
     margin-right: 0;
+}
+
+.alert-custom {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 300px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
 }
 
 @media (min-width: 768px) {
