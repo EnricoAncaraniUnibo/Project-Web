@@ -9,7 +9,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="PHPPages/mappa.php" class="navbar-button">
+                    <a href="Mappa.php" class="navbar-button">
                         <img src="../img/map_icon.svg" alt="Map" class="small-icon"/>
                         <span class="d-none d-sm-inline ms-2">Mappa</span>
                     </a>
@@ -44,11 +44,7 @@
                             </li>
                             <li class="d-flex dropdown-item align align-items-center">
                                 <img src="../img/create_icon.svg" alt="Crea evento" class="small-icon"/>
-<<<<<<< HEAD
-                                <a class="ms-2 dropdown-link" href="PHPPages/creaEvento.php">Crea evento</a>
-=======
                                 <a class="ms-2 dropdown-link" href="creaEvento.php">Crea evento</a>
->>>>>>> ed0b23afa93641260a0cf99710fb3c6baaab3a71
                             </li>
                             <li class="d-flex dropdown-item align align-items-center">
                                 <img src="../img/dashboard_icon.svg" alt="Bacheca" class="small-icon"/>

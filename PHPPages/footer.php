@@ -33,7 +33,7 @@
         <ul class="footer-links">
             <li><a href="homepageUser.php">Home / Eventi</a></li>
             <li><a href="#">Le mie attività</a></li>
-            <li><a href="#">Mappa</a></li>
+            <li><a href="Mappa.php">Mappa</a></li>
             <li><a href="#">Mio profilo</a></li>
             <li><a href="creaEvento.php">Crea evento</a></li>
         </ul>
