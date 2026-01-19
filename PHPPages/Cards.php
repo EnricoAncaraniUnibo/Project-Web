@@ -89,3 +89,4 @@ $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
     </div>
 </div>
 <?php endforeach; ?>
+<script src="../JS/showCards.js"></script>
