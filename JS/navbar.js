@@ -1,5 +1,5 @@
-const main = document.querySelector("nav");
-main.querySelector("#logout-button").addEventListener("click", function(e){
+const nav = document.querySelector("nav");
+nav.querySelector("#logout-button").addEventListener("click", function(e){
     e.preventDefault();
     console.log("Logout initiated");
     fetch("../PHPUtilities/api-logout.php", { redirect: 'manual' })
