@@ -1,3 +1,9 @@
+<?php
+// Verifica se l'utente è loggato
+$utenteLoggato = isset($_SESSION['matricola']) && !empty($_SESSION['matricola']);
+$matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
+?>
+
 <?php foreach($eventiPerCitta as $citta => $eventi): ?>
 <div class="mb-3 w-100 maxWidthScaling">
     <div class="event-container">
@@ -28,6 +34,49 @@
                         <?php endif; ?>
                         partecipanti
                     </p>
+                    
+                    <?php if($utenteLoggato): ?>
+                        <!-- Sezione per utenti loggati -->
+                        <?php 
+                        $amiciPartecipanti = $dbh->getAmiciPartecipanti($evento["Id"], $matricolaUtente);
+                        if (count($amiciPartecipanti) > 0): 
+                        ?>
+                            <p class="SizeForDescription">
+                                Amici che partecipano:
+                                <strong>
+                                    <?php 
+                                    $nomiAmici = array_map(function($amico) {
+                                        return htmlspecialchars($amico['nome']);
+                                    }, $amiciPartecipanti);
+                                    echo implode(', ', $nomiAmici);
+                                    ?>
+                                </strong>
+                            </p>
+                        <?php endif; ?>
+                        
+                        <?php 
+                        $utentePartecipa = $dbh->verificaPartecipazioneUtente($evento["Id"], $matricolaUtente);
+                        $eventoCompleto = $evento["Max_Partecipanti"] && $evento["Partecipanti_Attuali"] >= $evento["Max_Partecipanti"];
+                        ?>
+                        
+                        <div class="d-flex gap-2">
+                            <?php if ($utentePartecipa): ?>
+                                <form method="POST" class="d-inline">
+                                    <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                                    <input type="hidden" name="azione" value="annulla">
+                                    <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
+                                </form>
+                            <?php elseif ($eventoCompleto): ?>
+                                <button class="btn-secondary-custom" disabled style="opacity: 0.5;">Evento completo</button>
+                            <?php else: ?>
+                                <form method="POST" class="d-inline">
+                                    <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                                    <input type="hidden" name="azione" value="partecipa">
+                                    <button type="submit" class="btn-primary-custom">Partecipa</button>
+                                </form>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -40,4 +89,3 @@
     </div>
 </div>
 <?php endforeach; ?>
-<script src="../JS/showCards.js"></script>
