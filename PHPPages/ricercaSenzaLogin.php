@@ -4,6 +4,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
     $termine = trim($_GET['key']);
     $templateParams["EventiRicercati"]=$dbh->search($termine);
     $templateParams["NumeroEventiRicercati"]=$dbh->NumberOfsearch($termine);
+    $eventiPerCitta = [];
+    foreach($templateParams["EventiRicercati"] as $evento) {
+        $citta = $evento["Città"];
+        if (!isset($eventiPerCitta[$citta])) {
+            $eventiPerCitta[$citta] = [];
+        }
+        $eventiPerCitta[$citta][] = $evento;
+    }
 }
 ?>
 
@@ -38,24 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
                     <span class="textprimary fs-3 mx-1">"<?php echo $termine ?>"</span>
                 </div>
                 <p class="SizeForDescription"><?php echo $templateParams["NumeroEventiRicercati"][0]["COUNT(*)"] ?> elementi trovati</p>
-                <?php foreach($templateParams["EventiRicercati"] as $evento): ?>
-                <div class="event-card mb-4 maxWidthScaling w-100">
-                    <div class="event-header d-flex justify-content-between">
-                        <div class="event-header d-flex align-items-center">
-                            <img src="../img/positionHeader.png" alt="luogo" class="imageForForm me-2">
-                            <span class="fw-bold"><?php echo $evento["Città"] ?></span>
-                        </div>
-                    </div>
-                    <div class="px-3 py-3">
-                        <h4 class="textprimary fw-bold"><?php echo $evento["Titolo"] ?></h4>
-                        <p class="SizeForDescription">Creato da: <?php echo $evento["nome"] ?> (Mat. <?php echo $evento["matricola"] ?>)</p>
-                        <p class="SizeForInformation mb-1">🕓 <?php echo formattaOrario($evento["Orario"]) ?>, <?php echo formattaDataItaliana($evento["Data"]) ?></p>
-                        <p class="SizeForInformation mb-1">📍 <?php echo $evento["Luogo"] ?>, <?php echo $evento["Indirizzo"] ?></p>
-                        <p class="SizeForInformation mb-1">🎓 <?php echo $evento["Descrizione"] ?></p>
-                        <p class="SizeForInformation mb-2">👥 <?php echo $evento["Partecipanti_Attuali"] ?> partecipanti</p>
-                    </div>
-                </div>
-                <?php endforeach; ?>
+                <?php include "Cards.php" ?>
             </main>
             <footer>
                 <p class="text-center mt-4">© 2026 Università di Bologna - Tutti i diritti riservati</p>

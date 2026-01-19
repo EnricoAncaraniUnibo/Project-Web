@@ -272,3 +272,45 @@
     background-color:white;
     color: #c10007;
 }
+
+.event-container {
+    position: relative;
+}
+.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.7);
+}
+.carousel-btn.prev {
+    left: 10px;
+}
+.carousel-btn.next {
+    right: 10px;
+}
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+        
