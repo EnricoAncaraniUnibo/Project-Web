@@ -94,6 +94,7 @@ if ($dataSelezionata === null) {
     }, 4000);
 </script>
 <body class="body font mb-0">
+<div class="page-content">
 <?php require 'navbar.php'; ?>
 <div class="container maxWidthScaling mt-4">
 
@@ -136,7 +137,7 @@ if ($dataSelezionata === null) {
         <?php include "Cards.php" ?>
     
     <?php endif; ?>
-
+</div>
 </div>
 <?php require 'footer.php'; ?>
 </body>

@@ -145,6 +145,7 @@ try {
 
 </head>
 <body class="body font">
+    <div class="page-content">
     <?php require 'navbar.php'; ?>
 
     <div class="d-flex flex-column container py-4 maxWidthScaling">
@@ -217,7 +218,7 @@ try {
             <?php endif; ?>
         </div>
     </div>
-
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <?php require 'footer.php'; ?>
     <script src="cercaUtenti.js"></script>

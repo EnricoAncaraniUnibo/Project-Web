@@ -107,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body class="body font">
+        <div class="page-content">
         <header>
             <?php require 'navbar.php'; ?>
         </header>
@@ -200,6 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
         </main>
+        </div>
         <footer><?php require 'footer.php'; ?></footer>
     </body>
     <script src="../JS/navbar.js"></script>

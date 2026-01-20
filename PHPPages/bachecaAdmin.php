@@ -72,6 +72,7 @@ foreach ($templateParams["EventiSegnalati"] as $evento) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body class="body font">
+        <div class="page-content">
         <header>
             <?php require 'navbar.php'; ?>
         </header>
@@ -99,6 +100,7 @@ foreach ($templateParams["EventiSegnalati"] as $evento) {
                 ?>
             </div>
         </main>
+        </div>
         <?php require 'footer.php'; ?>
         <script src="../JS/bachecaAdmin.js"></script>
         <script src="../JS/navbar.js"></script>

@@ -144,6 +144,10 @@
     padding-right: 4%;
 }
 
+.page-content {
+    flex: 1;  
+}
+
 .form {
     max-width: 600px;
     border-radius: 40px;

@@ -144,6 +144,7 @@ try {
     </style>
 </head>
 <body class="body font">
+    <div class="page-content">
     <?php require 'navbar.php'; ?>
     
 
@@ -206,7 +207,7 @@ try {
             </div>
         </div>
     </div>
-
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <?php require 'footer.php'; ?>
     <script src="../JS/navbar.js"></script>

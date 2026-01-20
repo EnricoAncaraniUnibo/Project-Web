@@ -64,10 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
         <link rel="stylesheet" href="../css/navbar.css">
     </head>
     <body class="body mx-0 my-0 font">
+        
         <header class="bg-white ">
             <?php require 'navbar.php'; ?>
         </header>
         <div class="body">
+            <div class="page-content">
             <main class="d-flex flex-column align-items-center marginx6">
                 <div class="w-100 maxWidthScaling d-flex justify-content-center">
                     <form action="" method="GET" class="searchBox">
@@ -99,6 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
                 <p class="SizeForDescription"><?php echo $templateParams["NumeroEventiRicercati"]?> elementi trovati</p>
                 <?php include "Cards.php" ?>
             </main>
+            </div>
             <footer>
                 <?php require 'footer.php'; ?>
             </footer>

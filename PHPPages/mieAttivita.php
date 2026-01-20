@@ -103,6 +103,7 @@ if($vistaAttiva === 'joined') {
     <link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body class="body">
+    <div class="page-content">
     <?php include "navbar.php"; ?>
     <div class="d-flex justify-content-center">
     <?php if (isset($_SESSION['successoSegnalazione'])): ?>
@@ -175,6 +176,7 @@ if($vistaAttiva === 'joined') {
             </form>
             </div>
         </div>
+    </div>
     </div>
     <?php include "footer.php"; ?>
 </body>

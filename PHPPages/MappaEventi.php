@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body class="body font">
-
+<div class="page-content">
 <header>
     <?php require 'navbar.php'; ?>
 </header>
@@ -32,7 +32,7 @@
     </div>
 
 </main>
-
+</div>
 <footer>
     <?php require 'footer.php'; ?>
 </footer>
