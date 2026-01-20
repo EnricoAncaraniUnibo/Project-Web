@@ -38,7 +38,20 @@ class DataBaseHelper{
 
     public function checkUserExists($matricola){
         $stmt = $this->db->prepare("SELECT * FROM utente WHERE matricola = ?");
-        $stmt->bind_param('i', $matricola);
+        try {
+            $stmt->bind_param('i', $matricola);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->num_rows > 0;
+        } catch (Exception $e){
+            return 0;
+        }
+        
+    }
+
+    public function checkEmailExist($email){
+        $stmt = $this->db->prepare("SELECT * FROM utente WHERE email = ?");
+        $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->num_rows > 0;

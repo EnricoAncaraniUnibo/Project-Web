@@ -33,6 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrati'])) {
     }
 
     if (empty($errori)) {
+        if ($dbh->checkEmailExist($email)) {
+            $errori[] = "Questa email è già registrata";
+        }
+    }
+
+    if (empty($errori)) {
         $dbh->registerUser($nome, $matricola, $email, $password);
         header('Location: index.php');
         exit();

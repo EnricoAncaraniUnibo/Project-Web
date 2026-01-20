@@ -44,7 +44,7 @@ $isAdmin = ($ruolo === 'admin');
                 </form>
             </li>
             <li class="nav-item dropdown">
-                <button type="button" class="navbar-button dropdown-toggle <?php echo in_array($current_page, ['mieAttivita.php', 'creaEvento.php', 'bachecaAdmin.php']) ? 'navbar-button-active' : ''; ?>" 
+                <button type="button" class="navbar-button dropdown-toggle <?php echo in_array($current_page, ['mieAttivita.php', 'creaEvento.php', 'bachecaAdmin.php','modificaProfilo.php','cercaUtenti.php']) ? 'navbar-button-active' : ''; ?>" 
                         data-bs-toggle="dropdown" 
                         aria-expanded="false"
                         aria-haspopup="true">
@@ -54,7 +54,7 @@ $isAdmin = ($ruolo === 'admin');
                 <div class="dropdown-menu dropdown-menu-end">
                     <div class="dropdown-header">    
                         <span>Matricola</span>
-                        <h6>1122</h6>
+                        <h6><?php echo $_SESSION['matricola']; ?></h6>
                     </div>
                     <hr class="dropdown-divider">
                     <ul class="list-unstyled">
