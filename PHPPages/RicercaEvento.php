@@ -3,7 +3,7 @@ require_once("../PHPUtilities/bootstrap.php");
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
     $termine = trim($_GET['key']);
     $templateParams["EventiRicercati"]=$dbh->search($termine);
-    $templateParams["NumeroEventiRicercati"]=$dbh->NumberOfsearch($termine);
+    $templateParams["NumeroEventiRicercati"]=count($templateParams["EventiRicercati"]);
     $eventiPerCitta = [];
     foreach($templateParams["EventiRicercati"] as $evento) {
         $citta = $evento["Città"];
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
                     <h3 class="mb-0">Risultati per </h3>
                     <span class="textprimary fs-3 mx-1">"<?php echo $termine ?>"</span>
                 </div>
-                <p class="SizeForDescription"><?php echo $templateParams["NumeroEventiRicercati"][0]["COUNT(*)"] ?> elementi trovati</p>
+                <p class="SizeForDescription"><?php echo $templateParams["NumeroEventiRicercati"]?> elementi trovati</p>
                 <?php include "Cards.php" ?>
             </main>
             <footer>
