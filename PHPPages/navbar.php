@@ -54,7 +54,7 @@ $isAdmin = ($ruolo === 'admin');
                 <div class="dropdown-menu dropdown-menu-end">
                     <div class="dropdown-header">    
                         <span>Matricola</span>
-                        <h6>1122</h6>
+                        <h6><?php echo $_SESSION['matricola']; ?></h6>
                     </div>
                     <hr class="dropdown-divider">
                     <ul class="list-unstyled">
