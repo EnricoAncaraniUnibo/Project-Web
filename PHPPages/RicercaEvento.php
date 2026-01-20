@@ -1,5 +1,42 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
+
+$matricolaUtente = $_SESSION['matricola'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['azione']) && ($_POST['azione'] === 'partecipa' || $_POST['azione'] === 'annulla')) {
+    $eventoId = isset($_POST['evento_id']) ? intval($_POST['evento_id']) : 0;
+    $azione = isset($_POST['azione']) ? $_POST['azione'] : '';
+    if ($eventoId > 0 && in_array($azione, ['partecipa', 'annulla'])) {
+        
+        if ($azione === 'partecipa') {
+            if ($dbh->verificaPartecipazioneUtente($eventoId, $matricolaUtente)) {
+                $_SESSION['errore'] = "Sei già iscritto a questo evento";
+            } else {
+                $risultato = $dbh->aggiungiPartecipazione($eventoId, $matricolaUtente);
+                if ($risultato) {
+                    $_SESSION['successo'] = "Ti sei iscritto con successo all'evento!";
+                } else {
+                    $_SESSION['errore'] = "Impossibile iscriversi all'evento. Potrebbe essere completo.";
+                }
+            }
+        } elseif ($azione === 'annulla') {
+            if (!$dbh->verificaPartecipazioneUtente($eventoId, $matricolaUtente)) {
+                $_SESSION['errore'] = "Non risulti iscritto a questo evento";
+            } else {
+                $risultato = $dbh->rimuoviPartecipazione($eventoId, $matricolaUtente);
+                if ($risultato) {
+                    $_SESSION['successo'] = "Hai annullato la partecipazione all'evento";
+                } else {
+                    $_SESSION['errore'] = "Impossibile annullare la partecipazione.";
+                }
+            }
+        }
+    }
+    header("Location: ".$_SERVER['REQUEST_URI']);
+    exit;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
     $termine = trim($_GET['key']);
     $templateParams["EventiRicercati"]=$dbh->search($termine);
@@ -40,6 +77,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
                         </button>
                     </form>
                 </div>
+                <?php if (isset($_SESSION['successo'])): ?>
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <?php echo htmlspecialchars($_SESSION['successo']); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <?php unset($_SESSION['successo']); ?>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION['errore'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <?php echo htmlspecialchars($_SESSION['errore']); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <?php unset($_SESSION['errore']); ?>
+        <?php endif; ?>
                 <div class="mt-4 d-flex align-items-center">
                     <h3 class="mb-0">Risultati per </h3>
                     <span class="textprimary fs-3 mx-1">"<?php echo $termine ?>"</span>
