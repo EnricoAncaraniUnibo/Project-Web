@@ -2,6 +2,7 @@
 // Verifica se l'utente è loggato
 $utenteLoggato = isset($_SESSION['matricola']) && !empty($_SESSION['matricola']);
 $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <?php foreach($eventiPerCitta as $citta => $eventi): ?>
@@ -27,6 +28,7 @@ $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
                     <p class="SizeForInformation mb-1">🕓 <?php echo formattaOrario($evento["Orario"]) ?>, <?php echo formattaDataItaliana($evento["Data"]) ?></p>
                     <p class="SizeForInformation mb-1">📍 <?php echo $evento["Luogo"] ?>, <?php echo $evento["Indirizzo"] ?></p>
                     <p class="SizeForInformation mb-1">🎓 <?php echo $evento["Descrizione"] ?></p>
+                    <?php if($current_page != 'bachecaAdmin.php'): ?>
                     <p class="SizeForDescription mb-2">
                         👥 <?php echo $evento["Partecipanti_Attuali"]; ?>
                         <?php if ($evento["Max_Partecipanti"]): ?>
@@ -34,8 +36,13 @@ $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
                         <?php endif; ?>
                         partecipanti
                     </p>
+                    <?php endif; ?>
+                    <?php if($current_page === 'bachecaAdmin.php'): ?>
+                    <button type="button" class="mt-2 buttonApproves border-0 px-3 py-2">✔ Approva</button>
+                    <button type="button" class="buttonPrimary border-0 px-3 py-2">✕ Rifiuta</button>
+                    <?php endif; ?>
                     
-                    <?php if($utenteLoggato): ?>
+                    <?php if($utenteLoggato && $current_page != 'bachecaAdmin.php'): ?>
                         <!-- Sezione per utenti loggati -->
                         <?php 
                         $amiciPartecipanti = $dbh->getAmiciPartecipanti($evento["Id"], $matricolaUtente);
