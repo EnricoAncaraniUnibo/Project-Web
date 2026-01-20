@@ -26,7 +26,7 @@
         </div>
 
         <div class="admin-expand" id="adminExpand">
-            <p>Amministratore del sistema, responsabile della gestione dei contenuti e del supporto agli utenti.</p>
+            <p>Gestore della piattaforma, responsabile del funzionamento del sistema, dell'aggiornamento dei contenuti e del supporto agli utenti.</p>
         </div>
 
         <div class="admin-contact" onclick="toggleAdmin(this)">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="admin-expand" id="adminExpand">
-            <p>Amministratore del sistema, responsabile della gestione dei contenuti e del supporto agli utenti.</p>
+            <p>Coordinatore tecnico, responsabile dello sviluppo del progetto, della manutenzione software e dell’assistenza operativa.</p>
         </div>
     </div>
     
