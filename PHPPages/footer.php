@@ -32,9 +32,9 @@
         <h3 class="footer-title">Naviga il Sito</h3>
         <ul class="footer-links">
             <li><a href="homepageUser.php">Home / Eventi</a></li>
-            <li><a href="#">Le mie attività</a></li>
+            <li><a href="mieAttivita.php">Le mie attività</a></li>
             <li><a href="Mappa.php">Mappa</a></li>
-            <li><a href="#">Mio profilo</a></li>
+            <li><a href="modificaProfilo.php">Mio profilo</a></li>
             <li><a href="creaEvento.php">Crea evento</a></li>
         </ul>
     </div>
@@ -50,4 +50,5 @@
         © 2026 Università di Bologna - Alma Mater Studiorum.<br>
         Tutti i diritti riservati.
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </footer>

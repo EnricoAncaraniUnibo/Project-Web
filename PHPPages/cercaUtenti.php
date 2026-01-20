@@ -22,7 +22,7 @@ try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $matricola_corrente = $_SESSION['matricola'];
-    $sql_user = "SELECT matricola, nome, email FROM UTENTE WHERE matricola = :matricola";
+    $sql_user = "SELECT matricola, nome, email, ruolo FROM UTENTE WHERE matricola = :matricola";
     $stmt_user = $pdo->prepare($sql_user);
     $stmt_user->execute([':matricola' => $matricola_corrente]);
     $utente_corrente = $stmt_user->fetch(PDO::FETCH_ASSOC);
@@ -153,10 +153,13 @@ try {
         <?php endif; ?>
 
         <div class="profile-header mb-1">
-            <h1 class="textsecondary fw-bold mt-3">Il mio profilo</h1>
+            <h1 class="textsecondary fw-bold">Il mio profilo</h1>
             <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente_corrente['nome']); ?></p>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente_corrente['matricola']); ?></p>
             <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente_corrente['email']); ?></p>
+            <?php if ($utente_corrente['ruolo'] === 'admin'): ?>
+                <p class="SizeForDescription"><span class="badge bg-primary">Amministratore</span></p>
+            <?php endif; ?>
         </div>
 
         <div class="d-flex gap-2 mb-4">

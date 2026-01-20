@@ -8,16 +8,18 @@ if (!isset($_SESSION['matricola'])) {
 }
 
 $host = 'localhost';
+$port = '3307';
 $dbname = 'gestionale_eventi';
-$username = 'root'; 
-$password = ''; 
+$username = 'root';
+$password = '';
 
 $messaggio = '';
 $tipo_messaggio = ''; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+        $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+        $pdo = new PDO($dsn, $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $titolo = trim($_POST['titolo'] ?? '');
         $descrizione = trim($_POST['descrizione'] ?? '');
@@ -26,11 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $luogo = trim($_POST['luogo'] ?? '');
         $indirizzo = trim($_POST['indirizzo'] ?? '');
         $citta = trim($_POST['citta'] ?? '');
+        $Nmax = trim($_POST['Nmax'] ?? '');
         $matricola_creatore = $_SESSION['matricola'];
-        
         if (empty($titolo) || empty($descrizione) || empty($data) || empty($orario) || 
-            empty($luogo) || empty($indirizzo) || empty($citta)) {
+            empty($luogo) || empty($indirizzo) || empty($citta) || empty($Nmax)) {
             throw new Exception('Tutti i campi obbligatori devono essere compilati');
+        }
+        $Nmax_int = (int)$Nmax;
+        if($Nmax_int<=0 || !is_int($Nmax_int)) {
+            throw new Exception('Il numero di partecipanti non è valido');
         }
         
         $data_evento = new DateTime($data);
@@ -41,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('La data dell\'evento non può essere nel passato');
         }
         
-        $sql = "INSERT INTO EVENTO (matricola_creatore, Titolo, Descrizione, Data, Orario, Luogo, Indirizzo, Città, Stato) VALUES (
-                    :matricola_creatore, :titolo, :descrizione, :data, :orario, :luogo, :indirizzo, :citta, 'in sospeso')";
+        $sql = "INSERT INTO EVENTO (matricola_creatore, Titolo, Descrizione, Data, Orario, Luogo, Indirizzo, Città, Stato, Max_Partecipanti) VALUES (
+                    :matricola_creatore, :titolo, :descrizione, :data, :orario, :luogo, :indirizzo, :citta, 'in sospeso', :Nmax)";
         
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
@@ -53,13 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':orario' => $orario,
             ':luogo' => $luogo,
             ':indirizzo' => $indirizzo,
-            ':citta' => $citta
+            ':citta' => $citta,
+            'Nmax' => $Nmax
         ]);
         
         $messaggio = 'Evento creato con successo! In attesa di approvazione.';
         $tipo_messaggio = 'success';
 
-        header('Refresh: 2; URL=eventi.php');
+        header('Refresh: 4; URL=creaEvento.php');
         
     } catch (PDOException $e) {
         $messaggio = 'Errore database: ' . $e->getMessage();
@@ -86,9 +93,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <body class="body font">
         <?php require 'navbar.php'; ?>
         <?php if (!empty($messaggio)): ?>
-            <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-custom alert-dismissible fade show" role="alert">
-                <?php echo htmlspecialchars($messaggio); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <div class="container mt-3">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-compact alert-dismissible fade show text-center" role="alert">
+                            <?php echo htmlspecialchars($messaggio); ?>
+                            <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert"></button>
+                        </div>
+                    </div>
+                </div>
             </div>
         <?php endif; ?>
         
@@ -139,6 +152,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Città *</h3>
                 </div>
                 <input type="text" name="citta" placeholder="Es. Bologna" class="inputForForm w-100" required>
+
+                <div class="d-flex pt-4 pb-2">
+                    <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Numero massimo di partecipanti *</h3>
+                </div>
+                <input type="text" name="Nmax" placeholder="0" class="inputForForm w-100" required>
                 
                 <div class="d-flex gap-3 mt-4 w-100 mb-4">
                     <button type="submit" class="btn-publish flex-fill">
@@ -150,7 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
         </main>
-        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <?php require 'footer.php'; ?>
         <script src="../JS/navbar.js"></script>

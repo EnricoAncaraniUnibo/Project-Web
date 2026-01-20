@@ -15,6 +15,7 @@ $password = '';
 $messaggio = '';
 $tipo_messaggio = '';
 $utente = null;
+$errori = [];
 
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
@@ -47,37 +48,61 @@ try {
             $sql_pwd = "SELECT password FROM UTENTE WHERE matricola = :matricola";
             $stmt_pwd = $pdo->prepare($sql_pwd);
             $stmt_pwd->execute([':matricola' => $matricola]);
-            $password_hash_db = $stmt_pwd->fetchColumn();
+            $password_db = $stmt_pwd->fetchColumn();
             
             // Verifica la vecchia password
-            if (!password_verify($vecchia_password, $password_hash_db)) {
+            if ($vecchia_password !== $password_db) {
                 throw new Exception('La vecchia password non è corretta');
             }
-            // Validazione nuova password
-            if (strlen($nuova_password) < 6) {
-                throw new Exception('La nuova password deve essere di almeno 6 caratteri');
-            }
-            // Aggiorna nome e password
-            $nuovo_hash = password_hash($nuova_password, PASSWORD_DEFAULT);
-            $sql_update = "UPDATE UTENTE SET nome = :nome, password = :password WHERE matricola = :matricola";
+            $errore = validaPassword($nuova_password, $nuova_password);
+            if ($errore !== null) {
+                throw new Exception($errore);
+            } 
+
+            $sql_update = "UPDATE UTENTE 
+                   SET nome = :nome, password = :password 
+                   WHERE matricola = :matricola";
             $stmt_update = $pdo->prepare($sql_update);
-            $stmt_update->execute([
-                ':nome' => $nuovo_nome,
-                ':password' => $nuovo_hash,
-                ':matricola' => $matricola
-            ]);
-            
-            $messaggio = 'Profilo e password aggiornati con successo!';
+            if ($nuovo_nome === $utente['nome']) {
+                // SOLO PASSWORD
+                $sql_update = "UPDATE UTENTE 
+                   SET password = :password 
+                   WHERE matricola = :matricola";
+                $stmt_update = $pdo->prepare($sql_update);
+                $stmt_update->execute([
+                    ':password' => $nuova_password,
+                    ':matricola' => $matricola
+                ]);
+                $messaggio = 'Password aggiornata con successo!';
+            } else {
+                // NOME + PASSWORD
+                $sql_update = "UPDATE UTENTE 
+                   SET nome = :nome, password = :password 
+                   WHERE matricola = :matricola";
+
+                $stmt_update = $pdo->prepare($sql_update);
+                $stmt_update->execute([
+                    ':nome' => $nuovo_nome,
+                    ':password' => $nuova_password,
+                    ':matricola' => $matricola
+             ]);
+                $messaggio = 'Password e nome aggiornati con successo!';
+            } 
         } else {
             // Aggiorna solo il nome
             $sql_update = "UPDATE UTENTE SET nome = :nome WHERE matricola = :matricola";
             $stmt_update = $pdo->prepare($sql_update);
-            $stmt_update->execute([
+
+            if($nuovo_nome === $utente['nome']) {
+                throw new Exception('Il nuovo nome deve essere diverso da quello attuale');
+            } else {
+                $stmt_update->execute([
                 ':nome' => $nuovo_nome,
                 ':matricola' => $matricola
-            ]);
+                ]);
+                $messaggio = 'Nome aggiornato con successo!';
+            }
             
-            $messaggio = 'Nome aggiornato con successo!';
         }
         $tipo_messaggio = 'success';
         // Ricarica i dati aggiornati
@@ -126,6 +151,7 @@ try {
     <div class="container py-4 maxWidthScaling">
         <div class="profile-header mb-4">
             <h1 class="textsecondary fw-bold">Il mio profilo</h1>
+            <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente['nome']); ?></p>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente['matricola']); ?></p>
             <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente['email']); ?></p>
             <?php if ($utente['ruolo'] === 'admin'): ?>
@@ -155,7 +181,11 @@ try {
                     </div>
 
                     <div class="mb-3">
+                        <label for="nuova_password" class="form-label defaultTextColor fw-semibold SizeForDescription">Nuova Password</label>
                         <input type="password" placeholder="Nuova password (min. 6 caratteri)" class="inputForForm w-100" id="nuova_password" name="nuova_password">
+                        <p class="SizeForDescription mt-2 mb-2">✔ Almeno 8 caratteri</p>
+                        <p class="SizeForDescription mt-2 mb-2">✔ Maiuscole e minuscole</p>
+                        <p class="SizeForDescription mt-2 mb-2">✔ Almeno un numero</p>
                     </div>
 
                     <button type="submit" class="buttonPrimary border-0 d-flex align-items-center gap-2">
