@@ -100,8 +100,10 @@ if($vistaAttiva === 'joined') {
     <link rel="stylesheet" href="../css/stylesVariables.css">
     <link rel="stylesheet" href="../css/stylesActivities.css">
     <link rel="stylesheet" href="../css/stylesEMME.css">
+    <link rel="stylesheet" href="../css/navbar.css">
 </head>
 <body class="body">
+    <?php include "navbar.php"; ?>
     <?php if (isset($_SESSION['successoSegnalazione'])): ?>
             <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                 <?php echo htmlspecialchars($_SESSION['successoSegnalazione']); ?>
@@ -141,7 +143,6 @@ if($vistaAttiva === 'joined') {
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-
             <form method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title">⚠️ Segnala un problema</h5>
@@ -170,11 +171,12 @@ if($vistaAttiva === 'joined') {
                     </div>
                 </div>
             </form>
-
             </div>
         </div>
     </div>
+    <?php include "footer.php"; ?>
 </body>
-<script src="../JS/MieAttivita.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="../JS/MieAttivita.js"></script>
+<script src="../JS/navbar.js"></script>
 </html>
