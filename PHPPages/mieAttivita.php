@@ -101,8 +101,12 @@ if($vistaAttiva === 'joined') {
                 <button type="submit" class="<?php echo $vistaAttiva === 'published' ? 'selected' : 'notSelected'; ?> maxWidthScaling px-5 py-3 border-0">Eventi che ho pubblicato</button>
             </form>
         </div>
-        <div class="d-flex flex-column align-items-center gap-4 mt-5" id="joinedEventsList">
-            <?php include "Cards.php" ?>
+        <div class="d-flex flex-column align-items-center gap-4 mt-5">
+                <?php if (empty($eventiPerCitta)): ?>
+                    <p class="text-center text-secondary fs-5">Nessun evento disponibile</p>
+                <?php else: ?>
+                    <?php include "Cards.php"; ?>
+                <?php endif; ?>
         </div>
     </main>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
