@@ -112,16 +112,17 @@ class DataBaseHelper{
                 u.nome LIKE ? OR
                 e.Città LIKE ? OR
                 e.Luogo LIKE ? OR
-                e.Indirizzo LIKE ?
+                e.Indirizzo LIKE ? OR
+                e.Data LIKE ?
              )
              AND e.Stato = 'approvato'
              ORDER BY e.Data, e.Orario"
         );
 
         $stmt->bind_param(
-            'ssssss',
+            'sssssss',
             $searchTerm, $searchTerm, $searchTerm,
-            $searchTerm, $searchTerm, $searchTerm
+            $searchTerm, $searchTerm, $searchTerm, $searchTerm
         );
     }
 
