@@ -1,13 +1,11 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
 
-// Verifica che l'utente sia loggato
 if (!isset($_SESSION['matricola'])) {
     header('Location: login.php');
     exit();
 }
 
-// Configurazione database
 $host = 'localhost';
 $port = '3307';
 $dbname = 'gestionale_eventi';
@@ -191,5 +189,6 @@ try {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="cercaUtenti.js"></script>
+    <script src="../JS/navbar.js"></script>
 </body>
 </html>

@@ -126,7 +126,7 @@ try {
     <div class="container py-4 maxWidthScaling">
         <div class="profile-header mb-4">
             <h1 class="textsecondary fw-bold">Il mio profilo</h1>
-            <p class="SizeForDescription mb-1">Matricola: <?php echo htmlspecialchars($utente['matricola']); ?></p>
+            <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente['matricola']); ?></p>
             <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente['email']); ?></p>
             <?php if ($utente['ruolo'] === 'admin'): ?>
                 <p class="SizeForDescription"><span class="badge bg-primary">Amministratore</span></p>
@@ -168,5 +168,6 @@ try {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <?php require 'footer.php'; ?>
+    <script src="../JS/navbar.js"></script>
 </body>
 </html>
