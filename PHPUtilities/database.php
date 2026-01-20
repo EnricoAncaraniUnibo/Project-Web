@@ -77,7 +77,7 @@ class DataBaseHelper{
     }
 
     public function getEventiPartecipa($matricola){
-        $stmt=$this->db->prepare("SELECT e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione 
+        $stmt=$this->db->prepare("SELECT e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore, e.Partecipanti_Attuali, e.Max_Partecipanti
         FROM evento e 
         JOIN partecipa p ON e.Id=p.Id_evento WHERE p.utente_matricola=?");
         $stmt->bind_param('i', $matricola);
@@ -87,7 +87,7 @@ class DataBaseHelper{
     }
 
     public function getEventiPubblicati($matricola){
-        $stmt=$this->db->prepare("SELECT e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione 
+        $stmt=$this->db->prepare("SELECT e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore, e.Partecipanti_Attuali, e.Max_Partecipanti
         FROM evento e 
         WHERE e.matricola_creatore=?");
         $stmt->bind_param('i', $matricola);
