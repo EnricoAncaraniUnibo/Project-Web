@@ -133,7 +133,7 @@ try {
             <?php endif; ?>
         </div>
 
-        <div class="d-flex gap-2 mb-4">
+        <div class="d-flex gap-2 mb-5">
             <span class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</span>
             <a href="cercaUtenti.php" class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</a> 
         </div>

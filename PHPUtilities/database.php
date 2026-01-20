@@ -79,7 +79,7 @@ class DataBaseHelper{
     public function getEventiPartecipa($matricola){
         $stmt=$this->db->prepare("SELECT e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore, e.Partecipanti_Attuali, e.Max_Partecipanti
         FROM evento e 
-        JOIN partecipa p ON e.Id=p.Id_evento WHERE p.utente_matricola=?");
+        JOIN partecipa p ON e.Id=p.evento_id WHERE p.utente_matricola=?");
         $stmt->bind_param('i', $matricola);
         $stmt->execute();
         $result=$stmt->get_result();

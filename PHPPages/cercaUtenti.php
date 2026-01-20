@@ -54,7 +54,7 @@ try {
     }
     
     // Gestione ricerca per nome o matricola
-    $search_query = trim($_GET['search'] ?? '');
+    $search_query = trim($_GET['inputNomeRicerca'] ?? '');
 
     if (!empty($search_query)) {
         $sql_search = "SELECT U.matricola, U.nome, U.email,
@@ -65,7 +65,7 @@ try {
                        ) as is_following
                        FROM UTENTE U
                        WHERE U.matricola != :matricola_corrente
-                       AND (U.nome LIKE :search OR U.matricola LIKE :search)
+                       AND (U.nome LIKE :inputNomeRicerca OR U.matricola LIKE :inputNomeRicerca)
                        ORDER BY U.nome ASC
                        LIMIT 50";
         
@@ -73,7 +73,7 @@ try {
         $search_param = '%' . $search_query . '%';
         $stmt_search->execute([
             ':matricola_corrente' => $matricola_corrente,
-            ':search' => $search_param
+            ':inputNomeRicerca' => $search_param
         ]);
         $utenti = $stmt_search->fetchAll(PDO::FETCH_ASSOC);
     } else {
@@ -119,16 +119,17 @@ try {
 </head>
 <body class="body font">
     <?php require 'navbar.php'; ?>
-    <?php if (!empty($messaggio)): ?>
+
+    <div class="d-flex flex-column container py-4 maxWidthScaling">
+        <?php if (!empty($messaggio)): ?>
         <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-custom alert-dismissible fade show" role="alert">
             <?php echo htmlspecialchars($messaggio); ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    <?php endif; ?>
+        <?php endif; ?>
 
-    <div class="container py-4 maxWidthScaling">
-        <div class="profile-header mb-4">
-            <h1 class="textsecondary fw-bold">Il mio profilo</h1>
+        <div class="profile-header mb-1">
+            <h1 class="textsecondary fw-bold mt-3">Il mio profilo</h1>
             <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente_corrente['nome']); ?></p>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente_corrente['matricola']); ?></p>
             <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente_corrente['email']); ?></p>
@@ -140,7 +141,7 @@ try {
         </div>
 
         <form method="GET" action="" class="search-container mb-4">
-            <input type="text" name="search" class="form-control inputForForm backgroundGrey border-0" 
+            <input type="text" name="inputNomeRicerca" class="form-control inputForForm backgroundGrey border-0" 
                    placeholder="Cerca per nome o matricola..." 
                    value="<?php echo htmlspecialchars($search_query); ?>">
             <i class="bi bi-search search-icon"></i>

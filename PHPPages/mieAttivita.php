@@ -1,5 +1,5 @@
 <?php
-require_once("PHPUtilities/bootstrap.php");
+require_once("../PHPUtilities/bootstrap.php");
 redirectToLoginIfUserNotLoggedIn();
 $templateParams["EventiPartecipa"]=$dbh->getEventiPartecipa($_SESSION['matricola']);
 $templateParams["EventiPubblicati"]=$dbh->getEventiPubblicati($_SESSION['matricola']);
