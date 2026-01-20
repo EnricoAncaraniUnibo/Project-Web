@@ -3,7 +3,7 @@ require_once("../PHPUtilities/bootstrap.php");
 redirectToLoginIfUserNotLoggedIn();
 
 $matricolaUtente = $_SESSION['matricola'];
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['evento_id']) && isset($_POST['azione'])) {
     $eventoId = isset($_POST['evento_id']) ? intval($_POST['evento_id']) : 0;
     $azione = isset($_POST['azione']) ? $_POST['azione'] : '';
     
@@ -37,16 +37,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
+if (!isset($_SESSION['vista_eventi'])) {
+    $_SESSION['vista_eventi'] = 'joined';
+}
+
+// aggiorna vista se arriva POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vista_eventi'])) {
+    $_SESSION['vista_eventi'] = $_POST['vista_eventi'];
+    header("Location: ".$_SERVER['PHP_SELF']); // evita doppio submit
+    exit;
+}
+
+// usa la variabile per mostrare la lista corretta
+$vistaAttiva = $_SESSION['vista_eventi'];
+
 
 $templateParams["EventiPartecipa"]=$dbh->getEventiPartecipa($_SESSION['matricola']);
 $templateParams["EventiPubblicati"]=$dbh->getEventiPubblicati($_SESSION['matricola']);
 $eventiPerCitta = [];
-foreach($templateParams["EventiPartecipa"] as $evento) {
-    $citta = $evento["Città"];
-    if (!isset($eventiPerCitta[$citta])) {
-        $eventiPerCitta[$citta] = [];
+
+if($vistaAttiva === 'joined') {
+    foreach($templateParams["EventiPartecipa"] as $evento) {
+        $citta = $evento["Città"];
+        if (!isset($eventiPerCitta[$citta])) {
+            $eventiPerCitta[$citta] = [];
+        }
+        $eventiPerCitta[$citta][] = $evento;
     }
-    $eventiPerCitta[$citta][] = $evento;
+} else {
+    foreach($templateParams["EventiPubblicati"] as $evento) {
+        $citta = $evento["Città"];
+        if (!isset($eventiPerCitta[$citta])) {
+            $eventiPerCitta[$citta] = [];
+        }
+        $eventiPerCitta[$citta][] = $evento;
+    }
 }
 ?>
 
@@ -67,48 +92,17 @@ foreach($templateParams["EventiPartecipa"] as $evento) {
                 <h3 class="textsecondary text-center fs-4">Le mie attività</h3>
         </div>
         <div class="mt-5 d-flex justify-content-center gap-3 align-items-center flex-wrap">
-            <button type="button" class="selected maxWidthScaling px-5 py-3 border-0" id="joinedEvents">Eventi a cui partecipo</button>
-            <button type="button" class="notSelected maxWidthScaling px-5 py-3 border-0" id="publishedEvents">Eventi che ho pubblicato</button>
+            <form method="POST" class="d-inline">
+                <input type="hidden" name="vista_eventi" value="joined">
+                <button type="submit" class="<?php echo $vistaAttiva === 'joined' ? 'selected' : 'notSelected'; ?> maxWidthScaling px-5 py-3 border-0">Eventi a cui partecipo</button>
+            </form>
+            <form method="POST" class="d-inline">
+                <input type="hidden" name="vista_eventi" value="published">
+                <button type="submit" class="<?php echo $vistaAttiva === 'published' ? 'selected' : 'notSelected'; ?> maxWidthScaling px-5 py-3 border-0">Eventi che ho pubblicato</button>
+            </form>
         </div>
         <div class="d-flex flex-column align-items-center gap-4 mt-5" id="joinedEventsList">
             <?php include "Cards.php" ?>
-        </div>
-        <div id="publishedEventsList" class="d-flex flex-column align-items-center gap-4 mt-5 d-none">
-                <?php foreach ($templateParams["EventiPubblicati"] as $evento): ?>
-                    <div class="event-card maxWidthScaling w-100">
-                        <div class="event-header d-flex justify-content-between">
-                            <div class="event-header d-flex align-items-center">
-                                <img src="../img/positionHeader.png" alt="luogo" class="imageForForm me-2">
-                                <span class="fw-bold"><?php echo $evento["Città"]; ?></span>
-                            </div>
-                        </div>
-                        <div class="px-3 py-3">
-                            <h4 class="textprimary fw-bold"><?php echo $evento["Titolo"]; ?></h4>
-                            <p class="SizeForDescription">
-                                Creato da: <?php echo $evento["nome"]; ?> (Mat. <?php echo $evento["matricola_creatore"]; ?>)
-                            </p>
-                            <p class="SizeForInformation mb-1">
-                                🕓 <?php echo formattaOrario($evento["Orario"]); ?>, <?php echo formattaDataItaliana($evento["Data"]); ?>
-                            </p>
-                            <p class="SizeForInformation mb-1">
-                                📍 <?php echo $evento["Luogo"]; ?>, <?php echo $evento["Indirizzo"]; ?>
-                            </p>
-                            <p class="SizeForInformation mb-1">
-                                🎓 <?php echo $evento["Descrizione"]; ?>
-                            </p>
-                            <p class="SizeForDescription mb-2">
-                                👥 <?php echo $evento["Partecipanti_Attuali"]; ?>
-                                <?php if ($evento["Max_Partecipanti"]): ?>
-                                    / <?php echo $evento["Max_Partecipanti"]; ?>
-                                <?php endif; ?>
-                                partecipanti
-                            </p>
-                            <button type="button" class="report-button mt-2 border-0 px-3 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                ⚠️ Segnala un problema
-                            </button>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
         </div>
     </main>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
