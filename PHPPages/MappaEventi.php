@@ -18,8 +18,8 @@
 </header>
 
 <main>
-    <!-- MAPPA -->
-    <div class="d-flex flex-column align-items-center justify-content-center">
+
+    <div class="d-flex flex-column align-items-center justify-content-center mt-4">
         <div id="mappaEventi" class="backgroundGrey" style="height: 400px; width: 90%; max-width: 800px;"></div>
     </div>
 
