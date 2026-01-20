@@ -61,11 +61,15 @@ $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
                         
                         <div class="d-flex gap-2">
                             <?php if (isset($activitiesPage) && $vistaAttiva === 'published'): ?>
-                                <button type="button" class="report-button mt-2 border-0 px-3 py-2" 
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        data-evento-id="<?php echo $evento['Id']; ?>">
-                                    ⚠️ Segnala un problema
-                                </button>
+                                <?php if (!$dbh->esisteSegnalazione($evento["Id"])):?>
+                                    <button type="button" class="report-button mt-2 border-0 px-3 py-2" 
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            data-evento-id="<?php echo $evento['Id']; ?>">
+                                        ⚠️ Segnala un problema
+                                    </button>
+                                <?php else: ?>
+                                    <h6 class="mt-2 text-secondary">È già stata effettuata una segnalazione</h6>
+                                <?php endif; ?>
                             <?php else: ?>
                                 <?php if ($utentePartecipa): ?>
                                     <form method="POST" class="d-inline">
