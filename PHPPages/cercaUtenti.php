@@ -190,17 +190,6 @@ try {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Auto-submit del form di ricerca quando si digita
-        const searchInput = document.querySelector('input[name="search"]');
-        let searchTimeout;
-        
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                this.form.submit();
-            }, 500); // Aspetta 500ms dopo che l'utente smette di digitare
-        });
-    </script>
+    <script src="cercaUtenti.js"></script>
 </body>
 </html>
