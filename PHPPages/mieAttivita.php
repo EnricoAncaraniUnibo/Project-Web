@@ -3,7 +3,6 @@ require_once("PHPUtilities/bootstrap.php");
 redirectToLoginIfUserNotLoggedIn();
 $templateParams["EventiPartecipa"]=$dbh->getEventiPartecipa($_SESSION['matricola']);
 $templateParams["EventiPubblicati"]=$dbh->getEventiPubblicati($_SESSION['matricola']);
-//wait for cards list code
 ?>
 
 <!DOCTYPE html>
@@ -28,23 +27,41 @@ $templateParams["EventiPubblicati"]=$dbh->getEventiPubblicati($_SESSION['matrico
         </div>
         <div class="d-flex flex-column align-items-center gap-4 mt-5">
             <div id="joinedEventsList">
-                <div class="event-card maxWidthScaling w-100">
+                <?php foreach ($templateParams["EventiPartecipa"] as $evento): ?>
+                    <div class="event-card maxWidthScaling w-100">
                         <div class="event-header d-flex justify-content-between">
                             <div class="event-header d-flex align-items-center">
                                 <img src="../img/positionHeader.png" alt="luogo" class="imageForForm me-2">
-                                <span class="fw-bold">Firenze</span>
+                                <span class="fw-bold"><?php echo $evento["Città"]; ?></span>
                             </div>
                         </div>
                         <div class="px-3 py-3">
-                            <h4 class="fw-bold">Presentazione Progetti Tesi</h4>
-                            <p class="SizeForDescription">Creato da: Marco Verdi (Mat. 0000234567)</p>
-                            <p class="SizeForInformation mb-1">🕓 14:00 </p>
-                            <p class="SizeForInformation mb-1">📍 Aula Magna, Via dell’università 20</p>
-                            <p class="SizeForInformation mb-1">🎓 Esposizione dei migliori progetti di tesi dell’anno</p>
-                            <p class="SizeForInformation mb-2">👥 120 partecipanti</p>
-                            <button type="button" class="report-button mt-2 border-0 px-3 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal">⚠️ Segnala un problema</button>
+                            <h4 class="textprimary fw-bold"><?php echo $evento["Titolo"]; ?></h4>
+                            <p class="SizeForDescription">
+                                Creato da: <?php echo $evento["nome"]; ?> (Mat. <?php echo $evento["matricola_creatore"]; ?>)
+                            </p>
+                            <p class="SizeForInformation mb-1">
+                                🕓 <?php echo formattaOrario($evento["Orario"]); ?>, <?php echo formattaDataItaliana($evento["Data"]); ?>
+                            </p>
+                            <p class="SizeForInformation mb-1">
+                                📍 <?php echo $evento["Luogo"]; ?>, <?php echo $evento["Indirizzo"]; ?>
+                            </p>
+                            <p class="SizeForInformation mb-1">
+                                🎓 <?php echo $evento["Descrizione"]; ?>
+                            </p>
+                            <p class="SizeForDescription mb-2">
+                                👥 <?php echo $evento["Partecipanti_Attuali"]; ?>
+                                <?php if ($evento["Max_Partecipanti"]): ?>
+                                    / <?php echo $evento["Max_Partecipanti"]; ?>
+                                <?php endif; ?>
+                                partecipanti
+                            </p>
+                            <button type="button" class="report-button mt-2 border-0 px-3 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                ⚠️ Segnala un problema
+                            </button>
                         </div>
-                </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <div id="publishedEventsList">
                 <div class="event-card maxWidthScaling w-100">
