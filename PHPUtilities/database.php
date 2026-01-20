@@ -462,5 +462,23 @@ class DataBaseHelper{
         $row = $result->fetch_assoc();
         return $row['count'];
     }
+
+    public function getResult(string $sql): array {
+
+        $result = $this->db->query($sql);
+
+        if ($result === false) {
+            die("Errore nella query: " . $this->db->error);
+        }
+
+        $rows = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
 }
 ?>

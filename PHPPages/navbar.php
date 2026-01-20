@@ -26,7 +26,7 @@ $isAdmin = ($ruolo === 'admin');
                 </a>
             </li>
             <li class="nav-item">
-                <a href="Mappa.php" class="navbar-button <?php echo isActive('Mappa.php', $current_page); ?>">
+                <a href="MappaEventi.php" class="navbar-button <?php echo isActive('MappaEventi.php', $current_page); ?>">
                     <img src="../img/map_icon.svg" alt="Map" class="small-icon"/>
                     <span class="d-none d-sm-inline ms-2">Mappa</span>
                 </a>
