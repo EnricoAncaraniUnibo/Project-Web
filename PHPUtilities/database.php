@@ -9,7 +9,7 @@ class DataBaseHelper{
     }
 
     public function getEventiInSospeso(){
-        $stmt=$this->db->prepare("SELECT * FROM evento e JOIN utente u ON e.matricola_creatore=u.matricola WHERE e.Stato='In Sospeso'");
+        $stmt=$this->db->prepare("SELECT * FROM evento e JOIN utente u ON e.matricola_creatore=u.matricola WHERE e.Stato='In Sospeso' Order by Data");
         $stmt->execute();
         $result=$stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -23,7 +23,7 @@ class DataBaseHelper{
     }
 
     public function getEventiSegnalati(){
-        $stmt=$this->db->prepare("SELECT * FROM evento e JOIN utente u ON e.matricola_creatore=u.matricola join segnalazione s ON s.Id=e.Id");
+        $stmt=$this->db->prepare("SELECT * FROM evento e JOIN utente u ON e.matricola_creatore=u.matricola join segnalazione s ON s.Id=e.Id Order by Data");
         $stmt->execute();
         $result=$stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
