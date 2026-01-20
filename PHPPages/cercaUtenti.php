@@ -153,7 +153,7 @@ try {
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
         <?php endif; ?>
-
+        
         <div class="profile-header mb-1">
             <h1 class="textsecondary fw-bold">Il mio profilo</h1>
             <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente_corrente['nome']); ?></p>
@@ -218,6 +218,7 @@ try {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <?php require 'footer.php'; ?>
     <script src="cercaUtenti.js"></script>
     <script src="../JS/navbar.js"></script>
 </body>
