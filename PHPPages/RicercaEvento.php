@@ -63,12 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
         <link rel="stylesheet" href="../css/stylesEMME.css">
         <link rel="stylesheet" href="../css/navbar.css">
     </head>
-    <body class="body mx-0 my-0 font">
+    <body class="body font">
         
-        <header class="bg-white ">
+        <header >
             <?php require 'navbar.php'; ?>
         </header>
-        <div class="body">
+        
             <div class="page-content">
             <main class="d-flex flex-column align-items-center marginx6">
                 <div class="w-100 maxWidthScaling d-flex justify-content-center">
@@ -83,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
             <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                 <?php echo htmlspecialchars($_SESSION['successo']); ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            <?php unset($_SESSION['successo']); ?>
+        
+        <?php unset($_SESSION['successo']); ?>
         <?php endif; ?>
         
         <?php if (isset($_SESSION['errore'])): ?>

@@ -102,7 +102,7 @@ if($vistaAttiva === 'joined') {
     <link rel="stylesheet" href="../css/stylesEMME.css">
     <link rel="stylesheet" href="../css/navbar.css">
 </head>
-<body class="body">
+<body class="body font">
     <div class="page-content">
     <?php include "navbar.php"; ?>
     <div class="d-flex justify-content-center">

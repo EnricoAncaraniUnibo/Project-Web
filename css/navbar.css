@@ -1,13 +1,16 @@
 .navbar-layout {
     background-color: var(--color-background-light);
-    padding: 20px;
+    padding: 20px !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.navbar {
+    height: 70px;
+}
 
 .navbar-title {
     color: var(--color-primary);
-    text-wrap: wrap;
+    
 }
 
 .navbar-button{
