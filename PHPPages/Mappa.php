@@ -8,10 +8,10 @@ require_once("../PHPUtilities/bootstrap.php");
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/stylesVariables.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/stylesEMME.css">
         <link rel="stylesheet" href="../css/navbar.css">
         <title>MappaEventi</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body class="body font">
         <header>
