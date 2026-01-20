@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
             <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                 <?php echo htmlspecialchars($_SESSION['successo']); ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        
+            </div>
         <?php unset($_SESSION['successo']); ?>
         <?php endif; ?>
         
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
                 <p class="SizeForDescription"><?php echo $templateParams["NumeroEventiRicercati"]?> elementi trovati</p>
                 <?php include "Cards.php" ?>
             </main>
-            </div>
+            
             <footer>
                 <?php require 'footer.php'; ?>
             </footer>
