@@ -72,13 +72,65 @@ class DataBaseHelper{
     }
 
     public function search($key) {
+
+    $mesi = [
+        'gennaio'=>1,'febbraio'=>2,'marzo'=>3,'aprile'=>4,
+        'maggio'=>5,'giugno'=>6,'luglio'=>7,'agosto'=>8,
+        'settembre'=>9,'ottobre'=>10,'novembre'=>11,'dicembre'=>12
+    ];
+
+    $key = strtolower(trim($key));
+
+    // SE è un mese → ricerca SOLO per mese (tutti gli anni)
+    if (isset($mesi[$key])) {
+
+        $mese = $mesi[$key];
+
+        $stmt = $this->db->prepare(
+            "SELECT * 
+             FROM evento e
+             JOIN utente u ON e.matricola_creatore = u.matricola
+             WHERE MONTH(e.Data) = ?
+             AND e.Stato = 'approvato'
+             ORDER BY e.Data, e.Orario"
+        );
+
+        $stmt->bind_param('i', $mese);
+
+    } else {
+
+        // ricerca testuale normale
         $searchTerm = "%" . $key . "%";
-        $stmt = $this->db->prepare("SELECT * FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where (e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ? or e.Data LIKE ?) AND Stato = 'approvato' ORDER BY e.Città,e.Data,e.Orario");
-        $stmt->bind_param('sssssss', $searchTerm, $searchTerm, $searchTerm,$searchTerm, $searchTerm, $searchTerm, $searchTerm);
-        $stmt->execute();
-        $result=$stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+
+        $stmt = $this->db->prepare(
+            "SELECT * 
+             FROM evento e
+             JOIN utente u ON e.matricola_creatore = u.matricola
+             WHERE (
+                e.Titolo LIKE ? OR
+                e.Descrizione LIKE ? OR
+                u.nome LIKE ? OR
+                e.Città LIKE ? OR
+                e.Luogo LIKE ? OR
+                e.Indirizzo LIKE ?
+             )
+             AND e.Stato = 'approvato'
+             ORDER BY e.Data, e.Orario"
+        );
+
+        $stmt->bind_param(
+            'ssssss',
+            $searchTerm, $searchTerm, $searchTerm,
+            $searchTerm, $searchTerm, $searchTerm
+        );
     }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+
 
     public function NumberOfsearch($key) {
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where (e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ?) AND Stato = 'approvato'");
