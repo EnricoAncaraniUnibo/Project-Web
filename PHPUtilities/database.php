@@ -157,7 +157,7 @@ class DataBaseHelper{
         $stmt=$this->db->prepare("SELECT e.Id,e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore as matricola, e.Partecipanti_Attuali, e.Max_Partecipanti, u.nome
         FROM evento e
         JOIN utente u ON e.matricola_creatore=u.matricola
-        WHERE e.matricola_creatore=?");
+        WHERE e.matricola_creatore=? AND Stato='approvato'");
         $stmt->bind_param('s', $matricola);
         $stmt->execute();
         $result=$stmt->get_result();
