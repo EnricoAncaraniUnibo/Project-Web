@@ -272,7 +272,7 @@ class DataBaseHelper{
 
     public function getRuoloByMatricola($matricola) {
         $stmt = $this->db->prepare("SELECT ruolo FROM utente WHERE matricola = ?");
-        $stmt->bind_param('s', $matricola); // Usa 's' per stringa
+        $stmt->bind_param('s', $matricola);
         $stmt->execute();
         $result = $stmt->get_result();
         
@@ -284,6 +284,23 @@ class DataBaseHelper{
         }
         
         return null; 
+    }
+
+    public function aggiungiSegnalazione($evento, $descrizione) {
+        $stmt = $this->db->prepare("INSERT INTO SEGNALAZIONE (Id, Descrizione) VALUES (?, ?)");
+        $stmt->bind_param('is', $evento, $descrizione);   
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
+    }
+
+    public function esisteSegnalazione($evento) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM SEGNALAZIONE WHERE Id = ?");
+        $stmt->bind_param('i', $evento);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['count'] > 0;
     }
 }
 ?>

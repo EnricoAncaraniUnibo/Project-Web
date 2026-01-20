@@ -60,20 +60,28 @@ $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
                         ?>
                         
                         <div class="d-flex gap-2">
-                            <?php if ($utentePartecipa): ?>
-                                <form method="POST" class="d-inline">
-                                    <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
-                                    <input type="hidden" name="azione" value="annulla">
-                                    <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
-                                </form>
-                            <?php elseif ($eventoCompleto): ?>
-                                <button class="btn-secondary-custom" disabled style="opacity: 0.5;">Evento completo</button>
+                            <?php if (isset($activitiesPage) && $vistaAttiva === 'published'): ?>
+                                <button type="button" class="report-button mt-2 border-0 px-3 py-2" 
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        data-evento-id="<?php echo $evento['Id']; ?>">
+                                    ⚠️ Segnala un problema
+                                </button>
                             <?php else: ?>
-                                <form method="POST" class="d-inline">
-                                    <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
-                                    <input type="hidden" name="azione" value="partecipa">
-                                    <button type="submit" class="btn-primary-custom">Partecipa</button>
-                                </form>
+                                <?php if ($utentePartecipa): ?>
+                                    <form method="POST" class="d-inline">
+                                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                                        <input type="hidden" name="azione" value="annulla">
+                                        <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
+                                    </form>
+                                <?php elseif ($eventoCompleto): ?>
+                                    <button class="btn-secondary-custom" disabled style="opacity: 0.5;">Evento completo</button>
+                                <?php else: ?>
+                                    <form method="POST" class="d-inline">
+                                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                                        <input type="hidden" name="azione" value="partecipa">
+                                        <button type="submit" class="btn-primary-custom">Partecipa</button>
+                                    </form>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
