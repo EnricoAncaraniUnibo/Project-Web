@@ -80,11 +80,7 @@ class DataBaseHelper{
         $stmt=$this->db->prepare("SELECT e.Id,e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore as matricola, e.Partecipanti_Attuali, e.Max_Partecipanti
         FROM evento e 
         JOIN partecipa p ON e.Id=p.evento_id WHERE p.utente_matricola=?");
-<<<<<<< HEAD
         $stmt->bind_param('s', $matricola);
-=======
-        $stmt->bind_param('i', $matricola);
->>>>>>> f37157076dd0d04937745239b98446f9a54fd07f
         $stmt->execute();
         $result=$stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
