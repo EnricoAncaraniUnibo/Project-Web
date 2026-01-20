@@ -90,8 +90,9 @@ class DataBaseHelper{
     }
 
     public function getEventiPartecipa($matricola){
-        $stmt=$this->db->prepare("SELECT e.Id,e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore as matricola, e.Partecipanti_Attuali, e.Max_Partecipanti
-        FROM evento e 
+        $stmt=$this->db->prepare("SELECT e.Id,e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore as matricola, e.Partecipanti_Attuali, e.Max_Partecipanti, u.nome
+        FROM evento e
+        JOIN utente u ON e.matricola_creatore=u.matricola
         JOIN partecipa p ON e.Id=p.evento_id WHERE p.utente_matricola=?");
         $stmt->bind_param('s', $matricola);
         $stmt->execute();
@@ -100,8 +101,9 @@ class DataBaseHelper{
     }
 
     public function getEventiPubblicati($matricola){
-        $stmt=$this->db->prepare("SELECT e.Id,e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore as matricola, e.Partecipanti_Attuali, e.Max_Partecipanti
-        FROM evento e 
+        $stmt=$this->db->prepare("SELECT e.Id,e.Data,e.Città,e.Titolo,e.Orario,e.Luogo,e.Indirizzo,e.Descrizione, e.matricola_creatore as matricola, e.Partecipanti_Attuali, e.Max_Partecipanti, u.nome
+        FROM evento e
+        JOIN utente u ON e.matricola_creatore=u.matricola
         WHERE e.matricola_creatore=?");
         $stmt->bind_param('s', $matricola);
         $stmt->execute();
