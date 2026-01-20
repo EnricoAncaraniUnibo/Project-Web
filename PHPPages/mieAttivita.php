@@ -104,20 +104,22 @@ if($vistaAttiva === 'joined') {
 </head>
 <body class="body">
     <?php include "navbar.php"; ?>
+    <div class="d-flex justify-content-center">
     <?php if (isset($_SESSION['successoSegnalazione'])): ?>
-            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            <div class="alert alert-success alert-dismissible fade show mt-3 maxWidthScaling w-100" role="alert">
                 <?php echo htmlspecialchars($_SESSION['successoSegnalazione']); ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             <?php unset($_SESSION['successoSegnalazione']); ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['erroreSegnalazione'])): ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show mt-3 maxWidthScaling w-100" role="alert">
                 <?php echo htmlspecialchars($_SESSION['erroreSegnalazione']); ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
             <?php unset($_SESSION['erroreSegnalazione']); ?>
     <?php endif; ?>
+    </div>
     <main class="marginx6">
         <div class="d-flex justify-content-center align-items-center mt-4 flex-wrap">
                 <h3 class="textsecondary text-center fs-4">Le mie attività</h3>
