@@ -3,28 +3,43 @@
         <h3 class="footer-title">Contatti Admin</h3>
         <p class="footer-subtitle">Il team di amministrazione di Uni Events</p>
         
-        <div class="admin-contact">
+        <div class="admin-contact" onclick="toggleAdmin(this)">
             <img src="../img/imageProfileFooter.png" alt="user" class="admin-icon">
-            <div>
+            <div class="admin-info">
                 <div class="admin-name">Enrico Ancarani</div>
                 <div class="admin-role">Amministratore</div>
             </div>
+            <span class="arrow">▼</span>
         </div>
-        
-        <div class="admin-contact">
+
+        <div class="admin-expand" id="adminExpand">
+            <p>Amministratore del sistema, responsabile della gestione dei contenuti e del supporto agli utenti.</p>
+        </div>
+
+        <div class="admin-contact" onclick="toggleAdmin(this)">
             <img src="../img/imageProfileFooter.png" alt="user" class="admin-icon">
-            <div>
+            <div class="admin-info">
                 <div class="admin-name">Andrea Monti</div>
                 <div class="admin-role">Amministratore</div>
             </div>
+            <span class="arrow">▼</span>
         </div>
-        
-        <div class="admin-contact">
+
+        <div class="admin-expand" id="adminExpand">
+            <p>Amministratore del sistema, responsabile della gestione dei contenuti e del supporto agli utenti.</p>
+        </div>
+
+        <div class="admin-contact" onclick="toggleAdmin(this)">
             <img src="../img/imageProfileFooter.png" alt="user" class="admin-icon">
-            <div>
+            <div class="admin-info">
                 <div class="admin-name">Davide Rossi</div>
                 <div class="admin-role">Amministratore</div>
             </div>
+            <span class="arrow">▼</span>
+        </div>
+
+        <div class="admin-expand" id="adminExpand">
+            <p>Amministratore del sistema, responsabile della gestione dei contenuti e del supporto agli utenti.</p>
         </div>
     </div>
     
@@ -50,4 +65,18 @@
         © 2026 Università di Bologna - Alma Mater Studiorum.<br>
         Tutti i diritti riservati.
     </div>
+    <script>
+        function toggleAdmin(el) {
+            const expand = el.nextElementSibling;
+
+            // sicurezza: controlla che sia quello giusto
+            if (!expand || !expand.classList.contains("admin-expand")) return;
+
+                expand.classList.toggle("open");
+
+                const arrow = el.querySelector(".arrow");
+                arrow.classList.toggle("rotate");
+        }
+    </script>
+
 </footer>

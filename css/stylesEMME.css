@@ -165,14 +165,44 @@ body {
     margin-bottom: 20px;
 }
 
+.admin-info {
+    flex-grow: 1;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+/* Parte espandibile */
+.admin-expand {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background: #9f0712;
+    border-radius: 0 0 8px 8px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+/* Stato aperto */
+.admin-expand.open {
+    max-height: 200px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.arrow.rotate {
+    transform: rotate(180deg);
+}
+
 .admin-contact {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 15px;
+    margin-top: 15px;
     background-color: #9f0712;
     padding: 12px 15px;
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0;
 }
 
 .admin-icon {
