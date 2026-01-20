@@ -35,9 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
-    
     //Redirect per evitare re-submit del form
-    $dataRitorno = isset($_POST['data_ritorno']) ? $_POST['data_ritorno'] : '';
+    $dataRitorno = $_POST['data_ritorno'] ?? $_GET['data'] ?? '';
     if ($dataRitorno && preg_match('/^\d{4}-\d{2}-\d{2}$/', $dataRitorno)) {
         header("Location: homepageUser.php?data=" . urlencode($dataRitorno));
     } else {
@@ -85,7 +84,14 @@ if ($dataSelezionata === null) {
     <link rel="stylesheet" href="../css/navbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(alertEl => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
+            alert.close();
+        });
+    }, 4000);
+</script>
 <body class="body font mb-0">
 <?php require 'navbar.php'; ?>
 <div class="container maxWidthScaling mt-4">
