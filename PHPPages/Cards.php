@@ -1,8 +1,9 @@
 <?php
-// Verifica se l'utente è loggato
 $utenteLoggato = isset($_SESSION['matricola']) && !empty($_SESSION['matricola']);
 $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
 $current_page = basename($_SERVER['PHP_SELF']);
+
+$sezione_attiva = $_GET['sezione'] ?? 'accettazioni';
 ?>
 
 <?php foreach($eventiPerCitta as $citta => $eventi): ?>
@@ -28,7 +29,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <p class="SizeForInformation mb-1">🕓 <?php echo formattaOrario($evento["Orario"]) ?>, <?php echo formattaDataItaliana($evento["Data"]) ?></p>
                     <p class="SizeForInformation mb-1">📍 <?php echo $evento["Luogo"] ?>, <?php echo $evento["Indirizzo"] ?></p>
                     <p class="SizeForInformation mb-1">🎓 <?php echo $evento["Descrizione"] ?></p>
-                    <?php if($current_page != 'bachecaAdmin.php'): ?>
+                    
                     <p class="SizeForDescription mb-2">
                         👥 <?php echo $evento["Partecipanti_Attuali"]; ?>
                         <?php if ($evento["Max_Partecipanti"]): ?>
@@ -36,14 +37,25 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <?php endif; ?>
                         partecipanti
                     </p>
-                    <?php endif; ?>
+                    
                     <?php if($current_page === 'bachecaAdmin.php'): ?>
-                    <button type="button" class="mt-2 buttonApproves border-0 px-3 py-2">✔ Approva</button>
-                    <button type="button" class="buttonPrimary border-0 px-3 py-2">✕ Rifiuta</button>
+                    <form method="POST" style="display: inline;">
+                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                        <input type="hidden" name="azione" value="approva">
+                        <input type="hidden" name="sezione" value="<?php echo $sezione_attiva; ?>">
+                        <button type="submit" class="mt-2 buttonApproves border-0 px-3 py-2">✔ Approva</button>
+                    </form>
+                    
+                    <form method="POST" style="display: inline;">
+                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                        <input type="hidden" name="azione" value="rifiuta">
+                        <input type="hidden" name="sezione" value="<?php echo $sezione_attiva; ?>">
+                        <button type="submit" class="buttonPrimary border-0 px-3 py-2">✕ Rifiuta</button>
+                    </form>
                     <?php endif; ?>
                     
                     <?php if($utenteLoggato && $current_page != 'bachecaAdmin.php'): ?>
-                        <!-- Sezione per utenti loggati -->
+                        <!-- Sezione per utenti loggati (partecipazione) -->
                         <?php 
                         $amiciPartecipanti = $dbh->getAmiciPartecipanti($evento["Id"], $matricolaUtente);
                         if (count($amiciPartecipanti) > 0): 
@@ -67,28 +79,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         ?>
                         
                         <div class="d-flex gap-2">
-                            <?php if (isset($activitiesPage) && $vistaAttiva === 'published'): ?>
-                                <button type="button" class="report-button mt-2 border-0 px-3 py-2" 
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        data-evento-id="<?php echo $evento['Id']; ?>">
-                                    ⚠️ Segnala un problema
-                                </button>
+                            <?php if ($utentePartecipa): ?>
+                                <form method="POST" class="d-inline">
+                                    <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                                    <input type="hidden" name="azione" value="annulla">
+                                    <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
+                                </form>
+                            <?php elseif ($eventoCompleto): ?>
+                                <button class="btn-secondary-custom" disabled style="opacity: 0.5;">Evento completo</button>
                             <?php else: ?>
-                                <?php if ($utentePartecipa): ?>
-                                    <form method="POST" class="d-inline">
-                                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
-                                        <input type="hidden" name="azione" value="annulla">
-                                        <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
-                                    </form>
-                                <?php elseif ($eventoCompleto): ?>
-                                    <button class="btn-secondary-custom" disabled style="opacity: 0.5;">Evento completo</button>
-                                <?php else: ?>
-                                    <form method="POST" class="d-inline">
-                                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
-                                        <input type="hidden" name="azione" value="partecipa">
-                                        <button type="submit" class="btn-primary-custom">Partecipa</button>
-                                    </form>
-                                <?php endif; ?>
+                                <form method="POST" class="d-inline">
+                                    <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                                    <input type="hidden" name="azione" value="partecipa">
+                                    <button type="submit" class="btn-primary-custom">Partecipa</button>
+                                </form>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>

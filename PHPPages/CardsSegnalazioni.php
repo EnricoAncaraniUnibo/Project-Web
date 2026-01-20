@@ -3,6 +3,8 @@
 $utenteLoggato = isset($_SESSION['matricola']) && !empty($_SESSION['matricola']);
 $matricolaUtente = $utenteLoggato ? $_SESSION['matricola'] : null;
 $current_page = basename($_SERVER['PHP_SELF']);
+
+$sezione_attiva = $_GET['sezione'] ?? 'segnalazioni';
 ?>
 
 <?php foreach($eventiPerCitta as $citta => $eventi): ?>
@@ -40,16 +42,33 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     
                     <!-- Mostra il numero di partecipanti -->
                     <p class="SizeForDescription mb-2">
-                        👥 <?php echo $evento["Partecipanti_Attuali"]; ?>
+                        👥 <?php echo $evento["Partecipanti_Attuali"] ?? 0; ?>
                         <?php if (isset($evento["Max_Partecipanti"]) && $evento["Max_Partecipanti"]): ?>
                             / <?php echo $evento["Max_Partecipanti"]; ?>
                         <?php endif; ?>
                         partecipanti
                     </p>
                     
-                    <button type="button" class="buttonModify border-0 px-3 py-2 mb-2">📝 Modifica evento</button>
-                    <button type="button" class="mt-2 buttonApproves border-0 px-3 py-2">✔ Risolto</button>
-                    <button type="button" class="buttonErase border-0 px-3 py-2">🗑️ Elimina Evento</button>
+                    <form method="POST" style="display: inline;">
+                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                        <input type="hidden" name="azione" value="modifica">
+                        <input type="hidden" name="sezione" value="<?php echo $sezione_attiva; ?>">
+                        <button type="submit" class="buttonModify border-0 px-3 py-2 mb-2">📝 Modifica evento</button>
+                    </form>
+                    
+                    <form method="POST" style="display: inline;">
+                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                        <input type="hidden" name="azione" value="risolto">
+                        <input type="hidden" name="sezione" value="<?php echo $sezione_attiva; ?>">
+                        <button type="submit" class="mt-2 buttonApproves border-0 px-3 py-2">✔ Risolto</button>
+                    </form>
+                    
+                    <form method="POST" style="display: inline;" onsubmit="return confirm('Sei sicuro di voler eliminare questo evento?');">
+                        <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
+                        <input type="hidden" name="azione" value="elimina">
+                        <input type="hidden" name="sezione" value="<?php echo $sezione_attiva; ?>">
+                        <button type="submit" class="buttonErase border-0 px-3 py-2">🗑️ Elimina Evento</button>
+                    </form>
                 </div>
             </div>
         </div>

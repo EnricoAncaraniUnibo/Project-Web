@@ -5,10 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
     exit();
 }
 
-// Ottieni il nome della pagina corrente
 $current_page = basename($_SERVER['PHP_SELF']);
-
-// Funzione per determinare se un link è attivo
 function isActive($page_name, $current_page) {
     return $page_name === $current_page ? 'navbar-button-active' : '';
 }
@@ -44,7 +41,7 @@ $isAdmin = ($ruolo === 'admin');
                 </form>
             </li>
             <li class="nav-item dropdown">
-                <button type="button" class="navbar-button dropdown-toggle <?php echo in_array($current_page, ['mieAttivita.php', 'creaEvento.php', 'bachecaAdmin.php','modificaProfilo.php','cercaUtenti.php']) ? 'navbar-button-active' : ''; ?>" 
+                <button type="button" class="navbar-button dropdown-toggle <?php echo in_array($current_page, ['mieAttivita.php', 'creaEvento.php', 'bachecaAdmin.php','modificaProfilo.php','cercaUtenti.php', 'modificaEvento.php']) ? 'navbar-button-active' : ''; ?>" 
                         data-bs-toggle="dropdown" 
                         aria-expanded="false"
                         aria-haspopup="true">

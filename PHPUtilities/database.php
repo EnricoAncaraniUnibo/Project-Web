@@ -73,8 +73,8 @@ class DataBaseHelper{
 
     public function search($key) {
         $searchTerm = "%" . $key . "%";
-        $stmt = $this->db->prepare("SELECT * FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where (e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ?) AND Stato = 'approvato' ORDER BY e.Città,e.Data,e.Orario");
-        $stmt->bind_param('ssssss', $searchTerm, $searchTerm, $searchTerm,$searchTerm, $searchTerm, $searchTerm);
+        $stmt = $this->db->prepare("SELECT * FROM evento e JOIN utente u on e.matricola_creatore=u.matricola where (e.Titolo LIKE ? or e.Descrizione LIKE ? or u.nome LIKE ? or e.Città LIKE ? or e.Luogo LIKE ? or e.Indirizzo LIKE ? or e.Data LIKE ?) AND Stato = 'approvato' ORDER BY e.Città,e.Data,e.Orario");
+        $stmt->bind_param('sssssss', $searchTerm, $searchTerm, $searchTerm,$searchTerm, $searchTerm, $searchTerm, $searchTerm);
         $stmt->execute();
         $result=$stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -314,6 +314,98 @@ class DataBaseHelper{
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         return $row['count'] > 0;
+    }
+
+    public function approvaEvento($evento_id) {
+        $stmt = $this->db->prepare("UPDATE evento SET Stato = 'approvato' WHERE Id = ?");
+        $stmt->bind_param('i', $evento_id);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function rifiutaEvento($evento_id) {
+        $stmt = $this->db->prepare("UPDATE evento SET Stato = 'rifiutato' WHERE Id = ?");
+        $stmt->bind_param('i', $evento_id);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function risolviSegnalazione($evento_id) {
+        $stmt = $this->db->prepare("DELETE FROM segnalazione WHERE Id = ?");
+        $stmt->bind_param('i', $evento_id);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function eliminaEvento($evento_id) {
+        $this->db->begin_transaction();
+        
+        try {
+            $stmt1 = $this->db->prepare("DELETE FROM segnalazione WHERE Id = ?");
+            $stmt1->bind_param('i', $evento_id);
+            $stmt1->execute();
+            
+            $stmt2 = $this->db->prepare("DELETE FROM partecipa WHERE evento_id = ?");
+            $stmt2->bind_param('i', $evento_id);
+            $stmt2->execute();
+            
+            $stmt3 = $this->db->prepare("DELETE FROM evento WHERE Id = ?");
+            $stmt3->bind_param('i', $evento_id);
+            $stmt3->execute();
+            
+            $this->db->commit();
+            return $stmt3->affected_rows;
+            
+        } catch (Exception $e) {
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
+    public function getEventoById($evento_id) {
+        $stmt = $this->db->prepare("SELECT * FROM evento WHERE Id = ?");
+        $stmt->bind_param('i', $evento_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function updateEvento($evento_id, $dati) {
+        $stmt = $this->db->prepare("UPDATE evento SET 
+                Titolo = ?, 
+                Descrizione = ?, 
+                Data = ?, 
+                Orario = ?, 
+                Luogo = ?, 
+                Indirizzo = ?, 
+                Città = ?, 
+                Max_Partecipanti = ?
+                WHERE Id = ?");
+        
+        $stmt->bind_param(
+            'sssssssii',
+            $dati['titolo'],
+            $dati['descrizione'],
+            $dati['data'],
+            $dati['orario'],
+            $dati['luogo'],
+            $dati['indirizzo'],
+            $dati['citta'],
+            $dati['max_partecipanti'],
+            $evento_id
+        );
+        
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function getNumeroPartecipantiByEventoId($evento_id) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM partecipa WHERE evento_id = ?");
+        $stmt->bind_param('i', $evento_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['count'];
     }
 }
 ?>
