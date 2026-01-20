@@ -151,6 +151,7 @@ try {
     <div class="container py-4 maxWidthScaling">
         <div class="profile-header mb-4">
             <h1 class="textsecondary fw-bold">Il mio profilo</h1>
+            <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente['nome']); ?></p>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente['matricola']); ?></p>
             <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente['email']); ?></p>
             <?php if ($utente['ruolo'] === 'admin'): ?>
