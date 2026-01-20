@@ -1,3 +1,14 @@
+// Aggiungi in navbar.js prima del DOMContentLoaded
+console.log("Navbar script loaded");
+
+// Debug per dropdown
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('dropdown-toggle')) {
+        console.log('Dropdown clicked');
+        console.log('Has data-bs-toggle:', e.target.hasAttribute('data-bs-toggle'));
+    }
+});
+
 const nav = document.querySelector("nav");
 nav.querySelector("#logout-button").addEventListener("click", function(e){
     e.preventDefault();

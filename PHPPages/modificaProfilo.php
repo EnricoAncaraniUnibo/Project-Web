@@ -108,14 +108,18 @@ try {
         // Ricarica i dati aggiornati
         $stmt->execute([':matricola' => $matricola]);
         $utente = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        header('Refresh: 4; URL=modificaProfilo.php');
     }
     
 } catch (PDOException $e) {
     $messaggio = 'Errore database: ' . $e->getMessage();
     $tipo_messaggio = 'error';
+    header('Refresh: 4; URL=modificaProfilo.php');
 } catch (Exception $e) {
     $messaggio = $e->getMessage();
     $tipo_messaggio = 'error';
+    header('Refresh: 4; URL=modificaProfilo.php');
 }
 ?>
 
@@ -141,14 +145,21 @@ try {
 </head>
 <body class="body font">
     <?php require 'navbar.php'; ?>
-    <?php if (!empty($messaggio)): ?>
-        <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-custom alert-dismissible fade show" role="alert">
-            <?php echo htmlspecialchars($messaggio); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php endif; ?>
+    
 
     <div class="container py-4 maxWidthScaling">
+        <?php if (!empty($messaggio)): ?>
+            <div class="container mt-3">
+                <div class="row justify-content-center">
+                    <div class="">
+                        <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-compact alert-dismissible fade show text-center" role="alert">
+                            <?php echo htmlspecialchars($messaggio); ?>
+                            <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="profile-header mb-4">
             <h1 class="textsecondary fw-bold">Il mio profilo</h1>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente['matricola']); ?></p>

@@ -116,6 +116,8 @@ try {
         $stmt_all = $pdo->prepare($sql_all);
         $stmt_all->execute([':matricola_corrente' => $matricola_corrente]);
         $utenti = $stmt_all->fetchAll(PDO::FETCH_ASSOC);
+
+        header('Refresh: 4; URL=cercaUtenti.php');
     }
     
 } catch (PDOException $e) {

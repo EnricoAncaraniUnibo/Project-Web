@@ -50,5 +50,4 @@
         © 2026 Università di Bologna - Alma Mater Studiorum.<br>
         Tutti i diritti riservati.
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </footer>
