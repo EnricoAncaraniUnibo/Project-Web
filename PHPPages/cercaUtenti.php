@@ -37,8 +37,26 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $azione = $_POST['azione'] ?? '';
         $matricola_target = $_POST['matricola_target'] ?? '';
-        if($_SESSION['matricola_target'] === $_POST['matricola_target'] && $_SESSION['azione'] ===  $_POST['azione']) {
+        if(!empty($_SESSION['matricola_target']) && $_SESSION['azione']) {
+            if($_SESSION['matricola_target'] === $_POST['matricola_target'] && $_SESSION['azione'] ===  $_POST['azione']) {
 
+            } else {
+                if ($azione === 'follow' && !empty($matricola_target)) {
+                    $sql_follow = "INSERT IGNORE INTO Segue (seguitore_matricola, seguito_matricola) VALUES (:seguitore, :seguito)";
+                    $stmt_follow = $pdo->prepare($sql_follow);
+                    $stmt_follow->execute([':seguitore' => $matricola_corrente, ':seguito' => $matricola_target]);
+                    $messaggio = 'Ora segui questo utente!';
+                    $tipo_messaggio = 'success';
+                } elseif ($azione === 'unfollow' && !empty($matricola_target)) {
+                    $sql_unfollow = "DELETE FROM Segue WHERE seguitore_matricola = :seguitore AND seguito_matricola = :seguito";
+                    $stmt_unfollow = $pdo->prepare($sql_unfollow);
+                    $stmt_unfollow->execute([':seguitore' => $matricola_corrente, ':seguito' => $matricola_target]);
+                    $messaggio = 'Non segui più questo utente';
+                    $tipo_messaggio = 'success';
+                }
+                $_SESSION['matricola_target'] = $_POST['matricola_target'];
+                $_SESSION['azione'] =  $_POST['azione'];
+            }  
         } else {
             if ($azione === 'follow' && !empty($matricola_target)) {
                 $sql_follow = "INSERT IGNORE INTO Segue (seguitore_matricola, seguito_matricola) VALUES (:seguitore, :seguito)";
@@ -55,7 +73,8 @@ try {
             }
             $_SESSION['matricola_target'] = $_POST['matricola_target'];
             $_SESSION['azione'] =  $_POST['azione'];
-        }  
+        }
+        
     }
     
     // Gestione ricerca per nome o matricola
