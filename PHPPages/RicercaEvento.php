@@ -85,7 +85,7 @@ $termineRicerca = $termine;
             <?php require 'navbar.php'; ?>
         </header>
         
-            <div class="page-content h-100">
+            <div class="page-content">
             <main class="d-flex flex-column align-items-center marginx6">
                 <div class="w-100 maxWidthScaling d-flex justify-content-center">
                     <form method="GET" class="searchBox">
