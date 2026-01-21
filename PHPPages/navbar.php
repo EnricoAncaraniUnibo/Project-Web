@@ -32,13 +32,13 @@ $isAdmin = ($ruolo === 'admin');
                 </a>
             </li>
             <li class="nav-item d-flex">
-                <form action="" method="GET" class="d-flex ">
+                <form method="GET" class="d-flex ">
                     <button name="search" class="bg navbar-button border-0 <?php echo isActive('RicercaEvento.php', $current_page); ?>">
                         <img src="../img/search_icon.svg" alt="Search" class="small-icon">
                         <span class="d-none d-sm-inline ms-2">Cerca</span>
                     </button>
                     <label for="search-key" class="visually-hidden">Input per cercare gli eventi</label>
-                    <input type="text" id="search-key" name="key" class="d-none d-lg-inline ms-2 searchbar" placeholder="Cerca eventi..."/>
+                    <input type="text" id="search-key" name="key" class="d-none d-lg-inline ms-2 searchbar" placeholder="Cerca eventi...">
                 </form>
             </li>
             <li class="nav-item dropdown">
