@@ -148,7 +148,7 @@ if($vistaAttiva === 'joined') {
             <div class="modal-content">
             <form method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title">⚠️ Segnala un problema</h5>
+                    <h4 class="modal-title">⚠️ Segnala un problema</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -161,7 +161,6 @@ if($vistaAttiva === 'joined') {
                         <textarea id="descrizione_problema" class="form-control" name="descrizione_problema" rows="4" placeholder="Descrivi il problema nel dettaglio..." required></textarea>
                         <input type="hidden" name="evento_id" id="eventoIdModal" value="">
                         <input type="hidden" name="azione" value="segnala">
-                        <span>Minimo 10 caratteri</span>
                     </div>
                 </div>
                 <div class="modal-footer p-3">

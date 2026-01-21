@@ -80,7 +80,7 @@ class DataBaseHelper{
     ];
 
     $key = strtolower(trim($key));
-
+    $oggi = date('Y-m-d'); // data di oggi
     // SE è un mese → ricerca SOLO per mese (tutti gli anni)
     if (isset($mesi[$key])) {
 
@@ -90,12 +90,12 @@ class DataBaseHelper{
             "SELECT * 
              FROM evento e
              JOIN utente u ON e.matricola_creatore = u.matricola
-             WHERE MONTH(e.Data) = ?
-             AND e.Stato = 'approvato'
+             WHERE MONTH(e.Data) = ? 
+             AND e.Stato = 'approvato' AND e.Data >= ?
              ORDER BY e.Data, e.Orario"
         );
 
-        $stmt->bind_param('i', $mese);
+        $stmt->bind_param('is', $mese, $oggi);
 
     } else {
 
@@ -115,14 +115,14 @@ class DataBaseHelper{
                 e.Indirizzo LIKE ? OR
                 e.Data LIKE ?
              )
-             AND e.Stato = 'approvato'
+             AND e.Stato = 'approvato' AND e.Data >= ?
              ORDER BY e.Data, e.Orario"
         );
 
         $stmt->bind_param(
-            'sssssss',
+            'ssssssss',
             $searchTerm, $searchTerm, $searchTerm,
-            $searchTerm, $searchTerm, $searchTerm, $searchTerm
+            $searchTerm, $searchTerm, $searchTerm, $searchTerm,$oggi
         );
     }
 
@@ -177,11 +177,12 @@ class DataBaseHelper{
 
     // Recupera la data precedente con eventi rispetto alla data fornita
     public function getDataPrecedenteConEventi($dataCorrente){
+        $oggi = date('Y-m-d');
         $query = "SELECT MAX(Data) as data_precedente 
-              FROM EVENTO 
-              WHERE Data < ? AND Stato = 'approvato'";
+                FROM EVENTO 
+                WHERE Data < ? AND Data >= ? AND Stato = 'approvato'";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $dataCorrente);
+        $stmt->bind_param('ss', $dataCorrente, $oggi);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
@@ -481,11 +482,13 @@ class DataBaseHelper{
     }
 
     public function getAllEventi() {
+        $oggi = date('Y-m-d');
         $query = "SELECT *
                 FROM evento JOIN utente on matricola_creatore=matricola
-                WHERE Stato = 'approvato'
+                WHERE Stato = 'approvato' AND Data >= ?
                 ORDER BY Data ASC, Orario ASC";
         $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $oggi);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -518,6 +521,19 @@ class DataBaseHelper{
         $stmt->fetch();
         $stmt->close();
         return $password;
+    }
+
+    public function getPrimaDataConEventiFuturi() {
+        $oggi = date('Y-m-d'); // data di oggi
+        $query = "SELECT MIN(Data) as prima_data 
+                FROM EVENTO 
+                WHERE Stato = 'approvato' AND Data >= ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $oggi);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['prima_data'];
     }
 
 }
