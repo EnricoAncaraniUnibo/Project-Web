@@ -55,7 +55,6 @@ $sezione_attiva = $_GET['sezione'] ?? 'accettazioni';
                     <?php endif; ?>
                     
                     <?php if($utenteLoggato && $current_page != 'bachecaAdmin.php'): ?>
-                        <!-- Sezione per utenti loggati (partecipazione) -->
                         <?php 
                         $amiciPartecipanti = $dbh->getAmiciPartecipanti($evento["Id"], $matricolaUtente);
                         if (count($amiciPartecipanti) > 0): 

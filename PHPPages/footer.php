@@ -65,18 +65,5 @@
         © 2026 Università di Bologna - Alma Mater Studiorum.<br>
         Tutti i diritti riservati.
     </div>
-    <script>
-        function toggleAdmin(el) {
-            const expand = el.nextElementSibling;
-
-            // sicurezza: controlla che sia quello giusto
-            if (!expand || !expand.classList.contains("admin-expand")) return;
-
-                expand.classList.toggle("open");
-
-                const arrow = el.querySelector(".arrow");
-                arrow.classList.toggle("rotate");
-        }
-    </script>
-
+    <script src="../JS/footer.js"></script>
 </footer>
