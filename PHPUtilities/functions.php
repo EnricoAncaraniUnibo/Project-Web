@@ -25,6 +25,7 @@ function isUserLoggedIn() {
 function redirectToLoginIfUserNotLoggedIn() {
     if (!isUserLoggedIn()) {
         header("Location: index.php");
+        exit();
     }
 }
 

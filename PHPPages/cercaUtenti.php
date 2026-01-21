@@ -3,11 +3,6 @@ require_once("../PHPUtilities/bootstrap.php");
 
 redirectToLoginIfUserNotLoggedIn();
 
-if (!isset($_SESSION['matricola'])) {
-    header('Location: login.php');
-    exit();
-}
-
 $host = 'localhost';
 $port = '3307';
 $dbname = 'gestionale_eventi';

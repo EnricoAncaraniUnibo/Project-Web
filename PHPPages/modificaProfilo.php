@@ -1,10 +1,6 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
 redirectToLoginIfUserNotLoggedIn();
-if (!isset($_SESSION['matricola'])) {
-    header('Location: index.php');
-    exit();
-}
 
 $messaggio = '';
 $tipo_messaggio = '';
