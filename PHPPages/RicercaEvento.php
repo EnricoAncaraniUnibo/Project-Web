@@ -88,8 +88,9 @@ $termineRicerca = $termine;
             <div class="page-content">
             <main class="d-flex flex-column align-items-center marginx6">
                 <div class="w-100 maxWidthScaling d-flex justify-content-center">
-                    <form action="" method="GET" class="searchBox">
-                        <input type="text" value="<?php echo $termine ?>" name="key" placeholder="Cerca eventi..." required>
+                    <form method="GET" class="searchBox">
+                        <label for="search-label" class="visually-hidden">Input per cercare gli eventi</label>
+                        <input type="text" id="search-label" value="<?php echo $termine ?>" name="key" placeholder="Cerca eventi..." required>
                         <button type="submit" name="search">
                             🔍
                         </button>
@@ -118,11 +119,9 @@ $termineRicerca = $termine;
                 <?php include "Cards.php" ?>
             </main>
             
-            <footer>
-                <?php require 'footer.php'; ?>
-            </footer>
+            <?php require 'footer.php'; ?>
         </div>
-    </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/navbar.js"></script>
+    </body>
 </html>

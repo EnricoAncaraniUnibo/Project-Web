@@ -114,50 +114,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </header>
         <main class="d-flex justify-content-center">
-            <form class="bg-white paddingx4 form mt-2" method="POST" action="">
+            <form class="bg-white paddingx4 form mt-2" method="POST">
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/title.png" alt="" class="imageForForm">
                     <h3 class="ms-2 fs-6 mb-0 defaultTextColor">Titolo dell'evento *</h3>
                 </div>
-                <input type="text" name="titolo" placeholder="Es. Workshop su AI e Machine Learning" class="inputForForm w-100" required>
+                <label for="inputTitolo" class="visually-hidden">Input per titolo dell'evento</label>
+                <input type="text" id="inputTitolo" name="titolo" placeholder="Es. Workshop su AI e Machine Learning" class="inputForForm w-100" required>
                 
                 <div class="d-flex pt-4 pb-2">
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Descrizione *</h3>
                 </div>
-                <textarea name="descrizione" placeholder="Descrivi l'evento, cosa verrà trattato, chi può partecipare..." class="inputForForm w-100" rows="4" required></textarea>
+                <label for="inputDescrizione" class="visually-hidden">Input per la descrizione dell'evento</label>
+                <textarea name="descrizione" id="inputDescrizione" placeholder="Descrivi l'evento, cosa verrà trattato, chi può partecipare..." class="inputForForm w-100" rows="4" required></textarea>
                 
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/calendary.png" alt="" class="imageForForm">
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Data *</h3>
                 </div>
-                <input type="date" name="data" class="inputForForm w-100" required>
+                <label for="inputData" class="visually-hidden">Input per la data dell'evento</label>
+                <input type="date" id="inputData" name="data" class="inputForForm w-100" required>
                 
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/time.png" alt="" class="imageForForm">
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Orario *</h3>
                 </div>
-                <input type="time" name="orario" class="inputForForm w-100" required>
+                <label for="inputTime" class="visually-hidden">Input per l'orario dell'evento</label>
+                <input type="time" id="inputTime" name="orario" class="inputForForm w-100" required>
                 
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/position.png" alt="" class="imageForForm">
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Nome del luogo *</h3>
                 </div>
-                <input type="text" name="luogo" placeholder="Es. Aula Magna" class="inputForForm w-100" required>
+                <label for="inputLuogo" class="visually-hidden">Input per il luogo dell'evento</label>
+                <input type="text" id="inputLuogo" name="luogo" placeholder="Es. Aula Magna" class="inputForForm w-100" required>
                 
                 <div class="d-flex pt-4 pb-2">
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Indirizzo *</h3>
                 </div>
-                <input type="text" name="indirizzo" placeholder="Es. Via dell'Università, 10, Bologna" class="inputForForm w-100" required>
+                <label for="inputIndirizzo" class="visually-hidden">Input per l'indirizzo dell'evento</label>
+                <input type="text" id="inputIndirizzo" name="indirizzo" placeholder="Es. Via dell'Università, 10, Bologna" class="inputForForm w-100" required>
                 
                 <div class="d-flex pt-4 pb-2">
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Città *</h3>
                 </div>
-                <input type="text" name="citta" placeholder="Es. Bologna" class="inputForForm w-100" required>
+                <label for="inputCittà" class="visually-hidden">Input per la città dell'evento</label>
+                <input type="text" id="inputCittà" name="citta" placeholder="Es. Bologna" class="inputForForm w-100" required>
 
                 <div class="d-flex pt-4 pb-2">
                     <h3 class="ms-3 fs-6 mb-0 defaultTextColor">Numero massimo di partecipanti *</h3>
                 </div>
-                <input type="text" name="Nmax" placeholder="0" class="inputForForm w-100" required>
+                <label for="inputNMax" class="visually-hidden">Input per il numero massimo di partecipanti dell'evento</label>
+                <input type="text" id="inputNMax" name="Nmax" placeholder="0" class="inputForForm w-100" required>
                 
                 <div class="d-flex gap-3 mt-4 w-100 mb-4">
                     <button type="submit" class="btn-publish flex-fill">
