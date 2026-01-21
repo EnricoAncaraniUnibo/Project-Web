@@ -6,116 +6,61 @@ if (!isset($_SESSION['matricola'])) {
     exit();
 }
 
-$host = 'localhost';
-$port = '3307';
-$dbname = 'gestionale_eventi';
-$username = 'root';
-$password = '';
-
 $messaggio = '';
 $tipo_messaggio = '';
 $utente = null;
-$errori = [];
 
 try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
     $matricola = $_SESSION['matricola'];
-    
-    $sql = "SELECT matricola, nome, email, ruolo FROM UTENTE WHERE matricola = :matricola";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':matricola' => $matricola]);
-    $utente = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
+    $utente = $dbh->getUserByMatricola($matricola);
+
     if (!$utente) {
         session_destroy();
-        header('Location: login.php?error=utente_non_trovato');
+        header('Location: index.php?error=utente_non_trovato');
         exit();
     }
-    
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nuovo_nome = trim($_POST['nome'] ?? '');
         $vecchia_password = $_POST['vecchia_password'] ?? '';
         $nuova_password = $_POST['nuova_password'] ?? '';
-        
+
         if (empty($nuovo_nome)) {
             throw new Exception('Il nome non può essere vuoto');
         }
+
         $cambio_password = !empty($vecchia_password) && !empty($nuova_password);
-        
+
         if ($cambio_password) {
-            $sql_pwd = "SELECT password FROM UTENTE WHERE matricola = :matricola";
-            $stmt_pwd = $pdo->prepare($sql_pwd);
-            $stmt_pwd->execute([':matricola' => $matricola]);
-            $password_db = $stmt_pwd->fetchColumn();
-            
-            // Verifica la vecchia password
-            if ($vecchia_password !== $password_db) {
+            $currentPwd = $dbh->getPasswordByMatricola($matricola);
+            if ($vecchia_password !== $currentPwd) {
                 throw new Exception('La vecchia password non è corretta');
             }
             $errore = validaPassword($nuova_password, $nuova_password);
             if ($errore !== null) {
                 throw new Exception($errore);
-            } 
-
-            $sql_update = "UPDATE UTENTE 
-                   SET nome = :nome, password = :password 
-                   WHERE matricola = :matricola";
-            $stmt_update = $pdo->prepare($sql_update);
-            if ($nuovo_nome === $utente['nome']) {
-                // SOLO PASSWORD
-                $sql_update = "UPDATE UTENTE 
-                   SET password = :password 
-                   WHERE matricola = :matricola";
-                $stmt_update = $pdo->prepare($sql_update);
-                $stmt_update->execute([
-                    ':password' => $nuova_password,
-                    ':matricola' => $matricola
-                ]);
-                $messaggio = 'Password aggiornata con successo!';
-            } else {
-                // NOME + PASSWORD
-                $sql_update = "UPDATE UTENTE 
-                   SET nome = :nome, password = :password 
-                   WHERE matricola = :matricola";
-
-                $stmt_update = $pdo->prepare($sql_update);
-                $stmt_update->execute([
-                    ':nome' => $nuovo_nome,
-                    ':password' => $nuova_password,
-                    ':matricola' => $matricola
-             ]);
-                $messaggio = 'Password e nome aggiornati con successo!';
-            } 
-        } else {
-            // Aggiorna solo il nome
-            $sql_update = "UPDATE UTENTE SET nome = :nome WHERE matricola = :matricola";
-            $stmt_update = $pdo->prepare($sql_update);
-
-            if($nuovo_nome === $utente['nome']) {
-                throw new Exception('Il nuovo nome deve essere diverso da quello attuale');
-            } else {
-                $stmt_update->execute([
-                ':nome' => $nuovo_nome,
-                ':matricola' => $matricola
-                ]);
-                $messaggio = 'Nome aggiornato con successo!';
             }
-            
         }
+        $success = $dbh->updateUser(
+            $matricola,
+            $nuovo_nome !== $utente['nome'] ? $nuovo_nome : $utente['nome'],
+            $cambio_password ? $nuova_password : null
+        );
+
+        if (!$success) {
+            throw new Exception('Nessuna modifica effettuata. Assicurati di cambiare il nome o la password.');
+        }
+
+        $messaggio = 'Profilo aggiornato con successo!';
         $tipo_messaggio = 'success';
+
         // Ricarica i dati aggiornati
-        $stmt->execute([':matricola' => $matricola]);
-        $utente = $stmt->fetch(PDO::FETCH_ASSOC);
+        $utente = $dbh->getUserByMatricola($matricola);
 
         header('Refresh: 4; URL=modificaProfilo.php');
     }
-    
-} catch (PDOException $e) {
-    $messaggio = 'Errore database: ' . $e->getMessage();
-    $tipo_messaggio = 'error';
-    header('Refresh: 4; URL=modificaProfilo.php');
+
 } catch (Exception $e) {
     $messaggio = $e->getMessage();
     $tipo_messaggio = 'error';
@@ -172,8 +117,8 @@ try {
         </div>
 
         <div class="d-flex gap-2 mb-4">
-            <span class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</span>
-            <a href="cercaUtenti.php" class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</a> 
+            <span class="buttonSelected flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</span>
+            <a href="cercaUtenti.php" class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center" style="cursor: pointer;">Cerca utenti</a> 
         </div>
 
         <div class="event-card">
@@ -194,7 +139,7 @@ try {
 
                     <div class="mb-3">
                         <label for="nuova_password" class="form-label defaultTextColor fw-semibold SizeForDescription">Nuova Password</label>
-                        <input type="password" placeholder="Nuova password (min. 6 caratteri)" class="inputForForm w-100" id="nuova_password" name="nuova_password">
+                        <input type="password" placeholder="Nuova password (min. 8 caratteri)" class="inputForForm w-100" id="nuova_password" name="nuova_password">
                         <p class="SizeForDescription mt-2 mb-2">✔ Almeno 8 caratteri</p>
                         <p class="SizeForDescription mt-2 mb-2">✔ Maiuscole e minuscole</p>
                         <p class="SizeForDescription mt-2 mb-2">✔ Almeno un numero</p>

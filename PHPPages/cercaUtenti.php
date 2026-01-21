@@ -22,14 +22,11 @@ try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $matricola_corrente = $_SESSION['matricola'];
-    $sql_user = "SELECT matricola, nome, email, ruolo FROM UTENTE WHERE matricola = :matricola";
-    $stmt_user = $pdo->prepare($sql_user);
-    $stmt_user->execute([':matricola' => $matricola_corrente]);
-    $utente_corrente = $stmt_user->fetch(PDO::FETCH_ASSOC);
+    $utente_corrente = $utente = $dbh->getUserByMatricola($matricola_corrente);
     
     if (!$utente_corrente) {
         session_destroy();
-        header('Location: login.php');
+        header('Location: index.php');
         exit();
     }
     
@@ -164,8 +161,8 @@ try {
         </div>
 
         <div class="d-flex gap-2 mb-4">
-            <a href="modificaProfilo.php" class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</a>
-            <span class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</span>
+            <a href="modificaProfilo.php" class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center " style="cursor: pointer;">Modifica profilo</a>
+            <span class="buttonSelected flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</span>
         </div>
 
         <form method="GET" class="search-container mb-4">
