@@ -61,7 +61,7 @@ require_once("../PHPUtilities/registration.php");
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Password *</h3>
                 </div>
                 <label for="password" class="visually-hidden">Password</label>
-                <input id="password" type="text" placeholder="Inserisci una password sicura" name="password" class="inputForForm w-100" required>
+                <input id="password" type="password" placeholder="Inserisci una password sicura" name="password" class="inputForForm w-100" required>
                 <p class="SizeForDescription mt-2 mb-2">✔ Almeno 8 caratteri</p>
                 <p class="SizeForDescription mt-2 mb-2">✔ Maiuscole e minuscole</p>
                 <p class="SizeForDescription mt-2 mb-2">✔ Almeno un numero</p>
@@ -70,7 +70,7 @@ require_once("../PHPUtilities/registration.php");
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Conferma password *</h3>
                 </div>
                 <label for="conferma_password" class="visually-hidden">Conferma reinserimento password</label>
-                <input id="conferma_password" type="text" placeholder="Reinserisci la password" name="conferma_password" class="inputForForm w-100" required>
+                <input id="conferma_password" type="password" placeholder="Reinserisci la password" name="conferma_password" class="inputForForm w-100" required>
                 <button type="submit" name="registrati" class="buttonPrimary mt-4 w-100 mb-4">Registrati</button>
             </form>
         </main>
