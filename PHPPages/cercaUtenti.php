@@ -90,7 +90,7 @@ try {
                        FROM UTENTE U
                        WHERE U.matricola != :matricola_corrente
                        AND (U.nome LIKE :inputNomeRicerca OR U.matricola LIKE :inputNomeRicerca)
-                       ORDER BY U.nome ASC
+                       ORDER BY is_following DESC, U.nome ASC
                        LIMIT 50";
         
         $stmt_search = $pdo->prepare($sql_search);
@@ -110,7 +110,7 @@ try {
                     ) as is_following
                     FROM UTENTE U
                     WHERE U.matricola != :matricola_corrente
-                    ORDER BY U.nome ASC
+                    ORDER BY is_following DESC, U.nome ASC
                     LIMIT 50";
         
         $stmt_all = $pdo->prepare($sql_all);
