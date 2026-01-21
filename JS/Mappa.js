@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(luoghi => {
 
             if (!luoghi || luoghi.length === 0) {
+                const map = L.map("mappaEventi").setView([44.4949, 11.3426], 10);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap'
+                }).addTo(map);
                 lista.innerHTML = '<p class="text-center mt-2">Nessun evento disponibile</p>';
                 return;
             }
@@ -77,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(err => {
             console.error("Errore fetch:", err);
-            lista.innerHTML = "<p>Errore nel caricamento degli eventi</p>";
+            lista.innerHTML = '<p class="text-center mt-2">Errore nel caricamento degli eventi</p>';
         });
 
 });
