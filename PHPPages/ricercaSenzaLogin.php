@@ -34,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
         <div class="body">
             <main class="d-flex flex-column align-items-center marginx6">
                 <div class="w-100 maxWidthScaling d-flex justify-content-center">
-                    <form action="" method="GET" class="searchBox">
-                        <input type="text" value="<?php echo $termine ?>" name="key" placeholder="Cerca eventi..." required>
+                    <form method="GET" class="searchBox">
+                        <label for="searchKey" class="visually-hidden">Cerca eventi</label>
+                        <input id="searchKey" type="text" value="<?php echo $termine ?>" name="key" placeholder="Cerca eventi..." required>
                         <button type="submit" name="search">
                             🔍
                         </button>
