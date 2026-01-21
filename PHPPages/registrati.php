@@ -33,29 +33,33 @@ require_once("../PHPUtilities/registration.php");
                     </ul>
                 </div>
             <?php endif; ?>
-            <form class="bg-white paddingx4 form mt-2" method="POST" action="">
+            <form class="bg-white paddingx4 form mt-2" method="POST">
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/imageProfile.png" alt="immagine profilo utente" class="imageForForm">
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Nome Utente *</h3>
                 </div>
-                <input type="text" placeholder="Inserisci il tuo nome e cognome" name="nome" class="inputForForm w-100" required>
+                <label for="nome" class="visually-hidden">Nome e cognome</label>
+                <input id="nome" type="text" placeholder="Inserisci il tuo nome e cognome" name="nome" class="inputForForm w-100" required>
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/imageGrid.png" alt="immagine di una griglia" class="imageForForm">
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Numero Matricola *</h3>
                 </div>
-                <input type="text" placeholder="0000123456" name="matricola" class="inputForForm w-100" required>
+                <label for="matricola" class="visually-hidden">Numero di matricola</label>
+                <input id="matricola" type="text" placeholder="0000123456" name="matricola" class="inputForForm w-100" required>
                 <p class="SizeForDescription mt-2 mb-2">Deve essere composto da 10 cifre</p>
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/imageEmail.png" alt="immagine di una email" class="imageForForm">
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Email Istituzionale *</h3>
                 </div>
-                <input type="text" placeholder="nome.cognome@studio.unibo.it" name="email" class="inputForForm w-100" required>
+                <label for="email" class="visually-hidden">Email istituzionale</label>
+                <input id="email" type="text" placeholder="nome.cognome@studio.unibo.it" name="email" class="inputForForm w-100" required>
                 <p class="SizeForDescription mt-2 mb-2">Utilizza la tua email @studio.unibo.it</p>
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/imageLock.png" alt="immagine di un lucchetto" class="imageForForm">
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Password *</h3>
                 </div>
-                <input type="text" placeholder="Inserisci una password sicura" name="password" class="inputForForm w-100" required>
+                <label for="password" class="visually-hidden">Password</label>
+                <input id="password" type="text" placeholder="Inserisci una password sicura" name="password" class="inputForForm w-100" required>
                 <p class="SizeForDescription mt-2 mb-2">✔ Almeno 8 caratteri</p>
                 <p class="SizeForDescription mt-2 mb-2">✔ Maiuscole e minuscole</p>
                 <p class="SizeForDescription mt-2 mb-2">✔ Almeno un numero</p>
@@ -63,7 +67,8 @@ require_once("../PHPUtilities/registration.php");
                     <img src="../img/imageLock.png" alt="immagine di un lucchetto" class="imageForForm">
                     <h3 class="ms-3 fs-5 mb-0 defaultTextColor">Conferma password *</h3>
                 </div>
-                <input type="text" placeholder="Reinserisci la password" name="conferma_password" class="inputForForm w-100" required>
+                <label for="conferma_password" class="visually-hidden">Conferma reinserimento password</label>
+                <input id="conferma_password" type="text" placeholder="Reinserisci la password" name="conferma_password" class="inputForForm w-100" required>
                 <button type="submit" name="registrati" class="buttonPrimary mt-4 w-100 mb-4">Registrati</button>
             </form>
         </main>
