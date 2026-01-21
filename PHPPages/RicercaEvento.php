@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $redirect = 'RicercaEvento.php';
 
-    if (!empty($_POST['key'])) {
+    if (isset($_POST['key']) && trim($_POST['key']) !== '') {
         $redirect .= '?key=' . urlencode($_POST['key']);
     }
 
@@ -48,16 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
-    $termine = trim($_GET['key']);
-    $templateParams["EventiRicercati"]=$dbh->search($termine);
-    $templateParams["NumeroEventiRicercati"]=count($templateParams["EventiRicercati"]);
-    $eventiPerCitta = [];
-    foreach($templateParams["EventiRicercati"] as $evento) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    $termine = isset($_GET['key']) ? trim($_GET['key']) : '';
+
+    if ($termine !== '') {
+        $templateParams["EventiRicercati"] = $dbh->search($termine);
+    } else {
+        $templateParams["EventiRicercati"] = $dbh->getAllEventi();
+    }
+
+    $templateParams["NumeroEventiRicercati"] = count($templateParams["EventiRicercati"]);
+
+    foreach ($templateParams["EventiRicercati"] as $evento) {
         $citta = $evento["Città"];
-        if (!isset($eventiPerCitta[$citta])) {
-            $eventiPerCitta[$citta] = [];
-        }
         $eventiPerCitta[$citta][] = $evento;
     }
 }

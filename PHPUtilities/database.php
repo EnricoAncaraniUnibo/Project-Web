@@ -480,5 +480,15 @@ class DataBaseHelper{
         return $rows;
     }
 
+    public function getAllEventi() {
+        $query = "SELECT *
+                FROM evento JOIN utente on matricola_creatore=matricola
+                WHERE Stato = 'approvato'
+                ORDER BY Data ASC, Orario ASC";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>
