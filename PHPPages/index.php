@@ -13,19 +13,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>HomePage</title>
-        <link rel="stylesheet" href="..\css\styles.css">
+        <link rel="stylesheet" href="../css/styles.css">
     </head>
     <body>
         <header class="alignHeader">
             <div class="LogoWrite">
-                <img src="..\img\LogoUni.png" alt="Logo Unibo">
+                <img src="../img/LogoUni.png" alt="Logo Unibo">
                 <div class="WriteToPutDown">
                     <h1>Università di</h1>
                     <h1>Bologna</h1>
                 </div>
             </div>
-            <form action="" method="GET" class="searchBox">
-                <input type="text" name="key" placeholder="Cerca eventi..." required>
+            <form method="GET" class="searchBox">
+                <label for="searchKey" class="visually-hidden">Cerca eventi</label>
+                <input  id="searchKey" type="text" name="key" placeholder="Cerca eventi..." required>
                 <button type="submit" name="search">
                     🔍
                 </button>
@@ -46,12 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
                     <?php echo $error_message; ?>
                 </div>
             <?php endif; ?>
-            <form method="POST" action="">
+            <form method="POST">
                 <h2>Accedi al tuo account</h2>
                 <h3>Numero Matricola</h3>
-                <input type="text" name="matricola" placeholder="Inserisci il tuo numero di matricola">
+                <label for="matricola" class="visually-hidden">Numero Matricola</label>
+                <input id="matricola" type="text" name="matricola" placeholder="Inserisci il tuo numero di matricola">
                 <h3>Password</h3>
-                <input type="password" name="password" placeholder="Inserisci la tua password">
+                <label for="password" class="visually-hidden">Password</label>
+                <input id="password" type="password" name="password" placeholder="Inserisci la tua password">
                 <button type="submit" name="login" class="accedi">Accedi</button>
                 <div class="separator">
                     <span class="linea"></span>
