@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(luoghi => {
 
             if (!luoghi || luoghi.length === 0) {
-                lista.innerHTML = "<p>Nessun evento disponibile</p>";
+                lista.innerHTML = '<p class="text-center mt-2">Nessun evento disponibile</p>';
                 return;
             }
 

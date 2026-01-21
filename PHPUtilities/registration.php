@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrati'])) {
 
     if (empty($errori)) {
         $dbh->registerUser($nome, $matricola, $email, $password);
+        $_SESSION["registration_state"] = "Registrazione avvenuta con successo";
         header('Location: index.php');
         exit();
     }

@@ -47,6 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
                     <?php echo $error_message; ?>
                 </div>
             <?php endif; ?>
+            <?php if (!empty($_SESSION["registration_state"])): ?>
+                <div class="success">
+                    <?php echo $_SESSION["registration_state"]; ?>
+                </div>
+            <?php endif; ?>
             <form method="POST">
                 <h2>Accedi al tuo account</h2>
                 <h3>Numero Matricola</h3>
