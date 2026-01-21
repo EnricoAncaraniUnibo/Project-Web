@@ -490,5 +490,35 @@ class DataBaseHelper{
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getUserByMatricola($matricola) {
+        $stmt = $this->db->prepare("SELECT matricola, nome, email, ruolo FROM UTENTE WHERE matricola = ?");
+        $stmt->bind_param('i', $matricola);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $utente = $result->fetch_assoc();
+        return $utente;
+    }
+
+    public function updateUser($matricola, $nuovo_nome, $nuova_password = null) {
+    if ($nuova_password) {
+        $stmt = $this->db->prepare("UPDATE UTENTE SET nome = ?, password = ? WHERE matricola = ?");
+        $stmt->bind_param("ssi", $nuovo_nome, $nuova_password, $matricola);
+    } else {
+        $stmt = $this->db->prepare("UPDATE UTENTE SET nome = ? WHERE matricola = ?");
+        $stmt->bind_param("si", $nuovo_nome, $matricola);
+    }
+    return $stmt->execute();
+    }
+    public function getPasswordByMatricola($matricola) {
+        $stmt = $this->db->prepare("SELECT password FROM UTENTE WHERE matricola = ?");
+        $stmt->bind_param("i", $matricola);
+        $stmt->execute();
+        $stmt->bind_result($password);
+        $stmt->fetch();
+        $stmt->close();
+        return $password;
+    }
+
 }
 ?>

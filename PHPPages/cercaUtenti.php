@@ -22,14 +22,11 @@ try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $matricola_corrente = $_SESSION['matricola'];
-    $sql_user = "SELECT matricola, nome, email, ruolo FROM UTENTE WHERE matricola = :matricola";
-    $stmt_user = $pdo->prepare($sql_user);
-    $stmt_user->execute([':matricola' => $matricola_corrente]);
-    $utente_corrente = $stmt_user->fetch(PDO::FETCH_ASSOC);
+    $utente_corrente = $utente = $dbh->getUserByMatricola($matricola_corrente);
     
     if (!$utente_corrente) {
         session_destroy();
-        header('Location: login.php');
+        header('Location: index.php');
         exit();
     }
     
