@@ -12,7 +12,7 @@
             <span class="arrow">▼</span>
         </div>
 
-        <div class="admin-expand" id="adminExpand">
+        <div class="admin-expand" id="adminExpand1">
             <p>Amministratore del sistema, responsabile della gestione dei contenuti e del supporto agli utenti.</p>
         </div>
 
@@ -25,7 +25,7 @@
             <span class="arrow">▼</span>
         </div>
 
-        <div class="admin-expand" id="adminExpand">
+        <div class="admin-expand" id="adminExpand2">
             <p>Gestore della piattaforma, responsabile del funzionamento del sistema, dell'aggiornamento dei contenuti e del supporto agli utenti.</p>
         </div>
 
@@ -38,7 +38,7 @@
             <span class="arrow">▼</span>
         </div>
 
-        <div class="admin-expand" id="adminExpand">
+        <div class="admin-expand" id="adminExpand3">
             <p>Coordinatore tecnico, responsabile dello sviluppo del progetto, della manutenzione software e dell’assistenza operativa.</p>
         </div>
     </div>

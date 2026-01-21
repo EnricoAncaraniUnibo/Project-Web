@@ -86,7 +86,7 @@ $sezione_attiva = $_GET['sezione'] ?? 'accettazioni';
                                         ⚠️ Segnala un problema
                                     </button>
                                 <?php else: ?>
-                                    <h6 class="mt-2 text-secondary">È già stata effettuata una segnalazione</h6>
+                                    <h5 class="mt-2 text-secondary">È già stata effettuata una segnalazione</h5>
                                 <?php endif; ?>
                             <?php else: ?>
                                 <?php if ($utentePartecipa): ?>

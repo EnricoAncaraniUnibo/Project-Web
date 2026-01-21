@@ -73,7 +73,7 @@ foreach ($templateParams["EventiSegnalati"] as $evento) {
         
     </head>
     <body class="body font">
-        <div class="page-content">
+        <span class="page-content">
         <header>
             <?php require 'navbar.php'; ?>
         </header>
@@ -101,7 +101,7 @@ foreach ($templateParams["EventiSegnalati"] as $evento) {
                 ?>
             </div>
         </main>
-        </div>
+            </span>
         <?php require 'footer.php'; ?>
         <script src="../JS/bachecaAdmin.js"></script>
         <script src="../JS/navbar.js"></script>

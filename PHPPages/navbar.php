@@ -37,7 +37,8 @@ $isAdmin = ($ruolo === 'admin');
                         <img src="../img/search_icon.svg" alt="Search" class="small-icon"/>
                         <span class="d-none d-sm-inline ms-2">Cerca</span>
                     </button>
-                    <input type="text" name="key" class="d-none d-lg-inline ms-2 searchbar" placeholder="Cerca eventi..."/>
+                    <label for="search-key" class="visually-hidden">Input per cercare gli eventi</label>
+                    <input type="text" id="search-key" name="key" class="d-none d-lg-inline ms-2 searchbar" placeholder="Cerca eventi..."/>
                 </form>
             </li>
             <li class="nav-item dropdown">
