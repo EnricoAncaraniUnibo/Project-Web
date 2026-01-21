@@ -91,7 +91,7 @@ if($vistaAttiva === 'joined') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -157,7 +157,8 @@ if($vistaAttiva === 'joined') {
                         segnalazione.
                     </p>
                     <div class="mt-3">
-                        <textarea class="form-control" name="descrizione_problema" rows="4" placeholder="Descrivi il problema nel dettaglio..." required></textarea>
+                        <label for="descrizione_problema" class="visually-hidden">Descrizione del problema</label>
+                        <textarea id="descrizione_problema" class="form-control" name="descrizione_problema" rows="4" placeholder="Descrivi il problema nel dettaglio..." required></textarea>
                         <input type="hidden" name="evento_id" id="eventoIdModal" value="">
                         <input type="hidden" name="azione" value="segnala">
                         <span>Minimo 10 caratteri</span>
@@ -179,8 +180,8 @@ if($vistaAttiva === 'joined') {
     </div>
     </div>
     <?php include "footer.php"; ?>
-</body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="../JS/MieAttivita.js"></script>
 <script src="../JS/navbar.js"></script>
+</body>
 </html>
