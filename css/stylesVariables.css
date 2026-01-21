@@ -281,10 +281,7 @@
     transition: 0.3s;
 }
 
-.selected:hover {
-    background-color:white;
-    color: #c10007;
-}
+
 
 .role {
     border-radius: 35px;
@@ -348,4 +345,9 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
-        
+@media (hover: hover) {
+   .selected:hover {
+        background-color:white;
+        color: #c10007;
+    }
+}    
