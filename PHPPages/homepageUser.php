@@ -85,14 +85,7 @@ if ($dataSelezionata === null) {
     <link rel="stylesheet" href="../css/navbar.css">
     
 </head>
-<script>
-    setTimeout(() => {
-        document.querySelectorAll('.alert').forEach(alertEl => {
-            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
-            alert.close();
-        });
-    }, 4000);
-</script>
+
 <body class="body font mb-0">
 <div class="page-content">
 <?php require 'navbar.php'; ?>
@@ -121,14 +114,16 @@ if ($dataSelezionata === null) {
         <?php endif; ?>
 
         <div class="header d-flex justify-content-between align-items-center mb-3">
-            <a href="<?php echo $templateParams["DataPrecedente"] ? '?data=' . $templateParams["DataPrecedente"] : '#'; ?>" 
+            <a <?php if($templateParams["DataPrecedente"]) echo 'href="?data=' . $templateParams["DataPrecedente"] . '"'; ?>
                 class="btn-primary-custom btn-arrow <?php echo !$templateParams["DataPrecedente"] ? 'disabled' : ''; ?>"
+                title="Vai alla data precedente"
                 <?php echo !$templateParams["DataPrecedente"] ? 'aria-disabled="true"' : ''; ?>>
                 <span class="arrow-left"></span>
             </a>
             <strong><?php echo $templateParams["DataFormattata"]; ?></strong>
-            <a href="<?php echo $templateParams["DataSuccessiva"] ? '?data=' . $templateParams["DataSuccessiva"] : '#'; ?>" 
+            <a <?php if($templateParams["DataSuccessiva"]) echo 'href="?data=' . $templateParams["DataSuccessiva"] . '"'; ?>
                 class="btn-primary-custom btn-arrow <?php echo !$templateParams["DataSuccessiva"] ? 'disabled' : ''; ?>"
+                title="Vai alla data successiva"
                 <?php echo !$templateParams["DataSuccessiva"] ? 'aria-disabled="true"' : ''; ?>>
                 <span class="arrow-right"></span>
             </a>
@@ -140,7 +135,15 @@ if ($dataSelezionata === null) {
 </div>
 </div>
 <?php require 'footer.php'; ?>
-</body>
 <script src="../JS/navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(alertEl => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
+            alert.close();
+        });
+    }, 4000);
+</script>
+</body>
 </html>

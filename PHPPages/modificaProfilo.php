@@ -180,7 +180,7 @@ try {
             <div class="p-4">
                 <h2 class="defaultTextColor text-center mb-4 fw-semibold">I miei dati</h2>
                 
-                <form method="POST" action="">
+                <form method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label defaultTextColor fw-semibold SizeForDescription">Nome</label>
                         <input type="text" class="inputForForm w-100" id="nome" name="nome" value="<?php echo htmlspecialchars($utente['nome']); ?>" required>
