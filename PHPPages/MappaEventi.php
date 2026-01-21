@@ -27,7 +27,6 @@
     <div class="d-flex flex-column align-items-center justify-content-center w-100">
         <h4 class="mt-4">Luoghi con eventi</h4>
         <div id="listaWrapper" class="w-100 d-flex flex-column align-items-center">
-            <!-- qui il JS metterà i blocchi -->
             <div id="listaLuoghi" class="w-100"></div>
         </div>
     </div>

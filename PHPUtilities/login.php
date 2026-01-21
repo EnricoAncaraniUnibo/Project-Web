@@ -2,7 +2,7 @@
 require_once("../PHPUtilities/bootstrap.php");
 
 if (isUserLoggedIn()) {
-    header('Location: /Project-Web/PHPPages/homepageUser.php');
+    header('Location: homepageUser.php');
     exit();
 }
 

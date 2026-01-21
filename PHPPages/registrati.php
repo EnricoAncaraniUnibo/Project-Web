@@ -22,7 +22,7 @@ require_once("../PHPUtilities/registration.php");
                 <p class="text-center fs-6  defaultTextColor">a Uni Events</p>
             </div>
         </header>
-        <main class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
             <?php if (!empty($errori)): ?>
                 <div class="error w-100">
                     <h4>Errore nella registrazione:</h4>
@@ -33,6 +33,8 @@ require_once("../PHPUtilities/registration.php");
                     </ul>
                 </div>
             <?php endif; ?>
+        </div>
+        <main class="d-flex justify-content-center">
             <form class="bg-white paddingx4 form mt-2" method="POST">
                 <div class="d-flex pt-4 pb-2">
                     <img src="../img/imageProfile.png" alt="immagine profilo utente" class="imageForForm">
