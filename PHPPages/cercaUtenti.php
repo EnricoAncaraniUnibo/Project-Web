@@ -22,7 +22,10 @@ try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $matricola_corrente = $_SESSION['matricola'];
-    $utente_corrente = $utente = $dbh->getUserByMatricola($matricola_corrente);
+    $utente_corrente = $dbh->getUserByMatricola($matricola_corrente);
+    
+    // Usa la matricola dal database per essere sicuri
+    $matricola_corrente = $utente_corrente['matricola'];
     
     if (!$utente_corrente) {
         session_destroy();
@@ -34,44 +37,23 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $azione = $_POST['azione'] ?? '';
         $matricola_target = $_POST['matricola_target'] ?? '';
-        if(!empty($_SESSION['matricola_target']) && $_SESSION['azione']) {
-            if($_SESSION['matricola_target'] === $_POST['matricola_target'] && $_SESSION['azione'] ===  $_POST['azione']) {
-
-            } else {
-                if ($azione === 'follow' && !empty($matricola_target)) {
-                    $sql_follow = "INSERT IGNORE INTO Segue (seguitore_matricola, seguito_matricola) VALUES (:seguitore, :seguito)";
-                    $stmt_follow = $pdo->prepare($sql_follow);
-                    $stmt_follow->execute([':seguitore' => $matricola_corrente, ':seguito' => $matricola_target]);
-                    $messaggio = 'Ora segui questo utente!';
-                    $tipo_messaggio = 'success';
-                } elseif ($azione === 'unfollow' && !empty($matricola_target)) {
-                    $sql_unfollow = "DELETE FROM Segue WHERE seguitore_matricola = :seguitore AND seguito_matricola = :seguito";
-                    $stmt_unfollow = $pdo->prepare($sql_unfollow);
-                    $stmt_unfollow->execute([':seguitore' => $matricola_corrente, ':seguito' => $matricola_target]);
-                    $messaggio = 'Non segui più questo utente';
-                    $tipo_messaggio = 'success';
-                }
-                $_SESSION['matricola_target'] = $_POST['matricola_target'];
-                $_SESSION['azione'] =  $_POST['azione'];
-            }  
-        } else {
-            if ($azione === 'follow' && !empty($matricola_target)) {
+        
+        if ($azione === 'follow' && !empty($matricola_target)) {
+            // Previeni di seguire se stessi
+            if ($matricola_target != $matricola_corrente) {
                 $sql_follow = "INSERT IGNORE INTO Segue (seguitore_matricola, seguito_matricola) VALUES (:seguitore, :seguito)";
                 $stmt_follow = $pdo->prepare($sql_follow);
                 $stmt_follow->execute([':seguitore' => $matricola_corrente, ':seguito' => $matricola_target]);
                 $messaggio = 'Ora segui questo utente!';
                 $tipo_messaggio = 'success';
-            } elseif ($azione === 'unfollow' && !empty($matricola_target)) {
-                $sql_unfollow = "DELETE FROM Segue WHERE seguitore_matricola = :seguitore AND seguito_matricola = :seguito";
-                $stmt_unfollow = $pdo->prepare($sql_unfollow);
-                $stmt_unfollow->execute([':seguitore' => $matricola_corrente, ':seguito' => $matricola_target]);
-                $messaggio = 'Non segui più questo utente';
-                $tipo_messaggio = 'success';
             }
-            $_SESSION['matricola_target'] = $_POST['matricola_target'];
-            $_SESSION['azione'] =  $_POST['azione'];
+        } elseif ($azione === 'unfollow' && !empty($matricola_target)) {
+            $sql_unfollow = "DELETE FROM Segue WHERE seguitore_matricola = :seguitore AND seguito_matricola = :seguito";
+            $stmt_unfollow = $pdo->prepare($sql_unfollow);
+            $stmt_unfollow->execute([':seguitore' => $matricola_corrente, ':seguito' => $matricola_target]);
+            $messaggio = 'Non segui più questo utente';
+            $tipo_messaggio = 'success';
         }
-        
     }
     
     // Gestione ricerca per nome o matricola
@@ -114,6 +96,11 @@ try {
         $stmt_all->execute([':matricola_corrente' => $matricola_corrente]);
         $utenti = $stmt_all->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    // Filtra ulteriormente per rimuovere l'utente corrente (per sicurezza)
+    $utenti = array_filter($utenti, function($utente) use ($matricola_corrente) {
+        return $utente['matricola'] != $matricola_corrente;
+    });
     
 } catch (PDOException $e) {
     $messaggio = 'Errore database: ' . $e->getMessage();

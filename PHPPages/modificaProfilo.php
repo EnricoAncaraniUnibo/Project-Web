@@ -58,13 +58,13 @@ try {
         // Ricarica i dati aggiornati
         $utente = $dbh->getUserByMatricola($matricola);
 
-        header('Refresh: 4; URL=modificaProfilo.php');
+        header('Refresh: 2; URL=modificaProfilo.php');
     }
 
 } catch (Exception $e) {
     $messaggio = $e->getMessage();
     $tipo_messaggio = 'error';
-    header('Refresh: 4; URL=modificaProfilo.php');
+    header('Refresh: 2; URL=modificaProfilo.php');
 }
 ?>
 

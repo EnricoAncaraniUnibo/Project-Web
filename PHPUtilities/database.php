@@ -39,7 +39,7 @@ class DataBaseHelper{
     public function checkUserExists($matricola){
         $stmt = $this->db->prepare("SELECT * FROM utente WHERE matricola = ?");
         try {
-            $stmt->bind_param('i', $matricola);
+            $stmt->bind_param('s', $matricola);
             $stmt->execute();
             $result = $stmt->get_result();
             return $result->num_rows > 0;
@@ -59,7 +59,7 @@ class DataBaseHelper{
 
     public function verifyUserCredentials($matricola, $password){
         $stmt = $this->db->prepare("SELECT * FROM utente WHERE matricola = ? AND password = ?");
-        $stmt->bind_param('is', $matricola, $password);
+        $stmt->bind_param('ss', $matricola, $password);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->num_rows > 0;
@@ -67,7 +67,7 @@ class DataBaseHelper{
 
     public function registerUser($username, $matricola,$email,$password){
         $stmt = $this->db->prepare("INSERT INTO utente (nome, matricola, email, password, ruolo) VALUES (?, ?, ?, ?, 'normale')");
-        $stmt->bind_param('siss', $username, $matricola, $email, $password);
+        $stmt->bind_param('ssss', $username, $matricola, $email, $password);
         $stmt->execute();
     }
 
@@ -493,7 +493,7 @@ class DataBaseHelper{
 
     public function getUserByMatricola($matricola) {
         $stmt = $this->db->prepare("SELECT matricola, nome, email, ruolo FROM UTENTE WHERE matricola = ?");
-        $stmt->bind_param('i', $matricola);
+        $stmt->bind_param('s', $matricola);
         $stmt->execute();
         $result = $stmt->get_result();
         $utente = $result->fetch_assoc();
@@ -503,16 +503,16 @@ class DataBaseHelper{
     public function updateUser($matricola, $nuovo_nome, $nuova_password = null) {
     if ($nuova_password) {
         $stmt = $this->db->prepare("UPDATE UTENTE SET nome = ?, password = ? WHERE matricola = ?");
-        $stmt->bind_param("ssi", $nuovo_nome, $nuova_password, $matricola);
+        $stmt->bind_param("sss", $nuovo_nome, $nuova_password, $matricola);
     } else {
         $stmt = $this->db->prepare("UPDATE UTENTE SET nome = ? WHERE matricola = ?");
-        $stmt->bind_param("si", $nuovo_nome, $matricola);
+        $stmt->bind_param("ss", $nuovo_nome, $matricola);
     }
     return $stmt->execute();
     }
     public function getPasswordByMatricola($matricola) {
         $stmt = $this->db->prepare("SELECT password FROM UTENTE WHERE matricola = ?");
-        $stmt->bind_param("i", $matricola);
+        $stmt->bind_param("s", $matricola);
         $stmt->execute();
         $stmt->bind_result($password);
         $stmt->fetch();
