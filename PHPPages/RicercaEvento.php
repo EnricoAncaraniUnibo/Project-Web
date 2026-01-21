@@ -85,7 +85,7 @@ $termineRicerca = $termine;
             <?php require 'navbar.php'; ?>
         </header>
         
-            <div class="page-content">
+            <div class="page-content h-100">
             <main class="d-flex flex-column align-items-center marginx6">
                 <div class="w-100 maxWidthScaling d-flex justify-content-center">
                     <form method="GET" class="searchBox">
@@ -119,8 +119,9 @@ $termineRicerca = $termine;
                 <?php include "Cards.php" ?>
             </main>
             
-            <?php require 'footer.php'; ?>
+            
         </div>
+        <?php require 'footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/navbar.js"></script>
     </body>
