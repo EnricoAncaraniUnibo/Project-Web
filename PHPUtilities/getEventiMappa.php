@@ -13,7 +13,7 @@ $cache = file_exists($cacheFile) ? json_decode(file_get_contents($cacheFile), tr
 $sql = "
 SELECT Luogo, Indirizzo, Città, Titolo, Data, Orario
 FROM EVENTO
-WHERE Stato = 'approvato'
+WHERE Stato = 'approvato' AND Data >= CURDATE()
 ORDER BY Luogo, Data, Orario
 ";
 
