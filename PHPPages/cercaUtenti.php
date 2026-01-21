@@ -140,14 +140,6 @@ try {
     <link rel="stylesheet" href="../css/stylesEMME.css">
     <link rel="stylesheet" href="../css/navbar.css">
 </head>
-<script>
-    setTimeout(() => {
-        document.querySelectorAll('.alert').forEach(alertEl => {
-            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
-            alert.close();
-        });
-    }, 4000);
-</script>
 
 <body class="body font">
     <div class="page-content">
@@ -162,7 +154,7 @@ try {
         <?php endif; ?>
         
         <div class="profile-header mb-1">
-            <h1 class="textsecondary fw-bold">Il mio profilo</h1>
+            <h2 class="textsecondary fw-bold fs-1">Il mio profilo</h2>
             <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente_corrente['nome']); ?></p>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente_corrente['matricola']); ?></p>
             <p class="SizeForDescription mb-0">Email: <?php echo htmlspecialchars($utente_corrente['email']); ?></p>
@@ -176,11 +168,12 @@ try {
             <span class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</span>
         </div>
 
-        <form method="GET" action="" class="search-container mb-4">
-            <input type="text" name="inputNomeRicerca" class="form-control inputForForm backgroundGrey border-0" 
+        <form method="GET" class="search-container mb-4">
+            <label for="inputPersona" class="visually-hidden">Input per cercare le persone</label>
+            <input type="text" id="inputPersona" name="inputNomeRicerca" class="form-control inputForForm backgroundGrey border-0" 
                    placeholder="Cerca per nome o matricola..." 
                    value="<?php echo htmlspecialchars($search_query); ?>">
-            <i class="bi bi-search search-icon"></i>
+            <strong class="bi bi-search search-icon"></strong>
         </form>
         
         <div class="users-list">
@@ -203,18 +196,18 @@ try {
                             </div>
                         </div>
                         
-                        <form method="POST" action="" style="margin: 0;">
+                        <form method="POST" style="margin: 0;">
                             <input type="hidden" name="matricola_target" value="<?php echo htmlspecialchars($utente['matricola']); ?>">
                             
                             <?php if ($utente['is_following']): ?>
                                 <input type="hidden" name="azione" value="unfollow">
                                 <button type="submit" class="btn-follow-light">
-                                    <i class="bi bi-person-check-fill"></i> Seguito
+                                    <strong class="bi bi-person-check-fill"></strong> Seguito
                                 </button>
                             <?php else: ?>
                                 <input type="hidden" name="azione" value="follow">
                                 <button type="submit" class="btn-unfollow">
-                                    <i class="bi bi-person-plus-fill"></i> Segui
+                                    <strong class="bi bi-person-plus-fill"></strong> Segui
                                 </button>
                             <?php endif; ?>
                         </form>
@@ -228,5 +221,13 @@ try {
     <?php require 'footer.php'; ?>
     <script src="cercaUtenti.js"></script>
     <script src="../JS/navbar.js"></script>
+    <script>
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(alertEl => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
+            alert.close();
+        });
+    }, 4000);
+</script>
 </body>
 </html>
