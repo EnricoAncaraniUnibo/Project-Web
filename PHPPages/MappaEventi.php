@@ -1,4 +1,6 @@
-<?php require_once("../PHPUtilities/bootstrap.php"); ?>
+<?php require_once("../PHPUtilities/bootstrap.php"); 
+redirectToLoginIfUserNotLoggedIn();
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>

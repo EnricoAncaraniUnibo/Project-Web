@@ -1,6 +1,6 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
-
+redirectToLoginIfUserNotLoggedIn();
 $matricolaUtente = $_SESSION['matricola'];
 $ruolo = $dbh->getRuoloByMatricola($matricolaUtente);
 $isAdmin = ($ruolo === 'admin');

@@ -1,6 +1,6 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
-
+redirectToLoginIfUserNotLoggedIn();
 $matricolaUtente = $_SESSION['matricola'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['azione']) && ($_POST['azione'] === 'partecipa' || $_POST['azione'] === 'annulla')) {

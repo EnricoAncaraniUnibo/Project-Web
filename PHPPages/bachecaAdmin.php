@@ -1,6 +1,8 @@
 <?php
 require_once("../PHPUtilities/bootstrap.php");
 
+redirectToLoginIfUserNotLoggedIn();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $evento_id = $_POST['evento_id'] ?? null;
     $azione = $_POST['azione'] ?? null;
