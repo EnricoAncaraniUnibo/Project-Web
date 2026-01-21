@@ -172,8 +172,8 @@ try {
         </div>
 
         <div class="d-flex gap-2 mb-4">
-            <a href="modificaProfilo.php" class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</a>
-            <span class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</span>
+            <a href="modificaProfilo.php" class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</a>
+            <span class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</span>
         </div>
 
         <form method="GET" action="" class="search-container mb-4">

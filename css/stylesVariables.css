@@ -263,6 +263,12 @@
     border-radius: 15px;
     background-color: #c10007;
     color: white;
+    transition: 0.3s;
+}
+
+.selected:hover {
+    background-color:white;
+    color: #c10007;
 }
 
 .role {
@@ -274,6 +280,12 @@
 .notSelected {
     background-color: white;
     border-radius: 15px;
+    transition: 0.3s;
+}
+
+.notSelected:hover {
+    background-color: #c10007;
+    color: white;
 }
 
 .buttonPrimary:hover {

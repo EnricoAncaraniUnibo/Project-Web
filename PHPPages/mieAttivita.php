@@ -128,11 +128,11 @@ if($vistaAttiva === 'joined') {
         <div class="mt-5 d-flex justify-content-center gap-3 align-items-center flex-wrap">
             <form method="POST" class="d-inline">
                 <input type="hidden" name="vista_eventi" value="joined">
-                <button type="submit" class="<?php echo $vistaAttiva === 'joined' ? 'selected' : 'notSelected'; ?> maxWidthScaling px-5 py-3 border-0">Eventi a cui partecipo</button>
+                <button type="submit" class="<?php echo $vistaAttiva === 'joined' ? 'selected' : 'notSelected'; ?> px-5 py-3 border-0">Eventi a cui partecipo</button>
             </form>
             <form method="POST" class="d-inline">
                 <input type="hidden" name="vista_eventi" value="published">
-                <button type="submit" class="<?php echo $vistaAttiva === 'published' ? 'selected' : 'notSelected'; ?> maxWidthScaling px-5 py-3 border-0">Eventi che ho pubblicato</button>
+                <button type="submit" class="<?php echo $vistaAttiva === 'published' ? 'selected' : 'notSelected'; ?> px-5 py-3 border-0">Eventi che ho pubblicato</button>
             </form>
         </div>
         <div class="d-flex flex-column align-items-center gap-4 mt-5">
