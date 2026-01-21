@@ -9,7 +9,8 @@
 }
 
 .navbar-title {
-    color: var(--color-primary);
+    color: var(--color-tertiary);
+    font-weight: bold;
 }
 
 .navbar-button{
