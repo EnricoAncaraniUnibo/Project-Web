@@ -275,8 +275,8 @@ body {
 }
 
 .btn-active:hover {
-    background-color: white;
-    color: var(--color-primary);
+    background-color: #C10007;
+    color: white;
 }
 
 .inputForForm {

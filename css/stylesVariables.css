@@ -214,6 +214,13 @@
     background-color: #c10007;
     color: white;
     font-size: 16px;
+    transition: 0.3s;
+}
+
+.buttonSelected:hover {
+    background-color: white;
+    color: #c10007;
+    cursor: pointer;
 }
 
 .buttonApproves {
