@@ -83,8 +83,8 @@ foreach ($templateParams["EventiSegnalati"] as $evento) {
                 <p class="mb-0 role py-1 px-3 fs-6 ms-2">Admin</p>
             </div>
             <div class="mt-5 d-flex flex-column flex-md-row justify-content-center gap-3 align-items-center">
-                <button type="button" id="bottone-Segnalazione" onclick="mostraEventiDaRisolvere()" class="<?php echo $sezione_attiva === 'segnalazioni' ? 'selected' : 'notSelected' ?> maxWidthScaling px-5 py-3 border-0">Segnalazione problemi (<?php echo $templateParams["NumeroEventiSegnalati"][0]["COUNT(*)"] ?? 0 ?>)</button>
                 <button type="button" id="bottone-Accettazione" onclick="mostraEventiDaAccettare()" class="<?php echo $sezione_attiva === 'accettazioni' ? 'selected' : 'notSelected' ?> maxWidthScaling px-5 py-3 border-0">Accettazione eventi (<?php echo $templateParams["NumeroEventiInSospeso"][0]["COUNT(*)"] ?? 0 ?>)</button>
+                <button type="button" id="bottone-Segnalazione" onclick="mostraEventiDaRisolvere()" class="<?php echo $sezione_attiva === 'segnalazioni' ? 'selected' : 'notSelected' ?> maxWidthScaling px-5 py-3 border-0">Segnalazione problemi (<?php echo $templateParams["NumeroEventiSegnalati"][0]["COUNT(*)"] ?? 0 ?>)</button>
             </div>
             
             <div class="d-flex flex-column align-items-center mt-5 <?php echo $sezione_attiva === 'accettazioni' ? '' : 'd-none' ?>" id="Div-Accettazioni">
