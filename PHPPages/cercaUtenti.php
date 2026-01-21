@@ -116,8 +116,6 @@ try {
         $stmt_all = $pdo->prepare($sql_all);
         $stmt_all->execute([':matricola_corrente' => $matricola_corrente]);
         $utenti = $stmt_all->fetchAll(PDO::FETCH_ASSOC);
-
-        header('Refresh: 4; URL=cercaUtenti.php');
     }
     
 } catch (PDOException $e) {
@@ -141,16 +139,23 @@ try {
     <link rel="stylesheet" href="../css/stylesVariables.css">
     <link rel="stylesheet" href="../css/stylesEMME.css">
     <link rel="stylesheet" href="../css/navbar.css">
-    
-
 </head>
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(alertEl => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
+            alert.close();
+        });
+    }, 4000);
+</script>
+
 <body class="body font">
     <div class="page-content">
     <?php require 'navbar.php'; ?>
 
     <div class="d-flex flex-column container py-4 maxWidthScaling">
         <?php if (!empty($messaggio)): ?>
-        <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-custom alert-dismissible fade show" role="alert">
+        <div class="alert <?php echo $tipo_messaggio === 'success' ? 'alert-success' : 'alert-danger'; ?> alert-dismissible fade show text-center mt-1" role="alert">
             <?php echo htmlspecialchars($messaggio); ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
@@ -160,9 +165,9 @@ try {
             <h1 class="textsecondary fw-bold">Il mio profilo</h1>
             <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente_corrente['nome']); ?></p>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente_corrente['matricola']); ?></p>
-            <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente_corrente['email']); ?></p>
+            <p class="SizeForDescription mb-0">Email: <?php echo htmlspecialchars($utente_corrente['email']); ?></p>
             <?php if ($utente_corrente['ruolo'] === 'admin'): ?>
-                <p class="SizeForDescription"><span class="badge bg-primary">Amministratore</span></p>
+                <p class="SizeForDescription mb-0"><span class="badge bg-primary">Amministratore</span></p>
             <?php endif; ?>
         </div>
 

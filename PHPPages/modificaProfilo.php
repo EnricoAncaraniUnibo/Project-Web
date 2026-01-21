@@ -161,17 +161,17 @@ try {
                 </div>
             </div>
         <?php endif; ?>
-        <div class="profile-header mb-4">
+        <div class="profile-header mb-1">
             <h1 class="textsecondary fw-bold">Il mio profilo</h1>
             <p class="SizeForDescription mb-0">Username: <?php echo htmlspecialchars($utente['nome']); ?></p>
             <p class="SizeForDescription mb-0">Matricola: <?php echo htmlspecialchars($utente['matricola']); ?></p>
-            <p class="SizeForDescription">Email: <?php echo htmlspecialchars($utente['email']); ?></p>
+            <p class="SizeForDescription mb-0">Email: <?php echo htmlspecialchars($utente['email']); ?></p>
             <?php if ($utente['ruolo'] === 'admin'): ?>
-                <p class="SizeForDescription"><span class="badge bg-primary">Amministratore</span></p>
+                <p class="SizeForDescription mb-0"><span class="badge bg-primary">Amministratore</span></p>
             <?php endif; ?>
         </div>
 
-        <div class="d-flex gap-2 mb-5">
+        <div class="d-flex gap-2 mb-4">
             <span class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</span>
             <a href="cercaUtenti.php" class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</a> 
         </div>
