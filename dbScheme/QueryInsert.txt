@@ -1,89 +1,133 @@
 -- Popolamento tabella UTENTE
 INSERT INTO UTENTE (matricola, password, nome, email, ruolo) VALUES
 -- Admin
-('ADM001', 'Admin123A', 'Mario Rossi', 'mario.rossi@email.com', 'admin'),
-('ADM002', 'Secure456B', 'Laura Bianchi', 'laura.bianchi@email.com', 'admin'),
+('1000000001', 'Admin123A', 'Mario Rossi', 'mario.rossi@studio.unibo.it', 'admin'),
+('1000000002', 'Secure456B', 'Laura Bianchi', 'laura.bianchi@studio.unibo.it', 'admin'),
 
 -- Utenti normali
-('USR001', 'Passw0rdA', 'Giuseppe Verdi', 'giuseppe.verdi@email.com', 'normale'),
-('USR002', 'Anna2024B', 'Anna Neri', 'anna.neri@email.com', 'normale'),
-('USR003', 'Paolo99C', 'Paolo Gialli', 'paolo.gialli@email.com', 'normale'),
-('USR004', 'SaraBlu1D', 'Sara Blu', 'sara.blu@email.com', 'normale'),
-('USR005', 'LucaRossi7E', 'Luca Rossi', 'luca.rossi@email.com', 'normale'),
-('USR006', 'ChiaraV8F', 'Chiara Verdi', 'chiara.verdi@email.com', 'normale'),
-('USR007', 'Marco2025G', 'Marco Fontana', 'marco.fontana@email.com', 'normale'),
-('USR008', 'ElenaPwd9H', 'Elena Ricci', 'elena.ricci@email.com', 'normale');
-
+('1000000010', 'Passw0rdA', 'Giuseppe Verdi', 'giuseppe.verdi@studio.unibo.it', 'normale'),
+('1000000011', 'Anna2024B', 'Anna Neri', 'anna.neri@studio.unibo.it', 'normale'),
+('1000000012', 'Paolo99C', 'Paolo Gialli', 'paolo.gialli@studio.unibo.it', 'normale'),
+('1000000013', 'SaraBlu1D', 'Sara Blu', 'sara.blu@studio.unibo.it', 'normale'),
+('1000000014', 'LucaRossi7E', 'Luca Rossi', 'luca.rossi@studio.unibo.it', 'normale'),
+('1000000015', 'ChiaraV8F', 'Chiara Verdi', 'chiara.verdi@studio.unibo.it', 'normale'),
+('1000000016', 'Marco2025G', 'Marco Fontana', 'marco.fontana@studio.unibo.it', 'normale'),
+('1000000017', 'ElenaPwd9H', 'Elena Ricci', 'elena.ricci@studio.unibo.it', 'normale');
 
 -- Popolamento tabella EVENTO
 INSERT INTO EVENTO
-(matricola_creatore, Titolo, Descrizione, Data, Orario, Luogo, Indirizzo, Città, Max_Partecipanti, Partecipanti_Attuali, Stato)
+(matricola_creatore, Titolo, Descrizione, Data, Orario, Luogo, Indirizzo, Città,
+ Max_Partecipanti, Partecipanti_Attuali, Stato)
 VALUES
--- Eventi PASSATI
-('USR001', 'Concerto Rock', 'Concerto di rock classico con band locale', '2025-06-15', '21:00:00', 'Teatro degli Arcimboldi', 'Piazza Tito Livio 1', 'Milano', 200, 0, 'approvato'),
-('USR003', 'Mostra Fotografica', 'Mostra di fotografia contemporanea', '2025-11-10', '10:00:00', 'MAXXI - Museo Nazionale delle Arti del XXI Secolo', 'Via Guido Reni 4', 'Roma', 100, 0, 'approvato'),
-('USR002', 'Workshop Programmazione', 'Workshop su Python e machine learning', '2026-01-10', '15:00:00', 'Università Bocconi', 'Via Roberto Sarfatti 25', 'Milano', 50, 0, 'approvato'),
-('USR007', 'Fiera del Libro', 'Esposizione e vendita di libri di tutti i generi', '2025-09-15', '10:00:00', 'Fiera di Bologna', 'Viale della Fiera 20', 'Bologna', 150, 0, 'approvato'),
-('USR008', 'Festival Jazz', 'Festival musicale con artisti nazionali e internazionali', '2025-12-05', '20:30:00', 'Teatro Verdi', 'Piazza G. Verdi 2', 'Firenze', 300, 0, 'approvato'),
+-- Eventi passati
+('1000000010', 'Concerto Rock', 'Concerto di rock classico con band locale',
+ '2025-06-15', '21:00:00', 'Teatro degli Arcimboldi', 'Piazza Tito Livio 1', 'Milano', 200, 0, 'approvato'),
 
--- Eventi FUTURI
-('USR004', 'Corso di Cucina', 'Corso di cucina italiana tradizionale', '2026-03-05', '18:30:00', 'Scuola di Cucina Lorenzo de''Medici', 'Via Faenza 43', 'Firenze', 30, 0, 'approvato'),
-('USR005', 'Maratona Beneficenza', 'Maratona per raccolta fondi per ricerca', '2026-04-20', '08:00:00', 'Parco Sempione', 'Viale Alemagna', 'Milano', 500, 0, 'in sospeso'),
-('USR006', 'Convegno AI', 'Convegno sull''intelligenza artificiale', '2026-06-15', '09:30:00', 'Centro Congressi Bologna Fiere', 'Via della Fiera 20', 'Bologna', 300, 0, 'in sospeso'),
-('USR007', 'Hackathon Studenti', 'Competizione di programmazione 24 ore', '2026-09-01', '09:00:00', 'Campus Universitario di Pisa', 'Via Giuseppe Moruzzi 1', 'Pisa', 120, 0, 'in sospeso'),
-('USR008', 'Seminario Cybersecurity', 'Sicurezza informatica e protezione dati', '2026-11-12', '14:30:00', 'Università di Padova - Dipartimento di Ingegneria', 'Via Gradenigo 6/B', 'Padova', 80, 0, 'in sospeso'),
+('1000000012', 'Mostra Fotografica', 'Mostra di fotografia contemporanea',
+ '2025-11-10', '10:00:00', 'MAXXI - Museo Nazionale delle Arti del XXI Secolo',
+ 'Via Guido Reni 4', 'Roma', 100, 0, 'approvato'),
+
+('1000000011', 'Workshop Programmazione', 'Workshop su Python e machine learning',
+ '2026-01-10', '15:00:00', 'Università Bocconi',
+ 'Via Roberto Sarfatti 25', 'Milano', 50, 0, 'approvato'),
+
+('1000000016', 'Fiera del Libro', 'Esposizione e vendita di libri di tutti i generi',
+ '2025-09-15', '10:00:00', 'Fiera di Bologna',
+ 'Viale della Fiera 20', 'Bologna', 150, 0, 'approvato'),
+
+('1000000017', 'Festival Jazz', 'Festival musicale con artisti nazionali e internazionali',
+ '2025-12-05', '20:30:00', 'Teatro Verdi',
+ 'Piazza G. Verdi 2', 'Firenze', 300, 0, 'approvato'),
+
+-- Eventi futuri
+('1000000013', 'Corso di Cucina', 'Corso di cucina italiana tradizionale',
+ '2026-03-05', '18:30:00', 'Scuola di Cucina Lorenzo de''Medici',
+ 'Via Faenza 43', 'Firenze', 30, 0, 'approvato'),
+
+('1000000014', 'Maratona Beneficenza', 'Maratona per raccolta fondi per ricerca',
+ '2026-04-20', '08:00:00', 'Parco Sempione',
+ 'Viale Alemagna', 'Milano', 500, 0, 'in sospeso'),
+
+('1000000015', 'Convegno AI', 'Convegno sull''intelligenza artificiale',
+ '2026-06-15', '09:30:00', 'Centro Congressi Bologna Fiere',
+ 'Via della Fiera 20', 'Bologna', 300, 0, 'in sospeso'),
+
+('1000000016', 'Hackathon Studenti', 'Competizione di programmazione 24 ore',
+ '2026-09-01', '09:00:00', 'Campus Universitario di Pisa',
+ 'Via Giuseppe Moruzzi 1', 'Pisa', 120, 0, 'in sospeso'),
+
+('1000000017', 'Seminario Cybersecurity', 'Sicurezza informatica e protezione dati',
+ '2026-11-12', '14:30:00', 'Università di Padova - Dipartimento di Ingegneria',
+ 'Via Gradenigo 6/B', 'Padova', 80, 0, 'in sospeso'),
 
 -- Eventi rifiutati
-('USR001', 'Festa Privata', 'Festa privata in villa', '2026-02-20', '22:00:00', 'Villa Reale', 'Viale Brianza 1', 'Monza', 150, 0, 'rifiutato'),
-('USR002', 'Raduno Auto', 'Raduno di auto d''epoca', '2026-05-10', '10:00:00', 'Fiera di Genova', 'Via alla Fiera 67', 'Genova', 200, 0, 'rifiutato'),
+('1000000010', 'Festa Privata', 'Festa privata in villa',
+ '2026-02-20', '22:00:00', 'Villa Reale',
+ 'Viale Brianza 1', 'Monza', 150, 0, 'rifiutato'),
 
--- Eventi FUTURI aggiuntivi
-('USR001', 'Corso Fotografia Avanzato', 'Lezioni avanzate di fotografia digitale', '2026-02-20', '16:00:00', 'Scuola Romana di Fotografia', 'Via Dei Marsi 78', 'Roma', 40, 0, 'in sospeso'),
-('USR002', 'Seminario Marketing', 'Strategie di marketing digitale e social media', '2026-03-15', '14:00:00', 'Centro Congressi Milano', 'Via Gattamelata 5', 'Milano', 100, 0, 'in sospeso'),
-('USR003', 'Torneo Scacchi', 'Torneo competitivo per appassionati di scacchi', '2026-05-10', '09:30:00', 'Circolo Scacchistico Torino', 'Corso Vittorio Emanuele II 12', 'Torino', 50, 0, 'in sospeso'),
-('USR004', 'Laboratorio Arte Bambini', 'Laboratorio creativo per bambini dai 6 ai 12 anni', '2026-06-22', '10:00:00', 'Museo degli Innocenti', 'Piazza Santissima Annunziata 12', 'Firenze', 60, 0, 'in sospeso'),
-('USR005', 'Corsa Trail Montagna', 'Evento sportivo in montagna per amatori e professionisti', '2026-08-01', '07:30:00', 'Parco Naturale Adamello Brenta', 'Località Molveno', 'Trento', 200, 0, 'in sospeso'),
-('USR006', 'Conferenza Robotica', 'Discussione sulle ultime innovazioni in robotica', '2026-09-30', '09:00:00', 'Università di Bologna - Dipartimento di Ingegneria', 'Via Terracini 28', 'Bologna', 120, 0, 'in sospeso'),
-('USR007', 'Maratona Letteraria', 'Letture e incontri con autori emergenti', '2026-10-15', '11:00:00', 'Biblioteca Universitaria di Pisa', 'Lungarno Pacinotti 43', 'Pisa', 80, 0, 'in sospeso'),
-('USR008', 'Workshop Blockchain', 'Introduzione alla blockchain e criptovalute', '2026-11-25', '15:00:00', 'Campus Innovazione Padova', 'Via Venezia 13', 'Padova', 60, 0, 'in sospeso');
+('1000000011', 'Raduno Auto', 'Raduno di auto d''epoca',
+ '2026-05-10', '10:00:00', 'Fiera di Genova',
+ 'Via alla Fiera 67', 'Genova', 200, 0, 'rifiutato'),
 
+-- Eventi futuri aggiuntivi
+('1000000010', 'Corso Fotografia Avanzato', 'Lezioni avanzate di fotografia digitale',
+ '2026-02-20', '16:00:00', 'Scuola Romana di Fotografia',
+ 'Via Dei Marsi 78', 'Roma', 40, 0, 'in sospeso'),
 
--- Popolamento tabella SEGNALAZIONE (per eventi rifiutati)
+('1000000011', 'Seminario Marketing', 'Strategie di marketing digitale e social media',
+ '2026-03-15', '14:00:00', 'Centro Congressi Milano',
+ 'Via Gattamelata 5', 'Milano', 100, 0, 'in sospeso'),
+
+('1000000012', 'Torneo Scacchi', 'Torneo competitivo per appassionati di scacchi',
+ '2026-05-10', '09:30:00', 'Circolo Scacchistico Torino',
+ 'Corso Vittorio Emanuele II 12', 'Torino', 50, 0, 'in sospeso'),
+
+('1000000013', 'Laboratorio Arte Bambini', 'Laboratorio creativo per bambini dai 6 ai 12 anni',
+ '2026-06-22', '10:00:00', 'Museo degli Innocenti',
+ 'Piazza Santissima Annunziata 12', 'Firenze', 60, 0, 'in sospeso'),
+
+('1000000014', 'Corsa Trail Montagna', 'Evento sportivo in montagna per amatori e professionisti',
+ '2026-08-01', '07:30:00', 'Parco Naturale Adamello Brenta',
+ 'Località Molveno', 'Trento', 200, 0, 'in sospeso'),
+
+('1000000015', 'Conferenza Robotica', 'Discussione sulle ultime innovazioni in robotica',
+ '2026-09-30', '09:00:00', 'Università di Bologna - Dipartimento di Ingegneria',
+ 'Via Terracini 28', 'Bologna', 120, 0, 'in sospeso'),
+
+('1000000016', 'Maratona Letteraria', 'Letture e incontri con autori emergenti',
+ '2026-10-15', '11:00:00', 'Biblioteca Universitaria di Pisa',
+ 'Lungarno Pacinotti 43', 'Pisa', 80, 0, 'in sospeso'),
+
+('1000000017', 'Workshop Blockchain', 'Introduzione alla blockchain e criptovalute',
+ '2026-11-25', '15:00:00', 'Campus Innovazione Padova',
+ 'Via Venezia 13', 'Padova', 60, 0, 'in sospeso');
+
+-- Popolamento tabella SEGNALAZIONE
 INSERT INTO SEGNALAZIONE (Id, Descrizione) VALUES
 (9, 'Evento privato non aperto al pubblico generale'),
 (10, 'Mancano le autorizzazioni necessarie per il raduno');
 
-
--- Popolamento tabella Partecipa
+-- Popolamento tabella PARTECIPA
 INSERT INTO Partecipa (evento_id, utente_matricola) VALUES
--- Concerto Rock
-(1, 'USR001'), (1, 'USR002'), (1, 'USR003'), (1, 'USR004'),
+(1, '1000000010'), (1, '1000000011'), (1, '1000000012'), (1, '1000000013'),
+(2, '1000000010'), (2, '1000000014'), (2, '1000000015'),
+(3, '1000000011'), (3, '1000000012'), (3, '1000000015'),
+(4, '1000000012'), (4, '1000000014');
 
--- Mostra Fotografica
-(2, 'USR001'), (2, 'USR005'), (2, 'USR006'),
-
--- Workshop
-(3, 'USR002'), (3, 'USR003'), (3, 'USR006'),
-
--- Corso di Cucina
-(4, 'USR003'), (4, 'USR005');
-
-
--- Popolamento tabella Segue (relazioni di follow tra utenti)
+-- Popolamento tabella SEGUE
 INSERT INTO Segue (seguitore_matricola, seguito_matricola) VALUES
-('USR001', 'USR002'), ('USR001', 'USR003'),
-('USR002', 'USR001'), ('USR002', 'USR004'),
-('USR003', 'USR005'), ('USR003', 'USR006'),
-('USR004', 'USR001'), ('USR004', 'USR002'),
-('USR005', 'USR003'), ('USR005', 'USR006'),
-('USR006', 'USR002'), ('USR006', 'USR004');
+('1000000010', '1000000011'), ('1000000010', '1000000012'),
+('1000000011', '1000000010'), ('1000000011', '1000000013'),
+('1000000012', '1000000014'), ('1000000012', '1000000015'),
+('1000000013', '1000000010'), ('1000000013', '1000000011'),
+('1000000014', '1000000012'), ('1000000014', '1000000015'),
+('1000000015', '1000000011'), ('1000000015', '1000000013');
 
-
--- Aggiornamento dei Partecipanti_Attuali nella tabella EVENTO
+-- Aggiornamento partecipanti attuali
 UPDATE EVENTO e
 SET Partecipanti_Attuali = (
     SELECT COUNT(*)
     FROM Partecipa p
     WHERE p.evento_id = e.Id
 )
-WHERE e.Id IN (1, 2, 3, 4);
+WHERE e.Id IN (1,2,3,4);
