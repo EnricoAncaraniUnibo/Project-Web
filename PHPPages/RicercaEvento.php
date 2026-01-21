@@ -32,7 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['azione']) && ($_POST[
             }
         }
     }
-    header("Location: ".$_SERVER['REQUEST_URI']);
+    
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $redirect = 'RicercaEvento.php';
+
+    if (!empty($_POST['key'])) {
+        $redirect .= '?key=' . urlencode($_POST['key']);
+    }
+
+    header("Location: $redirect");
     exit;
 }
 
@@ -50,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['key'])) {
         $eventiPerCitta[$citta][] = $evento;
     }
 }
+$termineRicerca = $termine;
 ?>
 
 <!DOCTYPE html>

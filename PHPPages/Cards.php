@@ -94,6 +94,7 @@ $sezione_attiva = $_GET['sezione'] ?? 'accettazioni';
                                     <form method="POST" class="d-inline">
                                         <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
                                         <input type="hidden" name="azione" value="annulla">
+                                        <input type="hidden" name="key" value="<?php echo $termine; ?>">
                                         <button type="submit" class="btn-secondary-custom">Annulla partecipazione</button>
                                     </form>
                                 <?php elseif ($eventoCompleto): ?>
@@ -102,6 +103,7 @@ $sezione_attiva = $_GET['sezione'] ?? 'accettazioni';
                                     <form method="POST" class="d-inline">
                                         <input type="hidden" name="evento_id" value="<?php echo $evento["Id"]; ?>">
                                         <input type="hidden" name="azione" value="partecipa">
+                                        <input type="hidden" name="key" value="<?php echo $termine; ?>">
                                         <button type="submit" class="btn-primary-custom">Partecipa</button>
                                     </form>
                                 <?php endif; ?>
