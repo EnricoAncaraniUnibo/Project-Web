@@ -172,8 +172,8 @@ try {
         </div>
 
         <div class="d-flex gap-2 mb-4">
-            <span class="buttonPrimary flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</span>
-            <a href="cercaUtenti.php" class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Cerca utenti</a> 
+            <span class="buttonSelected flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center">Modifica profilo</span>
+            <a href="cercaUtenti.php" class="btn-active btn-disabled flex-fill border-0 text-decoration-none d-flex align-items-center justify-content-center" style="cursor: pointer;">Cerca utenti</a> 
         </div>
 
         <div class="event-card">

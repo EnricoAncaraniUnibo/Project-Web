@@ -208,6 +208,14 @@
     font-size: 16px;
 }
 
+.buttonSelected {
+    padding: 3%;
+    border-radius: 10px;
+    background-color: #c10007;
+    color: white;
+    font-size: 16px;
+}
+
 .buttonApproves {
     border-radius: 10px;
     background-color: #00a63e;
