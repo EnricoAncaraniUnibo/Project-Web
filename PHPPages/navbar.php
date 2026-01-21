@@ -21,20 +21,20 @@ $isAdmin = ($ruolo === 'admin');
         <ul class="navbar-nav flex-row justify-content-around w-75">
             <li class="nav-item">
                 <a href="homepageUser.php" class="navbar-button <?php echo isActive('homepageUser.php', $current_page); ?>">
-                    <img src="../img/home_icon.svg" alt="Home" class="small-icon"/>
+                    <img src="../img/home_icon.svg" alt="Home" class="small-icon">
                     <span class="d-none d-sm-inline ms-2">Home</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="MappaEventi.php" class="navbar-button <?php echo isActive('MappaEventi.php', $current_page); ?>">
-                    <img src="../img/map_icon.svg" alt="Map" class="small-icon"/>
+                    <img src="../img/map_icon.svg" alt="Map" class="small-icon">
                     <span class="d-none d-sm-inline ms-2">Mappa</span>
                 </a>
             </li>
             <li class="nav-item d-flex">
                 <form action="" method="GET" class="d-flex ">
                     <button name="search" class="bg navbar-button border-0 <?php echo isActive('RicercaEvento.php', $current_page); ?>">
-                        <img src="../img/search_icon.svg" alt="Search" class="small-icon"/>
+                        <img src="../img/search_icon.svg" alt="Search" class="small-icon">
                         <span class="d-none d-sm-inline ms-2">Cerca</span>
                     </button>
                     <label for="search-key" class="visually-hidden">Input per cercare gli eventi</label>
@@ -46,7 +46,7 @@ $isAdmin = ($ruolo === 'admin');
                         data-bs-toggle="dropdown" 
                         aria-expanded="false"
                         aria-haspopup="true">
-                    <img src="../img/user_icon.svg" alt="User" class="small-icon"/>
+                    <img src="../img/user_icon.svg" alt="User" class="small-icon">
                     <span class="d-none d-sm-inline ms-2">Profilo</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
@@ -57,26 +57,26 @@ $isAdmin = ($ruolo === 'admin');
                     <hr class="dropdown-divider">
                     <ul class="list-unstyled">
                         <li class="d-flex dropdown-item align-items-center">
-                            <img src="../img/activity_icon.svg" alt="Le mie attività" class="small-icon"/>
+                            <img src="../img/activity_icon.svg" alt="Le mie attività" class="small-icon">
                             <a class="ms-2 dropdown-link <?php echo $current_page === 'mieAttivita.php' ? 'active' : ''; ?>" href="mieAttivita.php">Le mie attività</a>
                         </li>
                         <li class="d-flex dropdown-item align-items-center">
-                            <img src="../img/profile_icon.svg" alt="Mio profilo" class="small-icon"/>
+                            <img src="../img/profile_icon.svg" alt="Mio profilo" class="small-icon">
                             <a class="ms-2 dropdown-link <?php echo $current_page === 'modificaProfilo.php' ? 'active' : ''; ?>" href="modificaProfilo.php">Mio profilo</a>
                         </li>
                         <li class="d-flex dropdown-item align-items-center">
-                            <img src="../img/create_icon.svg" alt="Crea evento" class="small-icon"/>
+                            <img src="../img/create_icon.svg" alt="Crea evento" class="small-icon">
                             <a class="ms-2 dropdown-link <?php echo $current_page === 'creaEvento.php' ? 'active' : ''; ?>" href="creaEvento.php">Crea evento</a>
                         </li>
                         <?php if ($isAdmin): ?>
                         <li class="d-flex dropdown-item align-items-center">
-                            <img src="../img/dashboard_icon.svg" alt="Bacheca" class="small-icon"/>
+                            <img src="../img/dashboard_icon.svg" alt="Bacheca" class="small-icon">
                             <a class="ms-2 dropdown-link <?php echo $current_page === 'bachecaAdmin.php' ? 'active' : ''; ?>" href="bachecaAdmin.php">Bacheca</a>
                         </li>
                         <?php endif; ?>
                         <li><hr class="dropdown-divider"></li>
                         <li class="d-flex dropdown-item align-items-center">
-                            <img src="../img/logout_icon.svg" alt="Logout" class="small-icon"/>
+                            <img src="../img/logout_icon.svg" alt="Logout" class="small-icon">
                             <button class="ms-2 dropdown-link text-danger border-0 bg-transparent p-0" id="logout-button">Logout</button>
                         </li>
                     </ul>
