@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $messaggio = 'Evento creato con successo! In attesa di approvazione.';
         $tipo_messaggio = 'success';
 
-        header('Refresh: 4; URL=creaEvento.php');
+        header('Refresh: 3; URL=creaEvento.php');
         
     } catch (PDOException $e) {
         $messaggio = 'Errore database: ' . $e->getMessage();

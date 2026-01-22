@@ -208,7 +208,7 @@ try {
             const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
             alert.close();
         });
-    }, 4000);
+    }, 3000);
 </script>
 </body>
 </html>
