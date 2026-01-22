@@ -14,7 +14,7 @@ $sql = "
 SELECT Luogo, Indirizzo, Città, Titolo, Data, Orario
 FROM EVENTO
 WHERE Stato = 'approvato' AND Data >= CURDATE()
-ORDER BY Luogo, Data, Orario
+ORDER BY Data,Orario,Luogo 
 ";
 
 // usa getResult del tuo helper

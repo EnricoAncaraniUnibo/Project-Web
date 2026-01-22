@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errori[] = $e->getMessage();
     }
 
-    header('Refresh: 4; URL=modificaEvento.php?id=' . urlencode($evento_id));
+    header('Refresh: 1; URL=bachecaAdmin.php?sezione=segnalazioni');
 }
 ?>
 
